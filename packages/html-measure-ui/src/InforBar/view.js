@@ -15,24 +15,30 @@ import './style.less'
 const cn = p('')
 const c = p('hm-infor-bar__')
 
-const Section = ({ title, table }) => (
-  <div className={c('sec')}>
+const Section = ({ title, table, className }) => (
+  <div className={cn(c('sec'), className)}>
     <div className={c('sec-title')}>{title}</div>
-    {table.map((row, rowID) => {
-      return (
-        <div key={rowID} className={c('sec-row')}>
-          {row.map((item, itemID) => {
-            return (
-              <div key={item.key || itemID} className={c('sec-item')}>
-                {item.label && <span className={c('sec-item-label')}>{item.label}</span>}
-                {item.type && <span style={item.typeStyle} className={c(`sec-type-${item.type}`)} />}
-                <span className={c('sec-item-content')}>{item.content}</span>
-              </div>
-            )
-          })}
-        </div>
-      )
-    })}
+    <table>
+      <tbody>
+        {table.map((row, rowID) => {
+          return (
+            <tr key={rowID} className={c('sec-row')}>
+              {row.map((item, itemID) => {
+                return (
+                  <td key={item.key || itemID} className={c('sec-item')}>
+                    <span className={c('sec-item-wrapper', !!item.type && `sec-type-${item.type}-wrapper`)}>
+                      {item.label && <span className={c('sec-item-label')}>{item.label}</span>}
+                      {item.type && <span style={item.typeStyle} className={c(`sec-type-${item.type}`)} />}
+                      <span className={c('sec-item-content')}>{item.content}</span>
+                    </span>
+                  </td>
+                )
+              })}
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
   </div>
 )
 
@@ -48,6 +54,7 @@ export default class InforBar extends React.Component {
     return (
       <div className={cn(c('container'), className)}>
         <Section
+          className={c('sec-basic')}
           title={title}
           table={[
             [{ label: 'X', content: sz(position.x) }, { label: 'Y', content: sz(position.y) }],
@@ -60,6 +67,7 @@ export default class InforBar extends React.Component {
 
         {font && (
           <Section
+            className={c('sec-font')}
             title={i18n('infor-bar.font.title')}
             table={[
               [{ label: i18n('infor-bar.font.family.label'), content: font.family }],

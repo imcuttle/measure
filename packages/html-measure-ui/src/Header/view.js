@@ -7,6 +7,7 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import p from 'prefix-classname'
+
 import Select, { createFilter } from '../components/Select'
 import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
@@ -98,7 +99,9 @@ export default class Header extends React.Component {
             <Input
               className={c('zoom-input')}
               value={(zoom * 100).toFixed(0)}
-              onChange={evt => this.local.setValue('zoom', evt.target.value / 100)}
+              onChange={evt => {
+                this.local.setValue('zoom', evt.target.value / 100)
+              }}
             />
             <span className={c('zoom-suffix')}>%</span>
           </span>

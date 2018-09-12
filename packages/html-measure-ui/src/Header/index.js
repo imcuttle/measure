@@ -22,9 +22,12 @@ export default class Header extends Root {
       value: 'rem'
     }
   ]
+
+  @storageSync
   @observable
   unit = 'rem'
 
+  @storageSync
   @observable
   remStandardPx = 16
 
@@ -84,15 +87,10 @@ export default class Header extends Root {
   @observable
   numberFixed = 1
 
+  // todo fit?
+  // @storageSync
   @observable
-  zoom = 1
-
-  @autorun
-  detectZoom() {
-    if (this.zoom <= 0) {
-      this.zoom = 0.1
-    }
-  }
+  zoom = 0.5
 
   @action
   updateZoom(delta = 0) {

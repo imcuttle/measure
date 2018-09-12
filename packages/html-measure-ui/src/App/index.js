@@ -5,7 +5,7 @@
  *
  */
 
-import { Root, bindView, observable, symbolicLink, storageSync } from 'react-mobx-vm'
+import { Root, bindView, observable, reaction, Symbolic, symbolicLink, storageSync } from 'react-mobx-vm'
 import { i18n } from '../i18n'
 import View from './view'
 import Header from '../Header'
@@ -16,12 +16,26 @@ import { sz } from 'html-measure'
 @bindView(View)
 export default class App extends Root {
   sz = pixel => {
-    return sz(pixel, this.header)
+    return sz(pixel, this)
   }
 
   clr = color => {
     // ;['auto', 'hex.argb', 'hex.rgb,a', 'rgb,a', 'argb']
     return color
+  }
+
+  hmRef = null
+
+  constructor(props) {
+    super(props)
+    symbolicLink(this, {
+      unit: Symbolic(this.header, 'unit'),
+      remStandardPx: Symbolic(this.header, 'remStandardPx'),
+      zoom: Symbolic(this.header, 'zoom'),
+      numberFixed: Symbolic(this.header, 'numberFixed'),
+      isShowUnit: Symbolic(this.header, 'isShowUnit'),
+      color: Symbolic(this.header, 'color')
+    })
   }
 
   header = Header.create()

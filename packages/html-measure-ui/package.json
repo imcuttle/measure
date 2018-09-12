@@ -5,7 +5,8 @@
     "html-measure": "^1.0.0",
     "rc-checkbox": "^2.1.5",
     "react-select": "^2.0.0",
-    "tiny-i18n": "^1.1.2"
+    "tiny-i18n": "^1.1.2",
+    "zepto": "^1.2.0"
   },
   "edam": {
     "source": "./src/__Template__",

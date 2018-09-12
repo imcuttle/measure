@@ -11,13 +11,11 @@ import createMount from '@rcp/util.createmount'
 
 import './style.less'
 
-if (typeof document !== 'undefined') {
-  require('zepto/src/zepto')
-} else {
-  console.error('HTML measure')
+if (typeof document === 'undefined' || typeof $ === 'undefined') {
+  console.error('Error: [html-measure] requires zepto or jquery and in browser environment')
 }
 
-const { Component } = React
+const { PureComponent } = React
 const cn = p('')
 const c = p('html-measure__')
 
@@ -54,16 +52,19 @@ function sz(pixel, { unit, numberFixed, isShowUnit, remStandardPx } = {}) {
   return `${Number(pixel).toFixed(numberFixed)}${isShowUnit ? unit : ''}`
 }
 
-export default class Scene extends Component {
+export default class Scene extends PureComponent {
   static sz = sz
 
   static propTypes = {
     className: PropTypes.string,
+    style: PropTypes.object,
+    html: PropTypes.string,
     unit: PropTypes.oneOf(['px', 'rem']),
     remStandardPx: PropTypes.number,
     scaleGapPx: PropTypes.number,
     numberFixed: PropTypes.number,
-    isShowUnit: PropTypes.bool
+    isShowUnit: PropTypes.bool,
+    isCalcContainerWidth: PropTypes.bool
   }
 
   static defaultProps = {
@@ -71,7 +72,12 @@ export default class Scene extends Component {
     remStandardPx: 16,
     scaleGapPx: 10,
     numberFixed: 0,
-    isShowUnit: true
+    isShowUnit: true,
+    isCalcContainerWidth: true
+  }
+
+  componentDidUpdate() {
+    this.update()
   }
 
   sz(pixel = 0) {
@@ -87,9 +93,26 @@ export default class Scene extends Component {
   scaleBottom = createMount()
   dotRound = createMount()
 
+  vRule = createMount()
+  hRule = createMount()
+  ruleBox = createMount()
+
+  componentWillUnmount() {
+    this.scaleWidth.close()
+    this.scaleHeight.close()
+    this.scaleTop.close()
+    this.scaleLeft.close()
+    this.scaleRight.close()
+    this.scaleBottom.close()
+    this.dotRound.close()
+    this.ruleBox.close()
+    this.vRule.close()
+    this.hRule.close()
+  }
+
   pos(node) {
     const offset = $(node).offset()
-    const pOffset = $(this.containerRef).offset()
+    const pOffset = $(this.layerRef).offset()
     return {
       ...offset,
       left: offset.left - pOffset.left,
@@ -101,32 +124,38 @@ export default class Scene extends Component {
     const { scaleGapPx } = this.props
     const $node = $(this.runtime.selectedNode)
     const { left, top } = this.pos($node)
-    this.scaleWidth.close()
-    this.scaleHeight.close()
+    $(this.scaleWidth.dom).hide()
+    $(this.scaleHeight.dom).hide()
 
     let dom = this.scaleWidth.open({
       element: <div className={c('scale-label')}>{this.sz($node.width())}</div>,
       attributes: {},
       mountNode: this.containerRef
     })
-    $(dom).css({
-      position: 'absolute',
-      top: `${top - scaleGapPx}px`,
-      left: `${left + $node.width() / 2}px`,
-      transform: `translate(-50%, -100%)`
-    })
+    this.scaleWidth.dom = dom
+    $(dom)
+      .css({
+        position: 'absolute',
+        top: `${top - scaleGapPx}px`,
+        left: `${left + $node.width() / 2}px`,
+        transform: `translate(-50%, -100%)`
+      })
+      .show()
 
     dom = this.scaleHeight.open({
       element: <div className={c('scale-label')}>{this.sz($node.height())}</div>,
       attributes: {},
       mountNode: this.containerRef
     })
-    $(dom).css({
-      position: 'absolute',
-      top: `${top + $node.height() / 2}px`,
-      left: `${left + $node.width() + scaleGapPx}px`,
-      transform: `translate(0%, -50%)`
-    })
+    this.scaleHeight.dom = dom
+    $(dom)
+      .css({
+        position: 'absolute',
+        top: `${top + $node.height() / 2}px`,
+        left: `${left + $node.width() + scaleGapPx}px`,
+        transform: `translate(0%, -50%)`
+      })
+      .show()
   }
 
   renderPixelDist() {
@@ -135,23 +164,23 @@ export default class Scene extends Component {
       const $selectedNode = $(selectedNode)
       const $ruleNode = $(ruleNode)
 
-      this.scaleHeight.close()
-      this.scaleWidth.close()
+      $(this.scaleHeight.dom).hide()
+      $(this.scaleWidth.dom).hide()
 
-      this.scaleLeft.close()
-      this.scaleBottom.close()
-      this.scaleTop.close()
-      this.scaleRight.close()
+      $(this.scaleLeft.dom).hide()
+      $(this.scaleBottom.dom).hide()
+      $(this.scaleTop.dom).hide()
+      $(this.scaleRight.dom).hide()
 
       const { paddingLeft, paddingRight, paddingTop, paddingBottom } = padding(ruleNode, selectedNode) || {}
 
       const selPos = this.pos($selectedNode)
       const rulePos = this.pos($ruleNode)
 
-      const leftDist = paddingLeft > 0 ? paddingLeft : selPos.left - rulePos.left - $ruleNode.width() - 1
-      const rightDist = paddingRight > 0 ? paddingRight : rulePos.left - selPos.left - $selectedNode.width() - 1
-      const topDist = paddingTop > 0 ? paddingTop : selPos.top - rulePos.top - $ruleNode.height() - 1
-      const bottomDist = paddingBottom > 0 ? paddingBottom : rulePos.top - selPos.top - $selectedNode.height() - 1
+      const leftDist = paddingLeft > 0 ? paddingLeft - 1 : selPos.left - rulePos.left - $ruleNode.width() + 1
+      const rightDist = paddingRight > 0 ? paddingRight - 1 : rulePos.left - selPos.left - $selectedNode.width()
+      const topDist = paddingTop > 0 ? paddingTop - 1 : selPos.top - rulePos.top - $ruleNode.height() + 1
+      const bottomDist = paddingBottom > 0 ? paddingBottom - 1 : rulePos.top - selPos.top - $selectedNode.height()
 
       let dom
       if (leftDist > 0) {
@@ -173,13 +202,16 @@ export default class Scene extends Component {
           },
           mountNode: this.containerRef
         })
+        this.scaleLeft.dom = dom
 
-        $(dom).css({
-          top: selPos.top + $selectedNode.height() / 2,
-          height: 1,
-          left: selPos.left - leftDist,
-          width: leftDist - 1
-        })
+        $(dom)
+          .css({
+            top: selPos.top + $selectedNode.height() / 2,
+            height: 1,
+            left: selPos.left - leftDist,
+            width: leftDist - 1
+          })
+          .show()
       }
 
       if (rightDist > 0) {
@@ -193,7 +225,7 @@ export default class Scene extends Component {
               }}
               className={c('scale-label')}
             >
-              {this.sz(rightDist - 1)}
+              {this.sz(rightDist)}
             </div>
           ),
           attributes: {
@@ -201,13 +233,16 @@ export default class Scene extends Component {
           },
           mountNode: this.containerRef
         })
+        this.scaleRight.dom = dom
 
-        $(dom).css({
-          top: selPos.top + $selectedNode.height() / 2,
-          height: 1,
-          left: selPos.left + $selectedNode.width() + 1,
-          width: rightDist
-        })
+        $(dom)
+          .css({
+            top: selPos.top + $selectedNode.height() / 2,
+            height: 1,
+            left: selPos.left + $selectedNode.width() + 1,
+            width: rightDist
+          })
+          .show()
       }
 
       if (topDist > 0) {
@@ -230,13 +265,16 @@ export default class Scene extends Component {
           },
           mountNode: this.containerRef
         })
+        this.scaleTop.dom = dom
 
-        $(dom).css({
-          top: selPos.top - topDist,
-          height: topDist - 1,
-          left: selPos.left + $selectedNode.width() / 2,
-          width: 1
-        })
+        $(dom)
+          .css({
+            top: selPos.top - topDist,
+            height: topDist - 1,
+            left: selPos.left + $selectedNode.width() / 2,
+            width: 1
+          })
+          .show()
       }
 
       if (bottomDist > 0) {
@@ -251,7 +289,7 @@ export default class Scene extends Component {
               }}
               className={c('scale-label')}
             >
-              {this.sz(bottomDist - 1)}
+              {this.sz(bottomDist)}
             </div>
           ),
           attributes: {
@@ -259,13 +297,16 @@ export default class Scene extends Component {
           },
           mountNode: this.containerRef
         })
+        this.scaleBottom.dom = dom
 
-        $(dom).css({
-          top: selPos.top + $selectedNode.height() + 1,
-          height: bottomDist,
-          left: selPos.left + $selectedNode.width() / 2,
-          width: 1
-        })
+        $(dom)
+          .css({
+            top: selPos.top + $selectedNode.height() + 1,
+            height: bottomDist,
+            left: selPos.left + $selectedNode.width() / 2,
+            width: 1
+          })
+          .show()
       }
     }
   }
@@ -286,28 +327,42 @@ export default class Scene extends Component {
       this.renderPixelDist()
 
       const { left, top } = this.pos(target)
-      $(this.rulesRef).show()
-      $(this.lRuleRef).css({
-        left
-      })
 
-      // todo ??
-      $(this.rRuleRef).css({
-        left: left + $(target).width()
+      let dom = this.hRule.open({
+        element: null,
+        mountNode: this.layerRef,
+        attributes: {
+          className: c('rule-h', 'rule')
+        }
       })
-      $(this.tRuleRef).css({
-        top
-      })
-      $(this.bRuleRef).css({
-        top: top + $(target).height()
-      })
+      this.hRule.dom = dom
+      $(dom)
+        .css({ left, width: $(target).width() })
+        .show()
 
-      $(this.boxRuleRef).css({
-        left,
-        width: $(target).width() - 1,
-        top,
-        height: $(target).height() - 1
+      dom = this.vRule.open({
+        element: null,
+        mountNode: this.layerRef,
+        attributes: {
+          className: c('rule-v', 'rule')
+        }
       })
+      this.vRule.dom = dom
+      $(dom)
+        .css({ top, height: $(target).height() })
+        .show()
+
+      dom = this.ruleBox.open({
+        element: null,
+        mountNode: this.layerRef,
+        attributes: {
+          className: c('rule-box', 'rule')
+        }
+      })
+      this.ruleBox.dom = dom
+      $(dom)
+        .css({ top, left, height: $(target).height(), width: $(target).width() })
+        .show()
 
       this.runtime.ruleNode = target
     }
@@ -316,7 +371,9 @@ export default class Scene extends Component {
   handleLayerMouseOut = ({ target }) => {
     if (isNodeContains(target)) {
       if (this.runtime.ruleNode === target) {
-        $(this.rulesRef).hide()
+        $(this.hRule.dom).hide()
+        $(this.vRule.dom).hide()
+        $(this.ruleBox.dom).hide()
         this.runtime.ruleNode = null
       }
     }
@@ -332,15 +389,17 @@ export default class Scene extends Component {
 
       $(target).addClass(selectedClassName)
       this.runtime.selectedNode = target
-      this.scaleLeft.close()
-      this.scaleBottom.close()
-      this.scaleTop.close()
-      this.scaleRight.close()
+      $(this.scaleLeft.dom).hide()
+      $(this.scaleBottom.dom).hide()
+      $(this.scaleTop.dom).hide()
+      $(this.scaleRight.dom).hide()
 
       this.renderPixelSize()
 
       if (this.runtime.selectedNode === this.runtime.ruleNode) {
-        $(this.rulesRef).hide()
+        $(this.vRule.dom).hide()
+        $(this.hRule.dom).hide()
+        $(this.ruleBox.dom).hide()
       }
 
       // render dot around
@@ -355,21 +414,27 @@ export default class Scene extends Component {
         ),
         mountNode: this.containerRef
       })
+      this.dotRound.dom = dom
       const $t = $(target)
-      $(dom).css({
-        position: 'absolute',
-        pointerEvents: 'none',
-        ...this.pos($t),
-        width: $t.width(),
-        height: $t.height()
-      })
+      $(dom)
+        .css({
+          position: 'absolute',
+          pointerEvents: 'none',
+          ...this.pos($t),
+          width: $t.width(),
+          height: $t.height()
+        })
+        .show()
     }
   }
 
-  update() {}
+  update() {
+    this.runtime.selectedNode && this.handleLayerClick({ target: this.runtime.selectedNode })
+    this.runtime.ruleNode && this.handleLayerMouseOver({ target: this.runtime.ruleNode })
+  }
 
   render() {
-    let { html, children, className } = this.props
+    let { html, getCalcContainerWidth, children, style, isCalcContainerWidth, className } = this.props
 
     const props = {}
     if (typeof html === 'string') {
@@ -379,7 +444,14 @@ export default class Scene extends Component {
       children = undefined
     }
     return (
-      <div ref={r => (this.containerRef = r)} className={cn(c('container'), className)}>
+      <div
+        ref={r => (this.containerRef = r)}
+        className={cn(c('container'), className)}
+        style={{
+          width: isCalcContainerWidth && this.layerRef ? this.layerRef.clientWidth : null,
+          ...style
+        }}
+      >
         <div
           onMouseMove={this.handleLayerMouseOver}
           onMouseOut={this.handleLayerMouseOut}
@@ -389,13 +461,6 @@ export default class Scene extends Component {
           {...props}
         >
           {children}
-        </div>
-        <div ref={r => (this.rulesRef = r)} className={c('rules')}>
-          <div ref={r => (this.lRuleRef = r)} className={c('rule-l', 'rule')} />
-          <div ref={r => (this.rRuleRef = r)} className={c('rule-r', 'rule')} />
-          <div ref={r => (this.tRuleRef = r)} className={c('rule-t', 'rule')} />
-          <div ref={r => (this.bRuleRef = r)} className={c('rule-b', 'rule')} />
-          <div ref={r => (this.boxRuleRef = r)} className={c('rule-box')} />
         </div>
       </div>
     )

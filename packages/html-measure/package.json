@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "dependencies": {
     "@rcp/util.createmount": "^1.0.7",
-    "prefix-classname": "^1.0.1",
-    "zepto": "^1.2.0"
+    "prefix-classname": "^1.0.1"
   }
 }
