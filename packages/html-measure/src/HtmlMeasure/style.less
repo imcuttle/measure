@@ -1,0 +1,138 @@
+@import (reference) '../_style/_mixin';
+@import (reference) '../_style/_variables';
+
+@prefix: html-measure__;
+
+.@{prefix} {
+  &container {
+    position: relative;
+
+    *:not([data-html-measurable-exclude]) {
+      cursor: pointer;
+      &.@{prefix}selected {
+        outline: 1px solid @highlight-border-color;
+      }
+    }
+  }
+  &scale-line {
+    pointer-events: none;
+    position: absolute;
+    background-color: @highlight-border-color;
+    text-align: center;
+  }
+  &scale-line-v {
+    &:before {
+      content: '';
+      height: @scale-line-point-size;
+      width: 1px;
+      position: absolute;
+      transform: translateY(-50%);
+      top: 0;
+      left: 0px;
+      background-color: @highlight-border-color;
+    }
+    &:after {
+      content: '';
+      height: @scale-line-point-size;
+      width: 1px;
+      position: absolute;
+      transform: translateY(-50%);
+      top: 0;
+      right: 0px;
+      background-color: @highlight-border-color;
+    }
+  }
+  &scale-line-h {
+    &:before {
+      content: '';
+      height: 1px;
+      width: @scale-line-point-size;
+      position: absolute;
+      transform: translateX(-50%);
+      left: 0;
+      top: 0;
+      background-color: @highlight-border-color;
+    }
+    &:after {
+      content: '';
+      height: 1px;
+      width: @scale-line-point-size;
+      position: absolute;
+      transform: translateX(-50%);
+      left: 0;
+      bottom: 0;
+      background-color: @highlight-border-color;
+    }
+  }
+  &scale-label {
+    font-family: @font-family;
+    color: #fff;
+    background-color: @highlight-border-color;
+    padding: 4px;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 3px;
+    line-height: 1;
+  }
+
+  &rules {
+    display: none;
+    pointer-events: none;
+  }
+  &rule {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    border: 0.5px dashed @highlight-rule-color;
+  }
+  &rule-box {
+    position: absolute;
+    border: 1px solid @highlight-rule-color;
+  }
+  &rule-l,
+  &rule-r {
+    top: 0;
+    width: 0px;
+
+    border-top: 0;
+    border-bottom: 0;
+  }
+  &rule-t,
+  &rule-b {
+    left: 0;
+    height: 0px;
+
+    border-left: 0;
+    border-right: 0;
+  }
+
+  &dot {
+    width: 4px;
+    height: 4px;
+    border: 1px solid @highlight-border-color;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+  }
+  &dot-lt {
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
+  }
+  &dot-rt {
+    right: 0;
+    top: 0;
+    transform: translate(50%, -50%);
+  }
+  &dot-rb {
+    right: 0;
+    bottom: 0;
+    transform: translate(50%, 50%);
+  }
+  &dot-lb {
+    left: 0;
+    bottom: 0;
+    transform: translate(-50%, 50%);
+  }
+}

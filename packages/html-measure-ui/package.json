@@ -1,0 +1,14 @@
+{
+  "name": "html-measure-ui",
+  "version": "1.0.0",
+  "dependencies": {
+    "html-measure": "^1.0.0",
+    "rc-checkbox": "^2.1.5",
+    "react-select": "^2.0.0",
+    "tiny-i18n": "^1.1.2"
+  },
+  "edam": {
+    "source": "./src/__Template__",
+    "output": "./src"
+  }
+}

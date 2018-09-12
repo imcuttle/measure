@@ -1,0 +1,18 @@
+@import (reference) '../../_style/_mixin';
+@import (reference) '../../_style/_variables';
+
+@import '~rc-checkbox/assets/index.css';
+
+@prefix: hm-checkbox__;
+
+.@{prefix} {
+  &container {
+    .rc-checkbox-inner:after {
+      left: 3px;
+      top: -1px;
+    }
+    input {
+      margin: 0;
+    }
+  }
+}
