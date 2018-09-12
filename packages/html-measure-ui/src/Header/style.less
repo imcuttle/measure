@@ -1,0 +1,125 @@
+@import (reference) '../_style/_mixin';
+@import (reference) '../_style/_variables';
+
+@prefix: hm-header__;
+
+.@{prefix} {
+  &container {
+    display: flex;
+    align-items: center;
+
+    padding: 13px 20px;
+
+    background-color: #eee;
+    border-bottom: 1px solid slategrey;
+  }
+  &unit {
+    min-width: 90px;
+  }
+
+  &rem-standard {
+    width: auto;
+  }
+  &color {
+    min-width: 150px;
+  }
+
+  &number-fixed {
+    min-width: 120px;
+  }
+
+  &zoom {
+  }
+
+  &zoom-out {
+    position: relative;
+    &:before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 70%;
+      height: 2px;
+
+      display: block;
+      background-color: #fff;
+      content: '';
+
+      transform: translate(-50%);
+    }
+  }
+  &zoom-in {
+    position: relative;
+    &:before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 70%;
+      height: 2px;
+
+      display: block;
+      background-color: #fff;
+      content: '';
+
+      transform: translate(-50%, -50%);
+    }
+    &:after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 70%;
+
+      display: block;
+      background-color: #fff;
+      content: '';
+
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &zoom {
+    display: flex;
+    align-items: center;
+  }
+  &zoom-btn {
+    cursor: pointer;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #419bf9;
+  }
+  &zoom-input-wrapper {
+    margin: auto 10px;
+    position: relative;
+  }
+  &zoom-input {
+    height: 24px;
+    padding: 2px;
+    width: 30px;
+    display: inline;
+  }
+  &zoom-suffix {
+  }
+
+  &item + &item {
+    margin-left: 15px;
+  }
+
+  &checkbox-wrapper {
+    display: flex;
+    align-items: center;
+
+    .hm-checkbox__container {
+      margin-right: 4px;
+    }
+  }
+  &zoom-disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+    &:before,
+    &:after {
+      background-color: #ddd;
+    }
+  }
+}

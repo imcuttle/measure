@@ -1,0 +1,32 @@
+@import (reference) '../_style/_mixin';
+@import (reference) '../_style/_variables';
+
+@prefix: hm-infor-bar__;
+
+.@{prefix} {
+  &container {
+    background-color: #2c2d2e;
+    padding: 2px 10px;
+  }
+
+  &sec-title {
+    background-color: #343539;
+    color: #818b8e;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  &sec-row {
+    display: flex;
+  }
+  &sec-item {
+  }
+  &sec-item-label {
+    color: #84878d;
+    &:after {
+      content: ':';
+    }
+  }
+  &sec-item-content {
+    color: #ffffff;
+  }
+}

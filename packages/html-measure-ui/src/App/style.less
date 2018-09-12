@@ -1,0 +1,29 @@
+@import (reference) '../_style/_mixin';
+@import (reference) '../_style/_variables';
+
+@prefix: hm-app__;
+
+.@{prefix} {
+  &container {
+    //position: relative;
+  }
+
+  &stage {
+    position: absolute;
+    width: 100vw;
+    height: ~'calc(100vh - 57px)';
+  }
+
+  &infor-bar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 240px;
+
+    overflow: auto;
+    transition: all 0.15s ease;
+    //right: -240px;
+    display: block;
+  }
+}
