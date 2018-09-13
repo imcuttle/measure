@@ -11,7 +11,7 @@
   &container {
     position: relative;
 
-    *:not([data-html-measurable-exclude]) {
+    *:not([data-hm-exclude]) {
       cursor: pointer;
       &.@{prefix}selected {
         outline: 1px solid @highlight-border-color;
@@ -105,9 +105,9 @@
   }
 
   &dot {
-    width: 4px;
-    height: 4px;
-    border: 1px solid @highlight-border-color;
+    width: 6px;
+    height: 6px;
+    border: 1.5px solid @highlight-border-color;
     background-color: #fff;
     border-radius: 50%;
     position: absolute;

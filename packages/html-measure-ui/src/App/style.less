@@ -19,7 +19,7 @@
     top: 0;
     bottom: 0;
     right: 0;
-    width: 240px;
+    width: @infor-bar-width;
 
     overflow: auto;
     transition: all 0.15s ease;
@@ -30,7 +30,7 @@
   &playground {
     background-color: #212226;
     overflow: auto;
-    margin-right: 240px;
+    margin-right: @infor-bar-width;
     height: 100%;
   }
 
@@ -41,5 +41,8 @@
     margin-bottom: 20%;
     //transform: translate(-50%, -50%);
     //top: 50%;
+    .html-measure__layer {
+      background-color: #fff;
+    }
   }
 }

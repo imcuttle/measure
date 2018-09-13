@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="../../node_modules/psd/dist/psd.browser.js"></script>
+  <script src="../../../html-measure-ui/demo.js"></script>
+</head>
+<body>
+<script>
+  PSD.fromURL('../../__tests__/fixtures/home.psd')
+     .then(function (psd) {
+       console.log(psd);
+       console.log(psd.tree());
+       console.log(psd.tree().export());
+     })
+</script>
+</body>
+</html>

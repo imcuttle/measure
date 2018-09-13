@@ -12,16 +12,41 @@ import Header from '../Header'
 import InforBar from '../InforBar'
 
 import { sz } from 'html-measure'
+import Clr from 'color'
 
 @bindView(View)
 export default class App extends Root {
-  sz = pixel => {
-    return sz(pixel, this)
+  sz = (pixel, opt) => {
+    return sz(pixel, { ...this.toJSON(), ...opt })
   }
 
-  clr = color => {
+  clr = (color, clrType = this.color) => {
+    const c = Clr(color)
+    switch (clrType) {
+      case 'auto': {
+        if (c.alpha() !== 1) {
+          return c.string().toLowerCase()
+        }
+        return c.hex().toLowerCase()
+      }
+      case 'hex.argb':
+        return `#${Number(c.alpha() * 255)
+          .toString(16)
+          .padStart(2, 'f')}${c.hex().slice(1)}`.toLowerCase()
+      case 'hex.rgb,a':
+        return `${c.hex()}, ${c.alpha()}`.toLowerCase()
+      case 'rgb,a':
+        return c.string().toLowerCase()
+      case 'argb':
+        const o = c.object()
+        if (!('alpha' in o)) {
+          o.alpha = 1
+        }
+        return `argb(${o.alpha * 255}, ${o.r}, ${o.g}, ${o.b}})`
+      default:
+        return color
+    }
     // ;['auto', 'hex.argb', 'hex.rgb,a', 'rgb,a', 'argb']
-    return color
   }
 
   hmRef = null
@@ -41,26 +66,6 @@ export default class App extends Root {
   header = Header.create()
   inforBar = InforBar.create({
     clr: this.clr,
-    sz: this.sz,
-    title: 'title',
-    position: {
-      x: 100,
-      y: 200
-    },
-    size: {
-      width: 100,
-      height: 200
-    },
-    opacity: 1,
-    radius: 4,
-    color: '#fff',
-    font: {
-      family: 'MISSD',
-      color: 'rgba(0,0,0,123)',
-      size: 20,
-      gap: 10,
-      lineHeight: 20,
-      content: '是撒多少'
-    }
+    sz: this.sz
   })
 }

@@ -1,0 +1,58 @@
+.clearfix() {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: ' ';
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// 正三角
+.up-caret(@color:#333, @size: 6px) {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-width: 0 @size @size;
+  border-style: solid;
+  border-color: transparent transparent @color transparent;
+}
+
+// 三角形
+.caret(@color:#333, @size: 6px) {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-width: @size @size 0;
+  border-style: solid;
+  border-color: @color transparent transparent transparent;
+}
+
+//@boxGlow(@spread: 5px, @color: #f00): inset 0 0 @spread @color;
+// 透明度
+.opacity(@opacity) {
+  opacity: @opacity;
+  // IE8 filter
+  @opacity-ie: (@opacity * 100);
+  filter: ~'alpha(opacity=@{opacity-ie})';
+}
+
+.ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.transition(@prop: all, @time: 0.6s) {
+  transition: @prop @time ease-in-out;
+}
+
+.multi-line-ellipsis(@line) {
+  display: -webkit-box; // 设置块元素的布局为伸缩布局；
+  -webkit-box-orient: vertical; // 设置伸缩项的布局方向；
+  -webkit-line-clamp: @line; // 设置块元素包含的文本行数；
+  text-overflow: ellipsis; // 则表示超出盒子的部分使用省略号表示。
+  word-break: break-all;
+  overflow: hidden;
+}

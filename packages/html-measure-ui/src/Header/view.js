@@ -34,61 +34,65 @@ export default class Header extends React.Component {
       isShowUnit,
       unit,
       remStandardPx,
+      logo,
       color,
       colorOptions
     } = this.local
 
     return (
       <div className={cn(c('container'), className)}>
-        <Select
-          className={c('unit', 'item')}
-          isSearchAble={false}
-          options={unitOptions}
-          value={unit}
-          placeholder={i18n('unit.placeholder')}
-          onChange={v => this.local.setValue('unit', v)}
-        />
-        {unit === 'rem' && (
-          <Input
-            onChange={evt => this.local.setValue('remStandardPx', evt.target.value)}
-            className={c('rem-standard', 'item')}
-            type={'number'}
-            value={remStandardPx}
+        <div className={c('left')}>
+          {logo && <div className={c('logo')}>{logo}</div>}
+          <Select
+            className={c('unit', 'item')}
+            isSearchAble={false}
+            options={unitOptions}
+            value={unit}
+            placeholder={i18n('unit.placeholder')}
+            onChange={v => this.local.setValue('unit', v)}
           />
-        )}
-        <Select
-          name="color"
-          className={c('color', 'item')}
-          onChange={color => {
-            this.local.setValue('color', color)
-          }}
-          placeholder={i18n('color.placeholder')}
-          value={color}
-          options={colorOptions}
-        />
-
-        <label className={c('item', 'checkbox-wrapper')}>
-          <Checkbox
-            checked={isShowUnit}
-            onChange={e => {
-              this.local.setValue('isShowUnit', e.target.checked)
+          {unit === 'rem' && (
+            <Input
+              onChange={evt => this.local.setValue('remStandardPx', evt.target.value)}
+              className={c('rem-standard', 'item')}
+              type={'number'}
+              value={remStandardPx}
+            />
+          )}
+          <Select
+            name="color"
+            className={c('color', 'item')}
+            onChange={color => {
+              this.local.setValue('color', color)
             }}
+            placeholder={i18n('color.placeholder')}
+            value={color}
+            options={colorOptions}
           />
-          <span>{' ' + i18n('unit.label')}</span>
-        </label>
 
-        <Select
-          name="number-fixed"
-          className={c('number-fixed', 'item')}
-          onChange={fixed => {
-            this.local.setValue('numberFixed', fixed)
-          }}
-          placeholder={i18n('number-fixed.placeholder')}
-          value={numberFixed}
-          options={numberFixedOptions}
-        />
+          <label className={c('item', 'checkbox-wrapper')}>
+            <Checkbox
+              checked={isShowUnit}
+              onChange={e => {
+                this.local.setValue('isShowUnit', e.target.checked)
+              }}
+            />
+            <span>{' ' + i18n('unit.label')}</span>
+          </label>
 
-        <div className={c('zoom', 'item')}>
+          <Select
+            name="number-fixed"
+            className={c('number-fixed', 'item')}
+            onChange={fixed => {
+              this.local.setValue('numberFixed', fixed)
+            }}
+            placeholder={i18n('number-fixed.placeholder')}
+            value={numberFixed}
+            options={numberFixedOptions}
+          />
+        </div>
+
+        <div className={c('right', 'zoom', 'item')}>
           <span
             className={c('zoom-out', 'zoom-btn', {
               'zoom-disabled': zoom <= 0.25

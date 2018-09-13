@@ -12,9 +12,9 @@ const { psdToHASTFromPath } = require('../lib/psd-to-hast')
 describe('psd-to-hast', function() {
   it('should psd-to-hast', function(done) {
     jest.setTimeout(50000)
-    psdToHASTFromPath(nps.join(__dirname, './fixtures/home.psd'))
+    psdToHASTFromPath(nps.join(__dirname, './fixtures/home.psd'), { imageSplit: false })
       .then(hast => {
-        fs.writeFileSync('./test.html', toHtml(hast, { entities: { escapeOnly: true } }))
+        fs.writeFileSync('../../../psd-test.html', toHtml(hast, { entities: { escapeOnly: true } }))
       })
       .then(done)
   })

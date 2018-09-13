@@ -1,6 +1,8 @@
 @import (reference) '../_style/_mixin';
 @import (reference) '../_style/_variables';
 
+@import './highlight/tomorrow-night-bright.css';
+
 @prefix: hm-infor-bar__;
 
 .@{prefix} {
@@ -21,6 +23,8 @@
     }
   }
   &sec-title {
+    .ellipsis();
+
     background-color: #393739;
     color: #818b8e;
 
@@ -32,6 +36,7 @@
   }
   &sec-item {
     padding: 5px 0;
+    max-width: @infor-bar-width - 30;
   }
   &sec-item-label {
     color: #84878d;
@@ -42,8 +47,17 @@
     display: inline-block;
     margin-right: 5px;
   }
+
   &sec-item-content {
     color: #ffffff;
+    position: relative;
+  }
+
+  &sec-item-wrapper.@{prefix}sec-with-label-wrapper {
+    .ellipsis();
+    .@{prefix}sec-item-content {
+      .ellipsis();
+    }
   }
 
   &sec-basic {
@@ -54,7 +68,8 @@
   }
 
   &sec-item-wrapper {
-    display: inline-block;
+    display: flex;
+    align-items: center;
   }
 
   &sec-type-color {
@@ -64,7 +79,72 @@
     margin-right: 6px;
     vertical-align: middle;
   }
+  &sec-type-pure-label-wrapper {
+    .@{prefix}sec-item-content {
+      display: none;
+    }
+    .@{prefix}sec-item-label {
+      &:after {
+        display: none;
+      }
+    }
+  }
   &sec-type-color-wrapper {
     //padding-top: 6px;
+  }
+  &sec-item-key-font-content {
+    .@{prefix}sec-item-content {
+      .multi-line-ellipsis(2);
+    }
+  }
+
+  &sec-item-key-content {
+    .multi-line-ellipsis(10);
+  }
+
+  &toast-tip {
+    display: inline-block;
+    padding: 6px 10px;
+    font-size: 15px;
+    border-radius: 3px;
+  }
+  &fail-tip {
+    background-color: #dd2f3d;
+    color: #fff;
+  }
+  &succ-tip {
+    background-color: #52daa5;
+    color: #fff;
+  }
+
+  &snippet-select {
+    width: 120px;
+  }
+
+  &sec-snippets {
+    pre {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      white-space: pre-wrap;
+    }
+  }
+
+  &highlight {
+  }
+
+  &snippet-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &btn {
+    user-select: none;
+    cursor: pointer;
+    color: #40b8dc;
+    font-size: 14px;
+    &:hover {
+      opacity: 0.6;
+    }
   }
 }

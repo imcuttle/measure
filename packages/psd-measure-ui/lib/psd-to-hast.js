@@ -10,6 +10,16 @@ const fs = require('fs')
 const { Writable, Transform } = require('stream')
 const nps = require('path')
 
+const psdUtils = require('./psd-utils')
+
+// const debug = d('psd-to-hast')
+
+function assert(check, ...argv) {
+  if (!check) {
+    console.error(`Error: [psd-measure-ui](psd-to-hast):`, ...argv)
+  }
+}
+
 const isBrowser = !(
   typeof process === 'object' &&
   typeof process.versions === 'object' &&
@@ -48,10 +58,36 @@ class CollectWritable extends Writable {
   }
 }
 
-function psdToHAST(psd, { unit = 'px', remStandard = 16 } = {}) {
-  if (!psd.parsed) {
-    psd.parse()
+function toBase64P(psd) {
+  if (!isBrowser) {
+    return new Promise((resolve, reject) => {
+      psd.image
+        .toPng()
+        .pack()
+        .pipe(new CollectWritable(b64 => resolve(`data:image/png;base64,${b64}`), { encoding: 'base64' }))
+        .on('error', reject)
+    })
+  } else {
+    return Promise.resolve(psd.image.toBase64())
   }
+}
+
+class Sep {
+  list = []
+  push(task) {
+    this.list.push(task)
+  }
+  run() {
+    let p = Promise.resolve()
+    this.list.forEach(task => {
+      p = p.then(task)
+    })
+    return p
+  }
+}
+
+function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false } = {}) {
+  psd.parse()
 
   const size = px => {
     if (unit === 'rem') {
@@ -65,40 +101,134 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16 } = {}) {
     hasts: []
   }
 
-  const root = tree.export()
+  const tasks = new Sep()
   visit(
-    root,
+    tree,
     (node, ctx) => {
       const { hasts } = ctx.state
-      if (node === root) {
+      if (node === tree) {
         return
       }
       // Skip the hidden node
-      if (!node.visible) {
+      if (!node.visible()) {
         return ctx.skip()
       }
 
       if (node.type === 'layer') {
-        hasts.unshift(
-          h(`div#${'psd-layer-' + hasts.length}.psd-layer`, {
-            'data-psd-index': hasts.length,
-            // 'data-psd-depth': ctx.depth,
-            // 'data-psd-child-index': ctx.index,
-            // 'data-psd-text': node.text ? JSON.stringify(node.text) : null,
-            style: {
-              opacity: node.opacity,
-              width: size(node.width),
-              height: size(node.height),
-              left: size(node.left),
-              top: size(node.top),
-              position: 'absolute'
-            }
+        // Get radius https://github.com/layervault/psd.rb/issues/60
+        // https://github.com/meltingice/psd.js/issues/83
+        // https://github.com/meltingice/psd.js/issues/107
+        // Spec https://www.tonton-pixel.com/Photoshop%20Additional%20File%20Formats/styles-file-format.html
+        const data = {}
+
+        const vectorOrigination = node.get('vectorOrigination')
+        const objectEffects = node.get('objectEffects')
+        const solidColor = node.get('solidColor')
+
+        // Drop Shadow
+        if (objectEffects && objectEffects.data && objectEffects.data.DrSh && objectEffects.data.DrSh.enab) {
+          const DrSh = objectEffects.data.DrSh
+          // console.log(DrSh)
+          const d = psdUtils.dropShadowToStyle({
+            dist: DrSh['Dstn'],
+            color: DrSh['Clr'],
+            spread: DrSh['Ckmt'],
+            size: DrSh['blur'],
+            angle: DrSh['lagl'],
+            opct: DrSh['Opct']
           })
-        )
+          Object.assign(data, {
+            'data-box-shadow-offset-x': d.offsetX,
+            'data-box-shadow-offset-y': d.offsetY,
+            'data-box-shadow-blur-radius': d.blurRadius,
+            'data-box-shadow-spread-radius': d.spreadRadius,
+            'data-box-shadow-color': d.color
+          })
+        }
+
+        if (
+          vectorOrigination &&
+          vectorOrigination.data &&
+          vectorOrigination.data.keyDescriptorList &&
+          vectorOrigination.data.keyDescriptorList[0]
+        ) {
+          const { keyOriginRRectRadii } = vectorOrigination.data.keyDescriptorList[0]
+          if (keyOriginRRectRadii) {
+            Object.assign(data, {
+              'data-radius-bottom-left': keyOriginRRectRadii.bottomLeft && keyOriginRRectRadii.bottomLeft.value,
+              'data-radius-bottom-right': keyOriginRRectRadii.bottomRight && keyOriginRRectRadii.bottomRight.value,
+              'data-radius-top-left': keyOriginRRectRadii.topLeft && keyOriginRRectRadii.topLeft.value,
+              'data-radius-top-right': keyOriginRRectRadii.topRight && keyOriginRRectRadii.topRight.value
+            })
+          }
+        }
+
+        Object.assign(data, {
+          'data-solid-color': solidColor && JSON.stringify(solidColor.color())
+        })
+
+        const exported = node.export()
+        if (exported.text) {
+          const text = exported.text
+          Object.assign(data, {
+            'data-content': text.value
+          })
+          if (text.font) {
+            const {
+              sizes = [],
+              names,
+              leading = [],
+              alignment = [],
+              styles = [],
+              colors = [],
+              lengthArray = [],
+              weights = [],
+              textDecoration = []
+            } = text.font
+
+            Object.assign(data, {
+              'data-font-length-array': names ? JSON.stringify(lengthArray) : null,
+              'data-font-family': names ? JSON.stringify(names) : null,
+              'data-text-align': JSON.stringify(alignment),
+              'data-font-colors': JSON.stringify(colors),
+              'data-font-leading': JSON.stringify(leading),
+              'data-font-sizes': JSON.stringify(sizes),
+              'data-text-decoration': JSON.stringify(textDecoration),
+              'data-font-weights': JSON.stringify(weights)
+            })
+          }
+        }
+
+        tasks.push(function() {
+          const p = imageSplit ? toBase64P(node.layer).then(b64encoded => `url(${b64encoded})`) : Promise.resolve(null)
+          return p.then(img => {
+            hasts.unshift(
+              h(
+                `div.psd-layer`,
+                Object.assign(
+                  {
+                    'data-psd-index': hasts.length,
+                    'data-title': exported.name,
+                    style: {
+                      'background-image': img,
+                      opacity: exported.opacity,
+                      width: size(exported.width),
+                      height: size(exported.height),
+                      left: size(exported.left),
+                      top: size(exported.top),
+                      position: 'absolute'
+                    }
+                  },
+                  data
+                )
+              )
+            )
+          })
+        })
       }
     },
     {
-      path: 'children',
+      path: '_children',
       order: 'pre',
       skipVisited: false,
       // hast
@@ -106,33 +236,23 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16 } = {}) {
     }
   )
 
-  let b64encodedPromise
-  if (!isBrowser) {
-    b64encodedPromise = new Promise((resolve, reject) => {
-      psd.image
-        .toPng()
-        .pack()
-        .pipe(new CollectWritable(b64 => resolve(`data:image/png;base64,${b64}`), { encoding: 'base64' }))
-        .on('error', reject)
+  return tasks.run().then(() => {
+    let b64encodedPromise = imageSplit ? Promise.resolve(null) : toBase64P(psd).then(b64encoded => `url(${b64encoded})`)
+    return b64encodedPromise.then(b64encoded => {
+      return h(
+        'div#psd-root',
+        {
+          'data-hm-exclude': true,
+          style: {
+            'background-image': b64encoded,
+            position: 'relative',
+            width: size(tree.width),
+            height: size(tree.height)
+          }
+        },
+        state.hasts
+      )
     })
-  } else {
-    b64encodedPromise = Promise.resolve(psd.image.toBase64())
-  }
-
-  return b64encodedPromise.then(b64encoded => {
-    return h(
-      'div#psd-root',
-      {
-        'data-html-measurable-exclude': true,
-        style: {
-          'background-image': `url(${b64encoded})`,
-          position: 'relative',
-          width: size(root.document.width),
-          height: size(root.document.height)
-        }
-      },
-      state.hasts
-    )
   })
 }
 

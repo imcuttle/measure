@@ -20,7 +20,8 @@ const c = p('hm-app__')
 
 export default class App extends React.Component {
   static propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
+    onClickMeasureAbleNode: PropTypes.func
   }
   static defaultProps = {}
 
@@ -29,7 +30,7 @@ export default class App extends React.Component {
     node.scrollIntoView()
   }
   render() {
-    const { className, ...props } = this.props
+    const { className, onClickMeasureAbleNode } = this.props
 
     return (
       <div className={cn(c('container'), className)}>
@@ -37,9 +38,10 @@ export default class App extends React.Component {
         <div className={c('stage')}>
           <div className={c('playground')}>
             <HtmlMeasure
+              onClickMeasureAbleNode={onClickMeasureAbleNode}
               style={{ zoom: this.local.zoom }}
               className={c('hm-core')}
-              ref={r => (this.local.hmRef = r)}
+              ref={r => r && (this.local.hmRef = r)}
               html={require('!raw-loader!../../../../psd-test.html')}
               scaleGapPx={10}
               remStandardPx={Number(this.local.remStandardPx)}

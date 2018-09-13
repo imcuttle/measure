@@ -26,7 +26,6 @@ export default class Select extends React.PureComponent {
   render() {
     const { className, value, options, onChange, ...props } = this.props
     const matchedVal = (options || []).find(x => x.value === value)
-
     return (
       <RSelect
         isSearchable

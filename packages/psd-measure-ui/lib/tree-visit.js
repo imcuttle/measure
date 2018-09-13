@@ -37,8 +37,6 @@ function visit(tree, visitor = () => {}, opts = {}) {
   const { path = 'children', skipVisited = true, uniquePath = null, state } = opts
 
   const getUniq = typeof uniquePath === 'string' ? get(uniquePath, uniquePath) : v => v
-  const childrenIsNotArrayMap = new Map()
-
   crawl(
     tree,
     function(node, ctx) {

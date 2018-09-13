@@ -83,6 +83,9 @@ export default class Header extends Root {
     }
   ]
 
+  @observable
+  logo = 'Measure'
+
   @storageSync
   @observable
   numberFixed = 1

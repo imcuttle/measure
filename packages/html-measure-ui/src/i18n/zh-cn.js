@@ -24,9 +24,24 @@ module.exports = {
 
   'infor-bar.width.label': '宽',
   'infor-bar.height.label': '高',
+  'infor-bar.font.align.label': '对齐',
   'infor-bar.font.title': '字体',
   'infor-bar.font.family.label': '字体',
   'infor-bar.font.size.label': '字号',
   'infor-bar.font.line-height': '行高',
-  'infor-bar.font.gap': '间距'
+  'infor-bar.font.gap': '间距',
+  'infor-bar.message.copy.succ': '文本复制成功！',
+  'infor-bar.message.copy.fail': '文本复制失败',
+  'infor-bar.font.content': '内容',
+  'infor-bar.tip.copy': '点击复制',
+  'infor-bar.color.title': '填充',
+  'infor-bar.radius.label': '圆角',
+  'infor-bar.copy.btn': '复制',
+
+  'infor-bar.box-shadow.title': '阴影',
+  'infor-bar.box-shadow.label': '外投影',
+  'infor-bar.box-shadow.x': 'X',
+  'infor-bar.box-shadow.y': 'Y',
+  'infor-bar.box-shadow.blur': '大小',
+  'infor-bar.box-shadow.spread': '扩散'
 }

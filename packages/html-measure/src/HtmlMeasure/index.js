@@ -19,7 +19,7 @@ const { PureComponent } = React
 const cn = p('')
 const c = p('html-measure__')
 
-const attrExcludeSymbol = 'data-html-measurable-exclude'
+const attrExcludeSymbol = 'data-hm-exclude'
 
 export function isNodeContains(node) {
   return !node.hasAttribute(attrExcludeSymbol)
@@ -46,10 +46,18 @@ function padding(node, parent) {
 }
 
 function sz(pixel, { unit, numberFixed, isShowUnit, remStandardPx } = {}) {
+  if (isNaN(pixel) || pixel === '') {
+    return null
+  }
+  pixel = Number(pixel)
+
   if (unit === 'rem') {
     pixel = pixel / remStandardPx
   }
-  return `${Number(pixel).toFixed(numberFixed)}${isShowUnit ? unit : ''}`
+  let decimal = Number(pixel).toFixed(numberFixed)
+  // 10.2 -> 10.2;   10.0 -> 10
+  decimal = decimal % 1 !== 0 ? decimal : Number(decimal).toFixed(0)
+  return `${decimal}${isShowUnit ? unit : ''}`
 }
 
 export default class Scene extends PureComponent {
@@ -64,7 +72,8 @@ export default class Scene extends PureComponent {
     scaleGapPx: PropTypes.number,
     numberFixed: PropTypes.number,
     isShowUnit: PropTypes.bool,
-    isCalcContainerWidth: PropTypes.bool
+    isCalcContainerWidth: PropTypes.bool,
+    onClickMeasureAbleNode: PropTypes.func
   }
 
   static defaultProps = {
@@ -425,6 +434,10 @@ export default class Scene extends PureComponent {
           height: $t.height()
         })
         .show()
+
+      if (typeof this.props.onClickMeasureAbleNode === 'function') {
+        this.props.onClickMeasureAbleNode(target)
+      }
     }
   }
 
