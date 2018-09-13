@@ -78,12 +78,14 @@ export class Position extends Root {
 
 function cssText(obj) {
   let str = ''
+  let has = false
   Object.keys(obj).forEach(name => {
     if (!isEmpty(obj[name]) && !!obj[name]) {
+      has = true
       str += `  ${name}: ${obj[name]};\n`
     }
   })
-  return str
+  return has ? str : ''
 }
 
 @bindView(View)
@@ -180,7 +182,7 @@ export default class InformationBar extends Root {
             `${_sz(shadow.outer.offsetX)} ${_sz(shadow.outer.offsetY)} ${_sz(shadow.outer.blurRadius)} ${_sz(
               shadow.outer.spreadRadius
             )} ${_cr(shadow.outer.color) || ''}`,
-          'background-color': _cr(color),
+          'background-color': color ? _cr(color) : null,
           opacity: opacity != 1 ? opacity : null
         }
         if (fontObjs[0]) {
@@ -188,9 +190,17 @@ export default class InformationBar extends Root {
           fontObjs.splice(0, 1)
         }
         let baseCls = `.${kebabcase(slug(title)) || id++}`
+        let css = cssText(obj)
         return (
-          `${baseCls} {\n${cssText(obj)}}` +
-          (fontObjs.length ? fontObjs.map(obj => `\n.${id++} {\n${cssText(obj)}}`).join('') : '')
+          `${css ? `${baseCls} {\n${css}}` : ''}` +
+          (fontObjs.length
+            ? fontObjs
+                .map(obj => {
+                  let css = cssText(obj)
+                  return css ? `\n\n.${id++} {\n${css}}` : ''
+                })
+                .join('')
+            : '')
         )
       }
     }

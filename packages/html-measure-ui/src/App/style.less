@@ -5,6 +5,29 @@
 
 .@{prefix} {
   &container {
+    ::-webkit-scrollbar-thumb {
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background-color: rgba(0, 0, 0, 0.64);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-corner,
+    ::-webkit-resizer {
+      background: @main-bg-color;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+      background: @main-bg-color;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-corner,
+    ::-webkit-resizer {
+      background: @main-bg-color;
+    }
+
     //position: relative;
   }
 
@@ -30,19 +53,27 @@
   &playground {
     background-color: #212226;
     overflow: auto;
+    margin-left: @navi-bar-width;
     margin-right: @infor-bar-width;
     height: 100%;
   }
 
   &hm-core {
-    //transition: all 0.15s ease;
-    margin: auto;
-    margin-top: 20%;
-    margin-bottom: 20%;
-    //transform: translate(-50%, -50%);
-    //top: 50%;
+    margin: 20% auto;
     .html-measure__layer {
       background-color: #fff;
     }
+  }
+
+  &navi {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: @navi-bar-width;
+
+    overflow: auto;
+    transition: all 0.15s ease;
+    display: block;
   }
 }

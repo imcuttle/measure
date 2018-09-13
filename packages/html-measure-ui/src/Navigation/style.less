@@ -1,0 +1,35 @@
+@import (reference) '../_style/_mixin';
+@import (reference) '../_style/_variables';
+
+@prefix: hm-navigation__;
+
+.@{prefix} {
+  &container {
+    background-color: @infor-bg-color;
+    padding: 10px;
+  }
+  &list {
+    color: #e5e7e7;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  &item {
+    .ellipsis();
+    padding: 10px 0;
+    img {
+      border-radius: 5px;
+      display: block;
+      width: auto;
+      height: 100px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+  }
+  &item-title {
+    display: inline-block;
+    padding-top: 6px;
+    .ellipsis();
+    font-size: 15px;
+  }
+}

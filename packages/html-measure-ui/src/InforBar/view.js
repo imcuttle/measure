@@ -312,27 +312,29 @@ export default class InforBar extends React.Component {
           />
         )}
 
-        <Section
-          className={c('sec-snippets')}
-          title={
-            <div className={c('snippet-title')}>
-              <Select
-                className={c('snippet-select')}
-                isSearchable={false}
-                value={this.local.snippetType}
-                onChange={val => this.local.setValue('snippetType', val)}
-                options={this.local.snippets}
-              />
-              <span className={c('btn')} onClick={() => copyAndToast(code)}>
-                {i18n('infor-bar.copy.btn')}
-              </span>
-            </div>
-          }
-        >
-          <Highlight className={c('highlight')} language={this.local.snippetType}>
-            {code}
-          </Highlight>
-        </Section>
+        {code && (
+          <Section
+            className={c('sec-snippets')}
+            title={
+              <div className={c('snippet-title')}>
+                <Select
+                  className={c('snippet-select')}
+                  isSearchable={false}
+                  value={this.local.snippetType}
+                  onChange={val => this.local.setValue('snippetType', val)}
+                  options={this.local.snippets}
+                />
+                <span className={c('btn')} onClick={() => copyAndToast(code)}>
+                  {i18n('infor-bar.copy.btn')}
+                </span>
+              </div>
+            }
+          >
+            <Highlight className={c('highlight')} language={this.local.snippetType}>
+              {code}
+            </Highlight>
+          </Section>
+        )}
       </div>
     )
   }

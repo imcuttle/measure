@@ -188,7 +188,7 @@ export default class Scene extends PureComponent {
 
       const leftDist = paddingLeft > 0 ? paddingLeft - 1 : selPos.left - rulePos.left - $ruleNode.width() + 1
       const rightDist = paddingRight > 0 ? paddingRight - 1 : rulePos.left - selPos.left - $selectedNode.width()
-      const topDist = paddingTop > 0 ? paddingTop - 1 : selPos.top - rulePos.top - $ruleNode.height() + 1
+      const topDist = paddingTop > 0 ? paddingTop : selPos.top - rulePos.top - $ruleNode.height() + 1
       const bottomDist = paddingBottom > 0 ? paddingBottom - 1 : rulePos.top - selPos.top - $selectedNode.height()
 
       let dom
@@ -216,7 +216,6 @@ export default class Scene extends PureComponent {
         $(dom)
           .css({
             top: selPos.top + $selectedNode.height() / 2,
-            height: 1,
             left: selPos.left - leftDist,
             width: leftDist - 1
           })
@@ -247,7 +246,6 @@ export default class Scene extends PureComponent {
         $(dom)
           .css({
             top: selPos.top + $selectedNode.height() / 2,
-            height: 1,
             left: selPos.left + $selectedNode.width() + 1,
             width: rightDist
           })
@@ -280,8 +278,7 @@ export default class Scene extends PureComponent {
           .css({
             top: selPos.top - topDist,
             height: topDist - 1,
-            left: selPos.left + $selectedNode.width() / 2,
-            width: 1
+            left: selPos.left + $selectedNode.width() / 2
           })
           .show()
       }
@@ -312,8 +309,7 @@ export default class Scene extends PureComponent {
           .css({
             top: selPos.top + $selectedNode.height() + 1,
             height: bottomDist,
-            left: selPos.left + $selectedNode.width() / 2,
-            width: 1
+            left: selPos.left + $selectedNode.width() / 2
           })
           .show()
       }

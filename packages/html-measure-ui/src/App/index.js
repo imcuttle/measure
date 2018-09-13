@@ -10,6 +10,7 @@ import { i18n } from '../i18n'
 import View from './view'
 import Header from '../Header'
 import InforBar from '../InforBar'
+import Navigation from '../Navigation'
 
 import { sz } from 'html-measure'
 import Clr from 'color'
@@ -63,6 +64,20 @@ export default class App extends Root {
     })
   }
 
+  navi = Navigation.create({
+    pages: [
+      {
+        title: 'asdsadas',
+        cover:
+          'https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2017-09-26/352f1d243122cf52462a2e6cdcb5ed6d.png'
+      },
+      {
+        title: 'xxxxxwwxxxxxwwxxxxxwwxxxxxwwxxxxxww',
+        cover:
+          'https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2018-09-13/ecba312a72bf2dd4807bed73240b8596.jpg'
+      }
+    ]
+  })
   header = Header.create()
   inforBar = InforBar.create({
     clr: this.clr,
