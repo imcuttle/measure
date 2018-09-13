@@ -1,5 +1,5 @@
 {
-  "name": "html-measure-ui",
+  "name": "measure-ui",
   "version": "1.0.0",
   "dependencies": {
     "html-measure": "^1.0.0",

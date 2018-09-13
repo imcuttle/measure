@@ -5,4 +5,4 @@
  *
  */
 
-import './packages/html-measure-ui/demo'
+import './packages/measure-ui/demo'
