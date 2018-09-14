@@ -11,6 +11,7 @@ import createMount from '@rcp/util.createmount'
 import some from 'lodash.some'
 import Clr from 'color'
 import Highlight from 'react-highlight'
+import { toJS } from 'mobx'
 
 import Select from '../components/Select'
 
@@ -322,7 +323,7 @@ export default class InforBar extends React.Component {
                   isSearchable={false}
                   value={this.local.snippetType}
                   onChange={val => this.local.setValue('snippetType', val)}
-                  options={this.local.snippets}
+                  options={toJS(this.local.snippets)}
                 />
                 <span className={c('btn')} onClick={() => copyAndToast(code)}>
                   {i18n('infor-bar.copy.btn')}
@@ -330,7 +331,10 @@ export default class InforBar extends React.Component {
               </div>
             }
           >
-            <Highlight className={c('highlight')} language={this.local.snippetType}>
+            <Highlight
+              className={c('highlight')}
+              language={this.local.matchedSnippet ? this.local.matchedSnippet.lang : null}
+            >
               {code}
             </Highlight>
           </Section>

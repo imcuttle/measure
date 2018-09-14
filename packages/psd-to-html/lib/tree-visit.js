@@ -42,13 +42,16 @@ function visit(tree, visitor = () => {}, opts = {}) {
     function(node, ctx) {
       if (!ctx[symbol]) {
         ctx.state = state
-        proxy(ctx.cursor, 'track', () => {
+        proxy(ctx, 'track', () => {
           return {
+            configurable: true,
+            enumerable: false,
             value: new Map()
           }
         })
         proxy(ctx, 'remove', oldRemove => {
           return {
+            enumerable: true,
             value: function remove() {
               const children = get(this.parent, path)
               if (!Array.isArray(children)) {
@@ -63,6 +66,7 @@ function visit(tree, visitor = () => {}, opts = {}) {
 
         proxy(ctx, 'replace', oldReplace => {
           return {
+            enumerable: true,
             value: function replace(node) {
               const children = get(this.parent, path)
               if (!Array.isArray(children)) {
@@ -76,12 +80,13 @@ function visit(tree, visitor = () => {}, opts = {}) {
         })
 
         Object.defineProperty(ctx, symbol, {
+          configurable: true,
           enumerable: false,
           value: true
         })
       }
 
-      const { track } = ctx.cursor
+      const { track } = ctx
 
       const uniqKey = getUniq(node)
       const visitedStatus = track.get(uniqKey)

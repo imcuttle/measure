@@ -2,7 +2,11 @@
   "name": "html-measure",
   "version": "1.0.0",
   "dependencies": {
-    "@rcp/util.createmount": "^1.0.7",
+    "@rcp/util.createmount": "^1.0.9",
     "prefix-classname": "^1.0.1"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*"
   }
 }

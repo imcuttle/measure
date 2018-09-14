@@ -54,7 +54,7 @@ function sz(pixel, { unit, numberFixed, isShowUnit, remStandardPx } = {}) {
   if (unit === 'rem') {
     pixel = pixel / remStandardPx
   }
-  let decimal = Number(pixel).toFixed(numberFixed)
+  let decimal = parseFloat(Number(pixel).toFixed(numberFixed))
   // 10.2 -> 10.2;   10.0 -> 10
   decimal = decimal % 1 !== 0 ? decimal : Number(decimal).toFixed(0)
   return `${decimal}${isShowUnit ? unit : ''}`
@@ -85,7 +85,12 @@ export default class Scene extends PureComponent {
     isCalcContainerWidth: true
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(old) {
+    if (this.props.html !== old.html) {
+      this.runtime = {}
+      this.hide()
+    }
+
     this.update()
   }
 
@@ -107,6 +112,10 @@ export default class Scene extends PureComponent {
   ruleBox = createMount()
 
   componentWillUnmount() {
+    this.hide()
+  }
+
+  hide() {
     this.scaleWidth.close()
     this.scaleHeight.close()
     this.scaleTop.close()
@@ -387,6 +396,8 @@ export default class Scene extends PureComponent {
   handleLayerClick = evt => {
     const { target } = evt
     if (isNodeContains(target)) {
+      typeof evt.preventDefault === 'function' && evt.preventDefault()
+
       const selectedClassName = c('selected')
       if (this.runtime.selectedNode) {
         $(this.runtime.selectedNode).removeClass(selectedClassName)
@@ -440,10 +451,25 @@ export default class Scene extends PureComponent {
   update() {
     this.runtime.selectedNode && this.handleLayerClick({ target: this.runtime.selectedNode })
     this.runtime.ruleNode && this.handleLayerMouseOver({ target: this.runtime.ruleNode })
+    this._updateWidth()
+  }
+
+  _updateWidth() {
+    if (this.props.isCalcContainerWidth && this.layerRef && this.layerRef.clientWidth !== this.state.width) {
+      this.setState({ width: this.layerRef.clientWidth })
+    }
+  }
+
+  state = {
+    width: null
+  }
+
+  componentDidMount() {
+    this._updateWidth()
   }
 
   render() {
-    let { html, getCalcContainerWidth, children, style, isCalcContainerWidth, className } = this.props
+    let { html, children, style, isCalcContainerWidth, className } = this.props
 
     const props = {}
     if (typeof html === 'string') {
@@ -452,12 +478,13 @@ export default class Scene extends PureComponent {
       }
       children = undefined
     }
+
     return (
       <div
         ref={r => (this.containerRef = r)}
         className={cn(c('container'), className)}
         style={{
-          width: isCalcContainerWidth && this.layerRef ? this.layerRef.clientWidth : null,
+          width: this.state.width,
           ...style
         }}
       >

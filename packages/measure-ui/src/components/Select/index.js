@@ -8,7 +8,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import p from 'prefix-classname'
-import RSelect, { createFilter } from 'react-select'
+import RSelect, { createFilter, components } from 'react-select'
 
 import './style.less'
 
@@ -17,7 +17,7 @@ export * from 'react-select'
 const cn = p('')
 const c = p('hm-select__')
 
-export default class Select extends React.PureComponent {
+export default class Select extends React.Component {
   static propTypes = {
     ...RSelect.propTypes
   }
@@ -32,6 +32,7 @@ export default class Select extends React.PureComponent {
         onChange={(ent, type) => {
           return onChange && onChange(ent.value, type)
         }}
+        components={{ Control: components.Control }}
         value={matchedVal}
         options={options}
         filterOption={createFilter({

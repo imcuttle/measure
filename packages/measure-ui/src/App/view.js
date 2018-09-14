@@ -7,13 +7,13 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import p from 'prefix-classname'
-import { findDOMNode } from 'react-dom'
 import { h } from 'react-mobx-vm'
 import 'zepto/src/zepto'
 
 import HtmlMeasure from 'html-measure'
 
 import './style.less'
+import { i18n } from '../i18n'
 
 const cn = p('')
 const c = p('hm-app__')
@@ -37,29 +37,70 @@ export default class App extends React.Component {
   }
   static defaultProps = {}
 
-  componentDidMount() {
-    const node = findDOMNode(this.local.hmRef)
-    node.scrollIntoView()
-  }
-
-  defaultClickMeasureAbleNode = node => {
+  handleClickMeasureAbleNode = node => {
     const app = this.local
     const pos = app.hmRef.pos(node)
     const $n = $(node)
 
-    const content = $n.data('content')
-    const solidColor = $n.data('solidColor')
-    const LengthArray = $n.data('fontLengthArray') || []
-    const leadings = $n.data('fontLeading') || []
-    const names = $n.data('fontFamily') || []
-    const colors = $n.data('fontColors') || []
-    const aligns = $n.data('textAlign') || []
-    const sizes = $n.data('fontSizes') || []
-    const textDecorations = $n.data('textDecoration') || []
-    const weights = $n.data('fontWeights') || []
+    let content = ''
+    let solidColor = ''
+    let LengthArray = [content.length]
+    let leadings = []
+    let names = []
+    let colors = []
+    let aligns = []
+    let sizes = []
+    let textDecorations = []
+    let weights = []
+
+    let snippetIndex = app.inforBar.snippets.findIndex(x => x.value === 'outerHtml')
+    if (node.hasAttribute('data-psd-index')) {
+      content = $n.data('content')
+      solidColor = $n.data('solidColor')
+      LengthArray = $n.data('fontLengthArray') || []
+      leadings = $n.data('fontLeading') || []
+      names = $n.data('fontFamily') || []
+      colors = $n.data('fontColors') || []
+      aligns = $n.data('textAlign') || []
+      sizes = $n.data('fontSizes') || []
+      textDecorations = $n.data('textDecoration') || []
+      weights = $n.data('fontWeights') || []
+
+      if (snippetIndex >= 0) {
+        app.inforBar.snippets.splice(snippetIndex, 1)
+      }
+    } else {
+      if (snippetIndex < 0) {
+        app.inforBar.snippets.push({
+          value: 'outerHtml',
+          label: 'Outer HTML',
+          lang: 'html',
+          process: () => {
+            return node.outerHTML
+          }
+        })
+      }
+
+      if (typeof getComputedStyle === 'function') {
+        const map = getComputedStyle(node)
+        const getSty = name => {
+          const v = map.getPropertyValue(name)
+          return v && v.hasOwnProperty('value') ? v.value : v
+        }
+        content = $n.text()
+        solidColor = getSty('background-color')
+        LengthArray = [content.length]
+        leadings = [parseFloat(getSty('line-height'))]
+        names = [getSty('font-family')]
+        colors = [getSty('color')]
+        aligns = [getSty('text-align')]
+        sizes = [parseFloat(getSty('font-size'))]
+        textDecorations = [getSty('text-decoration')]
+        weights = [getSty('font-weight')]
+      }
+    }
 
     let fonts = []
-
     if (LengthArray && LengthArray.length) {
       let pos = 0
       fonts = LengthArray.map((len, i) => {
@@ -122,21 +163,79 @@ export default class App extends React.Component {
     }
   }
 
+  state = {
+    isWaitingForUpload: false,
+    isImporting: false
+  }
+
+  handleDrop = evt => {
+    const files = evt.dataTransfer.files
+
+    this.setState({
+      isImporting: true,
+      isWaitingForUpload: false
+    })
+    this.local.import(files).then(() => {
+      this.setState({
+        isImporting: false
+      })
+    })
+
+    this.preventAndStop(evt)
+  }
+
+  preventAndStop = evt => {
+    evt.stopPropagation()
+    evt.preventDefault()
+  }
+
+  handleDragEnter = evt => {
+    this.setState({
+      isWaitingForUpload: true
+    })
+    this.preventAndStop(evt)
+  }
+
+  handleDragLeave = evt => {
+    this.setState({
+      isWaitingForUpload: false
+    })
+    this.preventAndStop(evt)
+  }
+
   render() {
     const { className, onClickMeasureAbleNode } = this.props
+    const { html } = this.local
+    const { isWaitingForUpload, isImporting } = this.state
 
     return (
-      <div className={cn(c('container'), className)}>
+      <div
+        onDragEnter={this.handleDragEnter}
+        onMouseLeave={this.handleDragLeave}
+        onDragLeave={this.preventAndStop}
+        onDragOver={this.preventAndStop}
+        onDrag={this.preventAndStop}
+        onDragExit={this.preventAndStop}
+        onDrop={this.handleDrop}
+        className={cn(c('container', (isWaitingForUpload || isImporting) && 'mask'), className)}
+      >
+        {isWaitingForUpload && (
+          <div className={c('mask-wrapper')}>
+            <div className={c('upload-tip')}>{i18n('app.upload.tip')}</div>
+          </div>
+        )}
+        {isImporting && <div className={c('mask-wrapper')}>{i18n('app.importing')}</div>}
+
         {h(this.local.header, { className: c('header') })}
         <div className={c('stage')}>
           {h(this.local.navi, c('navi'))}
           <div className={c('playground')}>
             <HtmlMeasure
-              onClickMeasureAbleNode={this.defaultClickMeasureAbleNode}
+              onClickMeasureAbleNode={this.handleClickMeasureAbleNode}
               style={{ zoom: this.local.zoom }}
               className={c('hm-core')}
               ref={r => r && (this.local.hmRef = r)}
-              html={require('!raw-loader!../../../../psd-test.html')}
+              html={html}
               scaleGapPx={10}
               remStandardPx={Number(this.local.remStandardPx)}
               unit={this.local.unit}

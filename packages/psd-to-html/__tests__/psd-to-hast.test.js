@@ -5,16 +5,16 @@
  * @jest-environment node
  */
 const nps = require('path')
-const toHtml = require('hast-util-to-html')
-const fs = require('fs')
-const { psdToHASTFromPath } = require('../lib/psd-to-hast')
+
+const { psdToHtmlFromPath } = require('../dist/psd-to-html.browser.cjs')
 
 describe('psd-to-hast', function() {
   it('should psd-to-hast', function(done) {
     jest.setTimeout(50000)
-    psdToHASTFromPath(nps.join(__dirname, './fixtures/home.psd'), { imageSplit: false })
-      .then(hast => {
-        fs.writeFileSync('../../../psd-test.html', toHtml(hast, { entities: { escapeOnly: true } }))
+    psdToHtmlFromPath(nps.join(__dirname, './fixtures/home.psd'), { imageSplit: false })
+      .then(html => {
+        console.log(html)
+        // fs.writeFileSync('../../../psd-test.html', toHtml(hast, { entities: { escapeOnly: true } }))
       })
       .then(done)
   })

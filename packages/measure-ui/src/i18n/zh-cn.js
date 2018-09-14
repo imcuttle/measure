@@ -16,13 +16,14 @@ module.exports = {
   'unit.placeholder': 'ARGB',
   'number-fixed.placeholder': 'number-fixed.placeholder',
 
-  'unit.label': 'Unit',
+  'unit.label': '单位',
   'number-fixed.label.integer': '取整',
   'number-fixed.label.one-pos-decimals': '一位小数',
   'number-fixed.label.two-pos-decimals': '两位小数',
   'number-fixed.label.three-pos-decimals': '三位小数',
 
   'infor-bar.width.label': '宽',
+  'app.upload.tip': '有一种导入叫做 “手放开”',
   'infor-bar.height.label': '高',
   'infor-bar.font.align.label': '对齐',
   'infor-bar.font.title': '字体',

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="../dist/psd-to-html.browser.umd.js"></script>
+</head>
+<body>
+<script>
+
+  Promise.all([
+    fetch('../__tests__/fixtures/home.psd', { method: 'GET' })
+      .then(res => res.arrayBuffer())
+      .then(buf => {
+        return PsdToHtml.psdToHtmlFromBuffer(new Uint8Array(buf))
+      }),
+    PsdToHtml
+      .psdToHtmlFromURL('../__tests__/fixtures/home.psd')
+  ]).then(htmlList => {
+    console.log(htmlList[0] === htmlList[1])
+  })
+
+
+
+</script>
+</body>
+</html>

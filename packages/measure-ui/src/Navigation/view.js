@@ -26,25 +26,28 @@ export default class Navigation extends React.Component {
   static defaultProps = {}
   render() {
     const { className, ...props } = this.props
-    const { pages = [] } = this.local
+    const { pages = [], handlePageClick } = this.local
 
     return (
       <div className={cn(c('container'), className)}>
         <ul className={c('list')}>
-          {pages.map((p, i) => (
-            <li key={p.key || i}>
-              <div
-                style={{
-                  cursor: p.onClick ? 'pointer' : null
-                }}
-                onClick={p.onClick}
-                className={c('item')}
-              >
-                {p.cover && <img src={p.cover} />}
-                {p.title && <span className={c('item-title')}>{p.title}</span>}
-              </div>
-            </li>
-          ))}
+          {pages.map((p, i) => {
+            const onClick = handlePageClick(p, i)
+            return (
+              <li key={p.key || i}>
+                <div
+                  style={{
+                    cursor: onClick ? 'pointer' : null
+                  }}
+                  onClick={onClick}
+                  className={c('item')}
+                >
+                  {p.cover && <img src={p.cover} />}
+                  {p.title && <span className={c('item-title')}>{p.title}</span>}
+                </div>
+              </li>
+            )
+          })}
         </ul>
       </div>
     )

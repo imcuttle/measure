@@ -31,8 +31,39 @@
     //position: relative;
   }
 
+  &mask {
+    position: relative;
+
+    .@{prefix}mask-wrapper {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      display: flex;
+      z-index: 100;
+
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .@{prefix}upload-tip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      font-size: 24px;
+      color: #a03713;
+      border-radius: 10px;
+      width: 400px;
+      height: 300px;
+      border: 2px dashed sienna;
+      pointer-events: none;
+    }
+  }
+
   &stage {
-    position: absolute;
+    position: relative;
     width: 100vw;
     height: ~'calc(100vh - 57px)';
   }

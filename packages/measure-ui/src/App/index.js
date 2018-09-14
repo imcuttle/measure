@@ -11,18 +11,22 @@ import View from './view'
 import Header from '../Header'
 import InforBar from '../InforBar'
 import Navigation from '../Navigation'
+import { PSD_DISABLED } from '../const'
+import * as nps from 'path'
 
 import { sz } from 'html-measure'
+import { findDOMNode } from 'react-dom'
+import { toJS } from 'mobx'
 import Clr from 'color'
 
 @bindView(View)
 export default class App extends Root {
   sz = (pixel, opt) => {
-    return sz(pixel, { ...this.toJSON(), ...opt })
+    return sz(toJS(pixel), { ...this.toJSON(), ...opt })
   }
 
   clr = (color, clrType = this.color) => {
-    const c = Clr(color)
+    const c = Clr(toJS(color))
     switch (clrType) {
       case 'auto': {
         if (c.alpha() !== 1) {
@@ -52,6 +56,18 @@ export default class App extends Root {
 
   hmRef = null
 
+  init() {
+    this.scrollIntoView()
+  }
+
+  @reaction('html')
+  scrollIntoView() {
+    setTimeout(() => {
+      const node = findDOMNode(this.hmRef)
+      node && node.scrollIntoView()
+    })
+  }
+
   constructor(props) {
     super(props)
     symbolicLink(this, {
@@ -64,23 +80,57 @@ export default class App extends Root {
     })
   }
 
-  navi = Navigation.create({
-    pages: [
-      {
-        title: 'asdsadas',
-        cover:
-          'https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2017-09-26/352f1d243122cf52462a2e6cdcb5ed6d.png'
-      },
-      {
-        title: 'xxxxxwwxxxxxwwxxxxxwwxxxxxwwxxxxxww',
-        cover:
-          'https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2018-09-13/ecba312a72bf2dd4807bed73240b8596.jpg'
-      }
-    ]
-  })
+  @observable
+  html = ''
+  @observable
+  isLoading = false
+  @observable
+  error = ''
+
+  navi = Navigation.create()
   header = Header.create()
   inforBar = InforBar.create({
     clr: this.clr,
     sz: this.sz
   })
+
+  import(files) {
+    let tasks = []
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+      const ext = nps.extname(file.name).toLowerCase()
+      if (['.html', '.htm', '.svg'].includes(ext)) {
+        tasks.push(() => {
+          return new Promise((resolve, reject) => {
+            let fr = new FileReader()
+            fr.readAsText(file, 'utf8')
+            fr.onload = evt => {
+              this.navi.pages.push({
+                title: file.name,
+                html: fr.result
+              })
+              resolve()
+            }
+            fr.onerror = reject
+          })
+        })
+      }
+
+      if (!PSD_DISABLED && ['.psd'].includes(ext)) {
+        tasks.push(() => {
+          return new Promise((resolve, reject) => {
+            let fr = new FileReader()
+            resolve(1)
+            // fr.readAsText(files, 'utf8')
+            // fr.onload = evt => {
+            //   resolve(fr.result)
+            // }
+            // fr.onerror = reject
+          })
+        })
+      }
+    }
+
+    return Promise.all(tasks.map(execable => execable()))
+  }
 }

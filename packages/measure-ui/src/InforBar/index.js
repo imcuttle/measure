@@ -5,10 +5,11 @@
  *
  */
 
-import { Root, bindView, observable, storageSync, action, List } from 'react-mobx-vm'
+import { Root, bindView, observable, autorun, storageSync, action, List } from 'react-mobx-vm'
+import { toJS } from 'mobx'
 import View, { isEmpty } from './view'
 import kebabcase from 'lodash.kebabcase'
-import slug from 'slug'
+import slug from 'slugify'
 
 export class Font extends Root {
   @observable
@@ -130,10 +131,11 @@ export default class InformationBar extends Root {
   snippets = [
     {
       label: 'CSS',
+      lang: 'css',
       value: 'css',
       process: ({ title, opacity, size, shadow, fonts, radius, color, clr, sz }) => {
         let id = 1
-        let _cr = c => clr(c, 'auto')
+        let _cr = c => clr(toJS(c), 'auto')
         let _sz = c => sz(c, { isShowUnit: true })
 
         let fontObjs = []
@@ -142,7 +144,7 @@ export default class InformationBar extends Root {
             color: _cr(f.color),
             'font-family': f.family,
             'font-size': _sz(f.size),
-            'font-weight': _sz(f.weight),
+            'font-weight': f.weight,
             'line-height': _sz(f.lineHeight),
             'text-decoration': f.textDecoration,
             'text-align': f.align
@@ -189,7 +191,7 @@ export default class InformationBar extends Root {
           Object.assign(obj, fontObjs[0])
           fontObjs.splice(0, 1)
         }
-        let baseCls = `.${kebabcase(slug(title)) || id++}`
+        let baseCls = `.${kebabcase(slug(title || '')) || id++}`
         let css = cssText(obj)
         return (
           `${css ? `${baseCls} {\n${css}}` : ''}` +
@@ -210,8 +212,19 @@ export default class InformationBar extends Root {
   @observable
   snippetType = 'css'
 
+  get matchedSnippet() {
+    return this.snippets.find(x => x.value === this.snippetType)
+  }
+
+  @autorun
+  fixSnippetType() {
+    if (!this.matchedSnippet && this.snippets[0] && this.snippets[0].value) {
+      this.setValue('snippetType', this.snippets[0].value)
+    }
+  }
+
   processSnippet() {
-    const v = this.snippets.find(x => x.value === this.snippetType)
+    const v = this.matchedSnippet
     if (v && v.process) {
       return v.process(this)
     }

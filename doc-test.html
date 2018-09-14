@@ -1,7 +1,155 @@
-<div>
-  <style>
-    a {
-      border-radius: 4px;
-    }
-  </style>
+<div id="maincontent">
+
+  <h1>CSS3 border-radius 属性</h1>
+
+
+  <div class="backtoreference">
+    <p><a href="/cssref/index.asp" title="CSS 参考手册">CSS 参考手册</a></p>
+  </div>
+
+
+  <div>
+    <h2>实例</h2>
+
+    <p>向 div 元素添加圆角边框：</p>
+
+    <pre>div
+{
+border:2px solid;
+border-radius:25px;
+}
+</pre>
+
+    <p class="tiy"><a target="_blank" href="/tiy/t.asp?f=css3_border-radius">亲自试一试</a></p>
+
+    <p>页面底部有更多实例。</p>
+  </div>
+
+
+  <div>
+    <h2>浏览器支持</h2>
+
+    <table class="dataintable browsersupport">
+      <tbody><tr>
+        <th>IE</th>
+        <th>Firefox</th>
+        <th>Chrome</th>
+        <th>Safari</th>
+        <th>Opera</th>
+      </tr>
+      <tr>
+        <td class="bsIE"></td>
+        <td class="bsFirefox"></td>
+        <td class="bsChrome"></td>
+        <td class="bsSafari"></td>
+        <td class="bsOpera"></td>
+      </tr>
+      </tbody></table>
+
+    <p>IE9+、Firefox 4+、Chrome、Safari 5+ 以及 Opera 支持 border-radius 属性。</p>
+  </div>
+
+
+  <div>
+    <h2>定义和用法</h2>
+
+    <p>border-radius 属性是一个简写属性，用于设置四个 border-*-radius 属性。</p>
+
+    <p class="tip"><span>提示：</span>该属性允许您为元素添加圆角边框！</p>
+
+    <table class="dataintable">
+      <tbody><tr>
+        <th style="width:25%;">默认值：</th>
+        <td style="width:75%;">0</td>
+      </tr>
+      <tr>
+        <th>继承性：</th>
+        <td>no</td>
+      </tr>
+      <tr>
+        <th>版本：</th>
+        <td>CSS3</td>
+      </tr>
+      <tr>
+        <th>JavaScript 语法：</th>
+        <td><i>object</i>.style.borderRadius="5px"</td>
+      </tr>
+      </tbody></table>
+  </div>
+
+
+  <div>
+    <h2 style="
+  border-radius: 10px 20px  30px;
+">语法</h2>
+
+    <pre>border-radius: <i>1-4 length</i>|<i>%</i> / <i>1-4 length</i>|<i>%</i>;</pre>
+
+    <p class="note"><span>注释：</span>按此顺序设置每个 radii 的四个值。如果省略 bottom-left，则与 top-right 相同。如果省略 bottom-right，则与 top-left 相同。如果省略 top-right，则与 top-left 相同。</p>
+
+
+    <table class="dataintable">
+      <tbody><tr>
+        <th style="width:28%;">值</th>
+        <th>描述</th>
+        <th style="width:8%;">测试</th>
+      </tr>
+
+      <tr>
+        <td><i>length</i></td>
+        <td>定义圆角的形状。</td>
+        <td><a target="_blank" href="/tiy/c.asp?f=css_border-radius">测试</a></td>
+      </tr>
+
+      <tr>
+        <td><i>%</i></td>
+        <td>以百分比定义圆角的形状。</td>
+        <td><a target="_blank" href="/tiy/c.asp?f=css_border-radius&amp;p=6">测试</a></td>
+      </tr>
+      </tbody></table>
+
+    <h3>例子 1</h3>
+
+    <pre>border-radius:2em;</pre>
+
+    <p>等价于：</p>
+
+    <pre>border-top-left-radius:2em;
+border-top-right-radius:2em;
+border-bottom-right-radius:2em;
+border-bottom-left-radius:2em;
+</pre>
+
+    <h3>例子 2</h3>
+
+    <pre>border-radius: 2em 1em 4em / 0.5em 3em;</pre>
+
+    <p>等价于：</p>
+
+    <pre>border-top-left-radius: 2em 0.5em;
+border-top-right-radius: 1em 3em;
+border-bottom-right-radius: 4em 0.5em;
+border-bottom-left-radius: 1em 3em;
+</pre>
+  </div>
+
+
+  <div>
+    <h2>相关页面</h2>
+
+    <p>CSS3 教程：<a href="/css3/css3_border.asp" title="CSS3 边框">CSS3 边框</a></p>
+  </div>
+
+
+  <div class="backtoreference">
+    <p><a href="/cssref/index.asp" title="CSS 参考手册">CSS 参考手册</a></p>
+  </div><div style="background-color:#fcfdf8; padding:0;">
+  <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- W3School 正文底部广告位 -->
+  <ins class="adsbygoogle" style="display:inline-block;width:800px;height:250px" data-ad-client="ca-pub-3381531532877742" data-ad-slot="9384069314"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
 </div>

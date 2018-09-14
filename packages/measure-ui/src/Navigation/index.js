@@ -17,11 +17,37 @@ export class Page extends Root {
   cover
   @observable
   html
+
+  @observable
+  isActive = false
   onClick() {}
+}
+
+class Pages extends List {
+  matched(key) {
+    let f = this.find(x => x.hasOwnProperty('key') && x.key === key)
+    if (!f) {
+      f = this.find(x => x.hasOwnProperty('title') && x.title === key)
+    }
+    if (!f) {
+      f = this.find((x, i) => i === key)
+    }
+
+    return f
+  }
+  getKey(i) {
+    const d = this[i]
+    if (d) {
+      return d.key || d.title || i
+    }
+    return d
+  }
 }
 
 @bindView(View)
 export default class Navigation extends Root {
   @observable
-  pages = List.create([], Page)
+  pages = Pages.create([], Page)
+
+  handlePageClick = (p, i) => null
 }

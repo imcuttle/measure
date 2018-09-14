@@ -9,7 +9,11 @@
   "author": "imcuttle <moyuyc95@gmail.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "lib/psd-measure.js",
+  "main": "dist/psd-to-html.cjs.js",
+  "module": "dist/psd-to-html.es.js",
+  "browser": "dist/psd-to-html.browser.cjs.js",
+  "cdn": "dist/psd-to-html.browser.umd.min.js",
+  "unpkg": "dist/psd-to-html.browser.umd.min.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -18,25 +22,22 @@
     "lib"
   ],
   "scripts": {
+    "dist": "rimraf dist && rollup -c",
+    "dev": "npm run dist -- -w",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@rcp/util.createmount": "^1.0.7",
+    "@moyuyc/psd": "^3.2.0",
     "color": "^3.0.0",
     "hast-util-to-html": "^4.0.1",
     "hastscript": "^4.0.0",
-    "lodash.eq": "^4.0.0",
-    "lodash.every": "^4.6.0",
-    "lodash.foreach": "^4.5.0",
     "lodash.get": "^4.4.2",
-    "lodash.kebabcase": "^4.1.1",
     "lodash.set": "^4.3.2",
-    "lodash.some": "^4.6.0",
     "lodash.unset": "^4.5.2",
-    "psd": "^3.2.0",
-    "react-highlight": "^0.12.0",
-    "shallowequal": "^1.1.0",
-    "slug": "^0.9.1",
     "tree-crawl": "^1.0.5"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2",
+    "rollup": "^0.65.2"
   }
 }

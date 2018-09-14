@@ -84,7 +84,7 @@ export default class Header extends Root {
   ]
 
   @observable
-  logo = 'Measure'
+  logo = 'Measure UI'
 
   @storageSync
   @observable

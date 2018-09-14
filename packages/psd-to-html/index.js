@@ -5,22 +5,34 @@
  *
  */
 const toHtml = require('hast-util-to-html')
+const PSD = require('@moyuyc/psd')
 const { psdToHAST, psdToHASTFormBuffer, psdToHASTFromPath } = require('./lib/psd-to-hast')
 
 function psdToHtmlFromBuffer(buffer, { toHtmlOpts, ...opts } = {}) {
-  return toHtml(psdToHASTFormBuffer(buffer, opts), toHtmlOpts)
+  return psdToHASTFormBuffer(buffer, opts).then(html => toHtml(html, toHtmlOpts))
 }
 
-function psdToHtml(buffer, { toHtmlOpts, ...opts } = {}) {
-  return toHtml(psdToHAST(buffer, opts), toHtmlOpts)
+function psdToHtml(psd, { toHtmlOpts, ...opts } = {}) {
+  return psdToHAST(psd, opts).then(html => toHtml(html, toHtmlOpts))
 }
 
 function psdToHtmlFromPath(path, { toHtmlOpts, ...opts } = {}) {
-  return toHtml(psdToHASTFromPath(path, opts), toHtmlOpts)
+  return psdToHASTFromPath(path, opts).then(html => toHtml(html, toHtmlOpts))
 }
 
-module.exports = {
-  psdToHtml,
-  psdToHtmlFromPath,
-  psdToHtmlFromBuffer
+function psdToHtmlFromURL(url, opts) {
+  return PSD.fromURL(url).then(psd => psdToHtml(psd, opts))
 }
+
+module.exports =
+  process.env.RUN_ENV === 'browser'
+    ? {
+        psdToHtml,
+        psdToHtmlFromBuffer,
+        psdToHtmlFromURL
+      }
+    : {
+        psdToHtml,
+        psdToHtmlFromPath,
+        psdToHtmlFromBuffer
+      }
