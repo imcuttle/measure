@@ -19,7 +19,7 @@ function config({ format, min = false, env = 'node', suffix = '' } = {}) {
   }
 
   const c = {
-    input: 'index.js',
+    input: 'lib/index.js',
     output: {
       // exports: 'named',
       file: `dist/psd-to-html${suffix}.${format}${min ? '.min' : ''}.js`,
@@ -27,9 +27,9 @@ function config({ format, min = false, env = 'node', suffix = '' } = {}) {
       sourcemap: true,
       globals: {
         '@moyuyc/psd': 'PSD'
-      }
+      },
+      name: 'PsdToHtml'
     },
-    name: 'PsdToHtml',
     external: ['es', 'cjs'].includes(format)
       ? id =>
           !!Object.keys(require('./package').dependencies)
@@ -55,6 +55,34 @@ function config({ format, min = false, env = 'node', suffix = '' } = {}) {
       }),
       babel({
         exclude: '**/node_modules/**',
+        presets: [
+          [
+            'env',
+            {
+              targets: {
+                node: '6',
+                browsers: ['ie>=11']
+              },
+              loose: true,
+              useBuiltIns: true,
+              modules: false
+            }
+          ],
+          'react'
+        ],
+        plugins: [
+          'external-helpers',
+          'transform-decorators-legacy',
+          'transform-class-properties',
+          'transform-object-rest-spread'
+          //    [
+          //      "transform-runtime",
+          //      {
+          //        "polyfill": false,
+          //        "regenerator": true
+          //      }
+          //    ]
+        ],
         externalHelpers: false,
         runtimeHelpers: true
       }),

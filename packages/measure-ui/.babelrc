@@ -8,21 +8,22 @@
           "browsers": ["ie>=11"]
         },
         "loose": true,
-        "useBuiltIns": true,
-        "modules": false
+        "useBuiltIns": true
       }
-    ]
+    ],
+    "react"
   ],
   "plugins": [
     "transform-decorators-legacy",
+    "add-module-exports",
     "transform-class-properties",
     "transform-object-rest-spread",
-//    [
-//      "transform-runtime",
-//      {
-//        "polyfill": false,
-//        "regenerator": true
-//      }
-//    ]
+    [
+      "transform-runtime",
+      {
+        "polyfill": false,
+        "regenerator": true
+      }
+    ]
   ]
 }

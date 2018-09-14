@@ -9,8 +9,6 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import createMount from '@rcp/util.createmount'
 
-import './style.less'
-
 if (typeof document === 'undefined' || typeof $ === 'undefined') {
   console.error('Error: [html-measure] requires zepto or jquery and in browser environment')
 }

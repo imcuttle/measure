@@ -8,8 +8,6 @@
     "test": "jest",
     "prepublishOnly": "npm test",
     "precommit": "pretty-quick --staged",
-    "build": "rimraf lib && babel src/ -Dd lib",
-    "dev": "npm run build -- -w",
     "version": "npm run changelog",
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
@@ -56,6 +54,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "color": "^3.0.0",
     "conventional-changelog-cli": "^2.0.5",
     "enzyme": "^3.6.0",
@@ -86,6 +85,7 @@
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-uglify": "^5.0.2",
     "tiny-i18n": "^1.1.2",
+    "webpack": "^4.19.0",
     "zepto": "^1.2.0"
   }
 }

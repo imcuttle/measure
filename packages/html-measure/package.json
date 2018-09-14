@@ -1,12 +1,27 @@
 {
   "name": "html-measure",
   "version": "1.0.0",
+  "scripts": {
+    "dist": "rimraf lib/ && babel src/ -Dd lib && npm run dist:css",
+    "dist:css": "lessc style.less style.css",
+    "dev": "npm run dist -- -w",
+    "prepublishOnly": "npm run dist"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "src/",
+    "lib/"
+  ],
   "dependencies": {
     "@rcp/util.createmount": "^1.0.9",
     "prefix-classname": "^1.0.1"
   },
   "peerDependencies": {
-    "react": "*",
-    "prop-types": "*"
+    "prop-types": "*",
+    "react": "*"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "less": "^3.8.1"
   }
 }

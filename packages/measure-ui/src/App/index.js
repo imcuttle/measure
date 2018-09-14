@@ -12,9 +12,10 @@ import Header from '../Header'
 import InforBar from '../InforBar'
 import Navigation from '../Navigation'
 import { PSD_DISABLED } from '../const'
-import * as nps from 'path'
 
-import { sz } from 'html-measure'
+import { psdToHtmlFromURL, psdToHtmlFromBuffer } from 'psd-to-html'
+import * as nps from 'path'
+import HM from 'html-measure'
 import { findDOMNode } from 'react-dom'
 import { toJS } from 'mobx'
 import Clr from 'color'
@@ -22,7 +23,7 @@ import Clr from 'color'
 @bindView(View)
 export default class App extends Root {
   sz = (pixel, opt) => {
-    return sz(toJS(pixel), { ...this.toJSON(), ...opt })
+    return HM.sz(toJS(pixel), { ...this.toJSON(), ...opt })
   }
 
   clr = (color, clrType = this.color) => {
@@ -120,12 +121,19 @@ export default class App extends Root {
         tasks.push(() => {
           return new Promise((resolve, reject) => {
             let fr = new FileReader()
-            resolve(1)
-            // fr.readAsText(files, 'utf8')
-            // fr.onload = evt => {
-            //   resolve(fr.result)
-            // }
-            // fr.onerror = reject
+            fr.readAsArrayBuffer(file)
+            fr.onload = evt => {
+              psdToHtmlFromBuffer(new Uint8Array(fr.result))
+                .then(html => {
+                  this.navi.pages.push({
+                    title: file.name,
+                    html
+                  })
+                })
+                .then(resolve)
+                .catch(reject)
+            }
+            fr.onerror = reject
           })
         })
       }

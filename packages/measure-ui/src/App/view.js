@@ -11,6 +11,7 @@ import { h } from 'react-mobx-vm'
 import 'zepto/src/zepto'
 
 import HtmlMeasure from 'html-measure'
+import 'html-measure/style.less'
 
 import './style.less'
 import { i18n } from '../i18n'
@@ -55,7 +56,7 @@ export default class App extends React.Component {
 
     let snippetIndex = app.inforBar.snippets.findIndex(x => x.value === 'outerHtml')
     if (node.hasAttribute('data-psd-index')) {
-      content = $n.data('content')
+      content = $n.data('content') || ''
       solidColor = $n.data('solidColor')
       LengthArray = $n.data('fontLengthArray') || []
       leadings = $n.data('fontLeading') || []
@@ -87,7 +88,7 @@ export default class App extends React.Component {
           const v = map.getPropertyValue(name)
           return v && v.hasOwnProperty('value') ? v.value : v
         }
-        content = $n.text()
+        content = $n.text() || ''
         solidColor = getSty('background-color')
         LengthArray = [content.length]
         leadings = [parseFloat(getSty('line-height'))]
@@ -113,7 +114,7 @@ export default class App extends React.Component {
           size: get(sizes),
           textDecoration: get(textDecorations),
           weight: get(weights),
-          content: content.substr(pos, len)
+          content: (content || '').substr(pos, len)
         }
         pos += len
         return item
@@ -170,18 +171,26 @@ export default class App extends React.Component {
 
   handleDrop = evt => {
     const files = evt.dataTransfer.files
+    this.preventAndStop(evt)
 
     this.setState({
       isImporting: true,
       isWaitingForUpload: false
     })
-    this.local.import(files).then(() => {
-      this.setState({
-        isImporting: false
+    this.local
+      .import(files)
+      .then(() => {
+        this.setState({
+          isImporting: false
+        })
       })
-    })
-
-    this.preventAndStop(evt)
+      .catch(err => {
+        console.error(err)
+        this.setState({
+          error: err.message,
+          isImporting: false
+        })
+      })
   }
 
   preventAndStop = evt => {
@@ -204,7 +213,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { className, onClickMeasureAbleNode } = this.props
+    const { className } = this.props
     const { html } = this.local
     const { isWaitingForUpload, isImporting } = this.state
 

@@ -6,4 +6,5 @@
  */
 
 export * from './HtmlMeasure/index'
-export default from './HtmlMeasure/index'
+import HtmlMeasure from './HtmlMeasure/index'
+export default HtmlMeasure

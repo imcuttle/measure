@@ -5,7 +5,7 @@
  *
  */
 
-import Measure from './'
+import Measure from '../'
 
 Measure.render(
   {
@@ -15,7 +15,7 @@ Measure.render(
           key: 'home',
           cover:
             'https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2017-09-26/352f1d243122cf52462a2e6cdcb5ed6d.png',
-          html: require('!raw-loader!../../psd-test.html')
+          html: require('!raw-loader!./psd-test.html')
         },
         {
           title: 'xxxxxwwxxxxxwwxxxxxwwxxxxxwwxxxxxww',
@@ -24,7 +24,7 @@ Measure.render(
           html: () =>
             new Promise(rlv => {
               require.ensure([], () => {
-                rlv(require('!raw-loader!../../doc-test.html'))
+                rlv(require('!raw-loader!./doc-test.html'))
               })
             })
         }

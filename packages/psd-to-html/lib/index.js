@@ -6,7 +6,7 @@
  */
 const toHtml = require('hast-util-to-html')
 const PSD = require('@moyuyc/psd')
-const { psdToHAST, psdToHASTFormBuffer, psdToHASTFromPath } = require('./lib/psd-to-hast')
+const { psdToHAST, psdToHASTFormBuffer, psdToHASTFromPath } = require('./psd-to-hast')
 
 function psdToHtmlFromBuffer(buffer, { toHtmlOpts, ...opts } = {}) {
   return psdToHASTFormBuffer(buffer, opts).then(html => toHtml(html, toHtmlOpts))

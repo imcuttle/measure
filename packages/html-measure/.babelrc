@@ -1,0 +1,30 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "6",
+          "browsers": ["ie>=11"]
+        },
+        "loose": true,
+        "useBuiltIns": true
+      }
+    ],
+    "react"
+  ],
+  "ignore": ["__Template__"],
+  "plugins": [
+    "transform-decorators-legacy",
+    "add-module-exports",
+    "transform-class-properties",
+    "transform-object-rest-spread"
+    //    [
+    //      "transform-runtime",
+    //      {
+    //        "polyfill": false,
+    //        "regenerator": true
+    //      }
+    //    ]
+  ]
+}
