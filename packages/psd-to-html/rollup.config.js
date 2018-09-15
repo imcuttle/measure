@@ -49,9 +49,14 @@ function config({ format, min = false, env = 'node', suffix = '' } = {}) {
         ...replacer
       }),
       commonjs({
-        exclude: ['node_modules/core-js/**'],
+        include: ['**/node_modules/**'],
+        exclude: ['**/node_modules/process-es6/**'],
         ignore: env === 'node' ? [] : ['fs', 'path', 'stream'],
-        namedExports: {}
+        namedExports: {
+          '../../node_modules/react/index.js': ['Children', 'Component', 'createElement'],
+          'react-dom': ['render', 'findNodeDOM'],
+          'src/i18n/index.js': ['i18n']
+        }
       }),
       babel({
         exclude: '**/node_modules/**',

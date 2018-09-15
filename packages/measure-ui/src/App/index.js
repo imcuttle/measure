@@ -16,7 +16,7 @@ import { PSD_DISABLED } from '../const'
 import { psdToHtmlFromURL, psdToHtmlFromBuffer } from 'psd-to-html'
 import * as nps from 'path'
 import HM from 'html-measure'
-import { findDOMNode } from 'react-dom'
+import * as ReactDOM from 'react-dom'
 import { toJS } from 'mobx'
 import Clr from 'color'
 
@@ -64,7 +64,7 @@ export default class App extends Root {
   @reaction('html')
   scrollIntoView() {
     setTimeout(() => {
-      const node = findDOMNode(this.hmRef)
+      const node = ReactDOM.findDOMNode(this.hmRef)
       node && node.scrollIntoView()
     })
   }

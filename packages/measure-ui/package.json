@@ -24,25 +24,17 @@
     "react-mobx-vm": "^0.2.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-plugin-add-module-exports": "^1.0.0",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-decorators-legacy": "^1.3.5",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
     "less": "^3.8.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "webpack": "^4.19.0",
+    "webpack-dev-server": "^3.1.8"
   },
   "edam": {
     "source": "./src/__Template__",
     "output": "./src"
   },
   "scripts": {
-    "demo": "cd ../../ && gojs -i packages/measure-ui/demo/index.js -p 10000",
-    "dist": "rimraf dist && rollup -c",
-    "dev": "npm run dist -- -w"
+    "demo": "webpack-dev-server demo.js -p 10000",
+    "dist": "rimraf dist && NODE_ENV=production webpack"
   }
 }
