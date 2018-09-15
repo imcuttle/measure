@@ -8,13 +8,18 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import p from 'prefix-classname'
 import { h } from 'react-mobx-vm'
-import 'zepto/src/zepto'
-
-import HtmlMeasure from 'html-measure'
-import 'html-measure/style.less'
 
 import './style.less'
 import { i18n } from '../i18n'
+
+import getPsdToHtml from '../getPsdToHtml'
+
+let HtmlMeasure = () => <h1>{i18n('error.not-in-browser')}</h1>
+if (typeof document !== 'undefined') {
+  require('zepto/src/zepto')
+  HtmlMeasure = require('html-measure').default
+  require('html-measure/style.less')
+}
 
 const cn = p('')
 const c = p('hm-app__')
@@ -217,6 +222,8 @@ export default class App extends React.Component {
     const { html } = this.local
     const { isWaitingForUpload, isImporting } = this.state
 
+    const isSupportPsd = getPsdToHtml()
+
     return (
       <div
         onDragEnter={this.handleDragEnter}
@@ -230,7 +237,9 @@ export default class App extends React.Component {
       >
         {isWaitingForUpload && (
           <div className={c('mask-wrapper')}>
-            <div className={c('upload-tip')}>{i18n('app.upload.tip')}</div>
+            <div className={c('upload-tip')}>
+              {isSupportPsd ? i18n('app.upload.tip.psd') : i18n('app.upload.tip.no-psd')}
+            </div>
           </div>
         )}
         {isImporting && <div className={c('mask-wrapper')}>{i18n('app.importing')}</div>}

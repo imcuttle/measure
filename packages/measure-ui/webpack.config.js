@@ -1,98 +1,50 @@
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-const postcssLoader = {
-  loader: 'postcss-loader',
-  options: {
-    ident: 'postcss',
-    plugins(/*loader*/) {
-      return [
-        require('autoprefixer')(),
-        require('cssnano')({
-          zindex: false,
-          // https://github.com/ben-eb/cssnano/issues/361
-          reduceIdents: false
-        })
-      ]
-    }
-  }
-}
-
-function conf({ define, isBuild, watch, mini, format } = {}) {
+let analyzerPort = 8888
+function conf({ define, isBuild, watch, externals, mini, suffix = '', format } = {}) {
   const NODE_ENV = isBuild ? 'production' : 'development'
-
+  const filename = `measure-ui${suffix}.${format}${mini ? '.min' : ''}.js`
   return {
+    // context: path.join(__dirname, '../..'),
+    name: filename,
     mode: NODE_ENV,
     entry: './src/index.js',
+    target: format === 'commonjs2' ? 'node' : 'web',
+    externals:
+      format === 'commonjs2'
+        ? [
+            function(context, request, callback) {
+              const dep = Object.keys(require('./package').dependencies).concat(
+                Object.keys(require('./package').peerDependencies)
+              )
+              const f = dep.find(name => request.startsWith(name))
+              if (f) {
+                return callback(null, 'commonjs ' + request)
+              }
+              callback()
+            }
+          ].concat(externals)
+        : externals,
     output: {
-      path: path.resolve(__dirname, 'dist'), // string
-      // 所有输出文件的目标路径
-      // 必须是绝对路径（使用 Node.js 的 path 模块）
-      filename: `measure-ui.${format}${mini ? '.min' : ''}.js`, // string    // 「入口分块(entry chunk)」的文件名模板
-      library: 'MeasureUI', // string,
+      path: path.resolve(__dirname, 'dist'),
+      filename,
+      library: {
+        root: 'MeasureUI',
+        amd: 'measure-ui',
+        commonjs: 'measure-ui'
+      },
       // 导出库(exported library)的名称
       libraryTarget: format // 通用模块定义    // 导出库(exported library)的类型
       /* 高级输出配置（点击显示） */
     },
-    module: {
-      // noParse: //,
-      // 关于模块配置
-      rules: [
-        {
-          test: /\.jsx?$/,
-          include: [__dirname],
-          exclude: ['node_modules/**'],
-          loader: 'babel-loader',
-          options: {}
-          // loader 的可选项
-        },
-        {
-          test: /\.less$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  // url: false,
-                  minimize: true,
-                  sourceMap: true
-                }
-              },
-              postcssLoader,
-              {
-                loader: 'less-loader',
-                options: {
-                  sourceMap: true
-                }
-              }
-            ]
-          })
-        },
-        {
-          test: /\.css$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  // url: false,
-                  minimize: true,
-                  sourceMap: true
-                }
-              },
-              postcssLoader
-            ]
-          })
-        }
-        // 条件不匹配时匹配
-      ]
-    },
+    devtool: 'source-map',
+    module: require('./webpack-module'),
     plugins: [
       new ExtractTextPlugin({
-        filename: 'build.min.css',
+        filename: 'style.css',
         allChunks: true
       }),
       new webpack.DefinePlugin({
@@ -101,13 +53,9 @@ function conf({ define, isBuild, watch, mini, format } = {}) {
       }),
       !isBuild && watch && new webpack.HotModuleReplacementPlugin(),
       isBuild &&
-        mini &&
-        new webpack.optimize.UglifyJsPlugin({
-          sourceMap: true,
-          compress: {
-            warnings: false,
-            drop_console: false
-          }
+        process.env.BUNDLE_ANALYZER &&
+        new BundleAnalyzerPlugin({
+          analyzerPort: analyzerPort++
         })
     ].filter(Boolean)
   }
@@ -117,18 +65,32 @@ module.exports = [
   conf({
     watch: false,
     isBuild: false,
-    mini: false,
-    format: 'commonjs'
+    format: 'commonjs2',
+    externals: ['psd-to-html']
   }),
 
   conf({
     isBuild: true,
-    mini: false,
-    format: 'umd'
-  }),
-  conf({
-    isBuild: true,
-    mini: false,
-    format: 'umd'
+    format: 'umd',
+    externals: {
+      'psd-to-html': {
+        commonjs: 'psd-to-html',
+        commonjs2: 'psd-to-html',
+        amd: 'psd-to-html',
+        root: 'PsdToHtml'
+      }
+      // react: {
+      //   commonjs: 'react',
+      //   commonjs2: 'react',
+      //   amd: 'react',
+      //   root: 'React'
+      // },
+      // 'react-dom': {
+      //   commonjs: 'react-dom',
+      //   commonjs2: 'react-dom',
+      //   amd: 'react-dom',
+      //   root: 'ReactDOM'
+      // }
+    }
   })
 ]

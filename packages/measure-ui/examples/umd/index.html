@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="../../dist/style.css">
+  <script src="../../dist/measure-ui.umd.js"></script>
+</head>
+<body>
+
+<div id="root"></div>
+<script>
+  MeasureUI.render({
+      navi: {
+        pages: [
+          {
+            key: 'home',
+            cover:
+              'https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2017-09-26/352f1d243122cf52462a2e6cdcb5ed6d.png',
+            html: '<div>demo1</div>'
+          },
+          {
+            title: 'xxxxxwwxxxxxwwxxxxxwwxxxxxwwxxxxxww',
+            cover:
+              'https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2018-09-13/ecba312a72bf2dd4807bed73240b8596.jpg',
+            html: () =>
+              new Promise(rlv => {
+                rlv('<div>demo22</div>')
+              })
+          }
+        ]
+      }
+    },
+    window.root
+  )
+
+  console.log('MeasureUI.isSupportPsd()', MeasureUI.isSupportPsd())
+  console.log('MeasureUI.isSupportPsd() again', MeasureUI.isSupportPsd())
+
+  function load() {
+    console.log('MeasureUI.isSupportPsd() after load psdToHtml', MeasureUI.isSupportPsd())
+  }
+  document.write('<scr' + 'ipt src="../../../psd-to-html/dist/psd-to-html.browser.umd.min.js" onload="load()"></scr' + 'ipt>')
+</script>
+</body>
+</html>

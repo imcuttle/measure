@@ -10,7 +10,8 @@ import p from 'prefix-classname'
 import createMount from '@rcp/util.createmount'
 import some from 'lodash.some'
 import Clr from 'color'
-import Highlight from 'react-highlight'
+import 'prismjs'
+import Highlight from 'react-prism'
 import { toJS } from 'mobx'
 
 import Select from '../components/Select'
@@ -38,12 +39,12 @@ function copyAndToast(text) {
   input.style.display = 'inline'
   input.value = text
 
-  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !global.MSStream) {
     input.contentEditable = true
     input.readOnly = false
     let range = document.createRange()
     range.selectNodeContents(input)
-    let sel = window.getSelection()
+    let sel = global.getSelection()
     sel.removeAllRanges()
     sel.addRange(range)
     input.setSelectionRange(0, 99999999)
@@ -332,7 +333,13 @@ export default class InforBar extends React.Component {
             }
           >
             <Highlight
-              className={c('highlight')}
+              component={'pre'}
+              className={cn(
+                c('highlight'),
+                this.local.matchedSnippet &&
+                  this.local.matchedSnippet.lang &&
+                  'language-' + this.local.matchedSnippet.lang
+              )}
               language={this.local.matchedSnippet ? this.local.matchedSnippet.lang : null}
             >
               {code}

@@ -6,6 +6,9 @@
  */
 
 module.exports = {
+  'app.upload.tip.psd': '有一种导入叫做 “手放开” (支持 psd/html)',
+  'app.upload.tip.no-psd': '有一种导入叫做 “手放开” (支持 html)',
+
   'color.label.auto': '自动(RGBA || Hex)',
   'color.label.hex.argb': '#Hex(ARGB)',
   'color.label.hex.rgb,a': '#Hex(RGB,A)',
@@ -23,7 +26,6 @@ module.exports = {
   'number-fixed.label.three-pos-decimals': '三位小数',
 
   'infor-bar.width.label': '宽',
-  'app.upload.tip': '有一种导入叫做 “手放开”',
   'infor-bar.height.label': '高',
   'infor-bar.font.align.label': '对齐',
   'infor-bar.font.title': '字体',

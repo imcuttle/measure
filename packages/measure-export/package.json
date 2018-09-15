@@ -28,5 +28,9 @@
   },
   "bugs": {
     "url": "https://github.com/imcuttle/measure/issues"
+  },
+  "dependencies": {
+    "globby": "^8.0.1",
+    "handlebars": "^4.0.12"
   }
 }

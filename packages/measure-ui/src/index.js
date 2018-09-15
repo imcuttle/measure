@@ -15,7 +15,7 @@ import { createHashHistory } from 'history'
 
 require('./_style/index.less')
 
-export default class Measure extends App {
+class Measure extends App {
   static render({ basename, ...data } = {}, node, callback) {
     const hashHistory = createHashHistory({
       basename,
@@ -109,3 +109,5 @@ export default class Measure extends App {
     return app
   }
 }
+
+module.exports = Measure

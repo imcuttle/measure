@@ -1,9 +1,9 @@
 @import (reference) '../_style/_mixin';
 @import (reference) '../_style/_variables';
 
-@import './highlight/tomorrow-night-bright.css';
-
 @prefix: hm-infor-bar__;
+
+@import '~prismjs/themes/prism-tomorrow.css';
 
 .@{prefix} {
   &container {
@@ -128,7 +128,8 @@
   &sec-snippets {
     pre {
       margin-top: 10px;
-      margin-bottom: 10px;
+      //margin-bottom: 0;
+      padding: 3px;
       white-space: pre-wrap;
     }
   }

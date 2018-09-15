@@ -11,9 +11,8 @@ import View from './view'
 import Header from '../Header'
 import InforBar from '../InforBar'
 import Navigation from '../Navigation'
-import { PSD_DISABLED } from '../const'
+import getPsdToHtml from '../getPsdToHtml'
 
-import { psdToHtmlFromURL, psdToHtmlFromBuffer } from 'psd-to-html'
 import * as nps from 'path'
 import HM from 'html-measure'
 import * as ReactDOM from 'react-dom'
@@ -22,6 +21,8 @@ import Clr from 'color'
 
 @bindView(View)
 export default class App extends Root {
+  static isSupportPsd = () => !!getPsdToHtml()
+
   sz = (pixel, opt) => {
     return HM.sz(toJS(pixel), { ...this.toJSON(), ...opt })
   }
@@ -117,7 +118,9 @@ export default class App extends Root {
         })
       }
 
-      if (!PSD_DISABLED && ['.psd'].includes(ext)) {
+      const toHtml = getPsdToHtml()
+      if (toHtml && ['.psd'].includes(ext)) {
+        const { psdToHtmlFromURL, psdToHtmlFromBuffer } = toHtml
         tasks.push(() => {
           return new Promise((resolve, reject) => {
             let fr = new FileReader()

@@ -5,7 +5,7 @@
  *
  */
 
-import Measure from '../'
+import Measure from '../src'
 
 Measure.render(
   {
