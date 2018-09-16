@@ -43,6 +43,7 @@ module.exports = function({
         new FriendlyErrors({
           compilationSuccessInfo
         }),
+      // new webpack.Define
       !debug &&
         prod &&
         new SimpleProgressPlugin({

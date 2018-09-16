@@ -1,4 +1,4 @@
-# html-measure
+# measure-ui
 
 [![Build status](https://img.shields.io/travis/imcuttle/html-measure/master.svg?style=flat-square)](https://travis-ci.org/imcuttle/html-measure)
 [![Test coverage](https://img.shields.io/codecov/c/github/imcuttle/html-measure.svg?style=flat-square)](https://codecov.io/github/imcuttle/html-measure?branch=master)
@@ -22,6 +22,10 @@ yarn add html-measure
 ```javascript
 import htmlMeasure from 'html-measure'
 ```
+
+## Todo
+
+- [ ] - i18n ui
 
 ## Related
 

@@ -156,6 +156,17 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, inj
               : Promise.resolve(null)
             : Promise.resolve(null)
           return p.then(img => {
+            const style = {
+              opacity: exported.opacity,
+              width: size(exported.width),
+              height: size(exported.height),
+              left: size(exported.left),
+              top: size(exported.top),
+              position: 'absolute'
+            }
+            if (img) {
+              style['background-image'] = img
+            }
             hasts.unshift(
               h(
                 `div.psd-layer`,
@@ -163,15 +174,7 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, inj
                   {
                     'data-psd-index': hasts.length,
                     'data-title': exported.name,
-                    style: {
-                      'background-image': img,
-                      opacity: exported.opacity,
-                      width: size(exported.width),
-                      height: size(exported.height),
-                      left: size(exported.left),
-                      top: size(exported.top),
-                      position: 'absolute'
-                    }
+                    style
                   },
                   data
                 )

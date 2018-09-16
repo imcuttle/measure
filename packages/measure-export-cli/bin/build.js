@@ -14,7 +14,7 @@ function build(opts = {}) {
     me.quit()
     process.exit()
   })
-  return me.build()
+  return me.build().then(() => me.quit())
 }
 
 module.exports = build
