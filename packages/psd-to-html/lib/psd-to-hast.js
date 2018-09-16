@@ -36,7 +36,7 @@ class Sep {
   }
 }
 
-function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false } = {}) {
+function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, injectImage = true } = {}) {
   psd.parse()
 
   const size = px => {
@@ -150,7 +150,11 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false } = 
         }
 
         tasks.push(function() {
-          const p = imageSplit ? toBase64P(node.layer).then(b64encoded => `url(${b64encoded})`) : Promise.resolve(null)
+          const p = injectImage
+            ? imageSplit
+              ? toBase64P(node.layer).then(b64encoded => `url(${b64encoded})`)
+              : Promise.resolve(null)
+            : Promise.resolve(null)
           return p.then(img => {
             hasts.unshift(
               h(
@@ -187,18 +191,25 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false } = 
   )
 
   return tasks.run().then(() => {
-    let b64encodedPromise = imageSplit ? Promise.resolve(null) : toBase64P(psd).then(b64encoded => `url(${b64encoded})`)
+    let b64encodedPromise = injectImage
+      ? imageSplit
+        ? Promise.resolve(null)
+        : toBase64P(psd).then(b64encoded => `url(${b64encoded})`)
+      : Promise.resolve(null)
     return b64encodedPromise.then(b64encoded => {
+      const style = {
+        position: 'relative',
+        width: size(tree.width),
+        height: size(tree.height)
+      }
+      if (b64encoded) {
+        style['background-image'] = b64encoded
+      }
       return h(
         'div#psd-root',
         {
           'data-hm-exclude': true,
-          style: {
-            'background-image': b64encoded,
-            position: 'relative',
-            width: size(tree.width),
-            height: size(tree.height)
-          }
+          style
         },
         state.hasts
       )
@@ -206,23 +217,23 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false } = 
   })
 }
 
-function psdToHASTFormBuffer(buffer, opts) {
+function psdToHASTFromBuffer(buffer, opts) {
   const psd = new PSD(buffer)
   return psdToHAST(psd, opts)
 }
 
 function psdToHASTFromPath(psdPath, opts) {
-  return psdToHASTFormBuffer(require('fs').readFileSync(require('path').resolve(psdPath)), opts)
+  return psdToHASTFromBuffer(require('fs').readFileSync(require('path').resolve(psdPath)), opts)
 }
 
 module.exports =
   process.env.RUN_ENV === 'browser'
     ? {
         psdToHAST,
-        psdToHASTFormBuffer
+        psdToHASTFromBuffer
       }
     : {
         psdToHAST,
-        psdToHASTFormBuffer,
+        psdToHASTFromBuffer,
         psdToHASTFromPath
       }

@@ -1,0 +1,38 @@
+{
+  "name": "measure-export-cli",
+  "version": "1.0.0",
+  "description": "measure export cli",
+  "keywords": [
+    "cli",
+    "measure",
+    "export"
+  ],
+  "author": "imcuttle <moyuyc95@gmail.com>",
+  "homepage": "https://github.com/imcuttle/measure#readme",
+  "license": "MIT",
+  "main": "lib/measure-export-cli.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "bin": {
+    "measure-export": "bin/index.js"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imcuttle/measure.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/imcuttle/measure/issues"
+  },
+  "dependencies": {
+    "caporal": "^0.10.0",
+    "measure-export": "^1.0.0"
+  }
+}

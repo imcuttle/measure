@@ -11,32 +11,46 @@
   "author": "imcuttle <moyuyc95@gmail.com>",
   "homepage": "https://github.com/imcuttle/measure#readme",
   "license": "MIT",
-  "main": "lib/measure-export.js",
+  "main": "src/MeasureExport.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/imcuttle/measure.git"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
   "bugs": {
     "url": "https://github.com/imcuttle/measure/issues"
   },
   "dependencies": {
-    "css-loader": "^1.0.0",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "@moyuyc/psd": "^3.2.2",
+    "@rcp/util.createlogger": "^1.0.9",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-preset-env": "^1.7.0",
+    "concat-stream": "^1.6.2",
+    "file-loader": "^2.0.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
     "globby": "^8.0.1",
     "handlebars": "^4.0.12",
+    "hast-util-to-html": "^4.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "inherits": "^2.0.3",
+    "md5": "^2.2.1",
     "measure-ui": "^1.0.0",
+    "mini-css-extract-plugin": "^0.4.2",
+    "mkdirp": "^0.5.1",
+    "pify": "^4.0.0",
+    "progress-bar-webpack-plugin": "^1.11.0",
     "psd-to-html": "^1.0.0",
-    "style-loader": "^0.23.0",
-    "webpack": "^4.19.0"
+    "rimraf": "^2.6.2",
+    "uglifyjs-webpack-plugin": "^2.0.0",
+    "webpack": "^4.19.0",
+    "webpack-dev-middleware": "^3.3.0"
   }
 }

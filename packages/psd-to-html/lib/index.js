@@ -6,10 +6,10 @@
  */
 const toHtml = require('hast-util-to-html')
 const PSD = require('@moyuyc/psd')
-const { psdToHAST, psdToHASTFormBuffer, psdToHASTFromPath } = require('./psd-to-hast')
+const { psdToHAST, psdToHASTFromBuffer, psdToHASTFromPath } = require('./psd-to-hast')
 
 function psdToHtmlFromBuffer(buffer, { toHtmlOpts, ...opts } = {}) {
-  return psdToHASTFormBuffer(buffer, opts).then(html => toHtml(html, toHtmlOpts))
+  return psdToHASTFromBuffer(buffer, opts).then(html => toHtml(html, toHtmlOpts))
 }
 
 function psdToHtml(psd, { toHtmlOpts, ...opts } = {}) {
@@ -29,10 +29,15 @@ module.exports =
     ? {
         psdToHtml,
         psdToHtmlFromBuffer,
-        psdToHtmlFromURL
+        psdToHtmlFromURL,
+        psdToHAST,
+        psdToHASTFromBuffer
       }
     : {
         psdToHtml,
         psdToHtmlFromPath,
-        psdToHtmlFromBuffer
+        psdToHtmlFromBuffer,
+        psdToHAST,
+        psdToHASTFromBuffer,
+        psdToHASTFromPath
       }

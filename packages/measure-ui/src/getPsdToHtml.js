@@ -10,5 +10,8 @@ module.exports = () => {
   try {
     toHtml = global.PsdToHtml || require('psd-to-html')
   } catch (e) {}
-  return toHtml && typeof toHtml.psdToHtml === 'function'
+  if (toHtml && typeof toHtml.psdToHtml === 'function') {
+    return toHtml
+  }
+  return null
 }

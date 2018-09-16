@@ -42,6 +42,7 @@
     "output": "./src"
   },
   "scripts": {
+    "prepare": "npm run dist",
     "demo": "webpack-dev-server --config webpack.demo.js --port 10000",
     "dist": "rimraf dist && NODE_ENV=production webpack",
     "dist:analy": "rimraf dist && BUNDLE_ANALYZER=1 NODE_ENV=production webpack"

@@ -17,6 +17,9 @@ function conf({ define, isBuild, watch, externals, mini, suffix = '', format } =
       format === 'commonjs2'
         ? [
             function(context, request, callback) {
+              if (['.less', '.css', '.sass'].includes(path.extname(request))) {
+                return callback()
+              }
               const dep = Object.keys(require('./package').dependencies).concat(
                 Object.keys(require('./package').peerDependencies)
               )

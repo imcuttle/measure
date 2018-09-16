@@ -49,14 +49,9 @@ function config({ format, min = false, env = 'node', suffix = '' } = {}) {
         ...replacer
       }),
       commonjs({
-        include: ['**/node_modules/**'],
-        exclude: ['**/node_modules/process-es6/**'],
+        exclude: ['node_modules/core-js/**'],
         ignore: env === 'node' ? [] : ['fs', 'path', 'stream'],
-        namedExports: {
-          '../../node_modules/react/index.js': ['Children', 'Component', 'createElement'],
-          'react-dom': ['render', 'findNodeDOM'],
-          'src/i18n/index.js': ['i18n']
-        }
+        namedExports: {}
       }),
       babel({
         exclude: '**/node_modules/**',
@@ -72,22 +67,15 @@ function config({ format, min = false, env = 'node', suffix = '' } = {}) {
               useBuiltIns: true,
               modules: false
             }
-          ],
-          'react'
+          ]
         ],
         plugins: [
-          'external-helpers',
           'transform-decorators-legacy',
+          'add-module-exports',
           'transform-class-properties',
           'transform-object-rest-spread'
-          //    [
-          //      "transform-runtime",
-          //      {
-          //        "polyfill": false,
-          //        "regenerator": true
-          //      }
-          //    ]
         ],
+        babelrc: false,
         externalHelpers: false,
         runtimeHelpers: true
       }),
