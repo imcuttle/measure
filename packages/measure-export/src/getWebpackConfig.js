@@ -5,26 +5,30 @@
  *
  */
 const nps = require('path')
+const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const SimpleProgressPlugin = require('simple-progress-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrors = require('friendly-errors-webpack-plugin')
 const ProgressBar = require('progress-bar-webpack-plugin')
 
 module.exports = function({
-  htmlTemplatePath = nps.join(__dirname, 'index.html'),
+  htmlTemplatePath,
   entry,
   debug,
   dist,
+  sourceMap,
   prod = true,
-  context
+  compilationSuccessInfo,
+  context,
+  hot
 } = {}) {
   const mode = prod ? 'production' : 'development'
-
   return {
-    entry,
-    context: nps.join(__dirname, '../../../..') /*: nps.join(__dirname, '../..')*/,
+    entry: [hot && !prod && `${require.resolve('webpack-hot-middleware/client')}?reload=true`, entry].filter(Boolean),
+    context /*: nps.join(__dirname, '../..')*/,
     mode,
-    devtool: prod ? false : 'source-map',
+    devtool: !prod || sourceMap ? 'source-map' : false,
     output: { path: dist, chunkFilename: 'assets/[name].js', filename: 'assets/[name].js' },
     optimization: {
       splitChunks: {
@@ -33,20 +37,18 @@ module.exports = function({
       }
     },
     plugins: [
-      !debug && new ProgressBar({}),
+      !debug && !prod && new ProgressBar({}),
       !debug &&
+        !prod &&
         new FriendlyErrors({
-          compilationSuccessInfo: {
-            messages: ['You application is running here http://localhost:3000'],
-            notes: ['Some additionnal notes to be displayed unpon successful compilation']
-          }
+          compilationSuccessInfo
         }),
-      new FriendlyErrors({
-        compilationSuccessInfo: {
-          messages: ['You application is running here http://localhost:3000'],
-          notes: ['Some additionnal notes to be displayed unpon successful compilation']
-        }
-      }),
+      !debug &&
+        prod &&
+        new SimpleProgressPlugin({
+          format: prod ? 'compact' : 'minimal'
+        }),
+      !prod && hot && new webpack.HotModuleReplacementPlugin(),
       new MiniCssExtractPlugin({
         // disable: !prod,
         filename: 'assets/style.css',

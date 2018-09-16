@@ -93,7 +93,7 @@
 	},
 	"dependencies": {
 		"@moyuyc/psd": "^3.2.2",
-		"@rcp/util.createlogger": "^1.0.9",
+		"@rcp/util.createlogger": "^1.1.0",
 		"globby": "^8.0.1",
 		"handlebars": "^4.0.12",
 		"hast-util-to-html": "^4.0.1",

@@ -13,7 +13,7 @@ const postcssLoader = {
     ident: 'postcss',
     plugins(/*loader*/) {
       return [
-        require('autoprefixer')(),
+        require('autoprefixer')({ remove: false }),
         require('cssnano')({
           zindex: false,
           // https://github.com/ben-eb/cssnano/issues/361

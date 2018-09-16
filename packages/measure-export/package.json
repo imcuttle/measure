@@ -8,10 +8,15 @@
     "psd",
     "html"
   ],
+  "scripts": {
+    "dist": "rimraf lib/ && babel src/ -Dd lib",
+    "dev": "npm run dist -- -w",
+    "prepare": "npm run dist"
+  },
   "author": "imcuttle <moyuyc95@gmail.com>",
   "homepage": "https://github.com/imcuttle/measure#readme",
   "license": "MIT",
-  "main": "src/MeasureExport.js",
+  "main": "lib/MeasureExport.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -29,10 +34,12 @@
   },
   "dependencies": {
     "@moyuyc/psd": "^3.2.2",
-    "@rcp/util.createlogger": "^1.0.9",
+    "@rcp/util.createlogger": "^1.1.0",
     "babel-loader": "^7.1.5",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.7.0",
+    "babel-runtime": "^6.26.0",
+    "chokidar": "^2.0.4",
     "concat-stream": "^1.6.2",
     "file-loader": "^2.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
@@ -43,14 +50,20 @@
     "inherits": "^2.0.3",
     "md5": "^2.2.1",
     "measure-ui": "^1.0.0",
+    "micromatch": "^3.1.10",
     "mini-css-extract-plugin": "^0.4.2",
     "mkdirp": "^0.5.1",
     "pify": "^4.0.0",
     "progress-bar-webpack-plugin": "^1.11.0",
     "psd-to-html": "^1.0.0",
+    "quote-it": "^1.0.1",
     "rimraf": "^2.6.2",
-    "uglifyjs-webpack-plugin": "^2.0.0",
+    "simple-progress-webpack-plugin": "^1.1.2",
     "webpack": "^4.19.0",
-    "webpack-dev-middleware": "^3.3.0"
+    "webpack-dev-middleware": "^3.3.0",
+    "webpack-hot-middleware": "^2.24.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
   }
 }

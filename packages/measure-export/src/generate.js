@@ -5,11 +5,12 @@
  *
  */
 const nps = require('path')
+const { safeSingle, toUriPath } = require('./utils')
 
-const psdLoaderPath = require.resolve('./psdLoader')
-const coverLoaderPath = require.resolve('./coverLoader')
-const rawLoaderPath = require.resolve('raw-loader')
-const fileLoaderPath = require.resolve('file-loader')
+const psdLoaderPath = toUriPath(require.resolve('./psdLoader'))
+const coverLoaderPath = toUriPath(require.resolve('./coverLoader'))
+const rawLoaderPath = toUriPath(require.resolve('raw-loader'))
+const fileLoaderPath = toUriPath(require.resolve('file-loader'))
 const double = JSON.stringify
 
 function generatePage(paths = [], { context } = {}) {
@@ -37,7 +38,7 @@ function generatePage(paths = [], { context } = {}) {
     cover: ${cover},
     html: function() {
       return import(/* webpackChunkName: ${wrappedName} */ ${double(
-          `!${require.resolve('babel-loader')}!${loader}!${filename}`
+          `!${toUriPath(require.resolve('babel-loader'))}!${loader}!${toUriPath(filename)}`
         )}).then(({ default: _ })  => _)
     }
   }`
@@ -48,7 +49,9 @@ function generatePage(paths = [], { context } = {}) {
 }
 
 function coverRequire(filename) {
-  return `require(${double(`!${fileLoaderPath}?name=preview/[path][name].png!${coverLoaderPath}!${filename}`)})`
+  return `require(${double(
+    `!${fileLoaderPath}?name=preview/[path][name].png!${coverLoaderPath}!${toUriPath(filename)}`
+  )})`
 }
 
 module.exports = {

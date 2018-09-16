@@ -1,15 +1,23 @@
 const MeasureUI = require('measure-ui')
 require('measure-ui/dist/style.css')
 
-const pages = require('{{{ pagesFilename }}}')
-
 // pages.map(x => {})
 
-MeasureUI.render(
-  {
-    navi: {
-      pages: pages
-    }
-  },
-  window['__root']
-)
+function run() {
+  MeasureUI.render(
+    {
+      language: '{{{ language }}}',
+      navi: {
+        pages: require('{{{ pagesFilename }}}')
+      }
+    },
+    window['__root']
+  )
+}
+run()
+
+if (module.hot) {
+  module.hot.accept(['{{{ pagesFilename }}}'], function() {
+    run()
+  })
+}

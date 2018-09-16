@@ -21,6 +21,8 @@ import Clr from 'color'
 
 @bindView(View)
 export default class App extends Root {
+  static i18n = require('../i18n')
+
   static isSupportPsd = () => !!getPsdToHtml()
 
   sz = (pixel, opt) => {

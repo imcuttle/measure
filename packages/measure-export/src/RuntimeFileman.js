@@ -26,7 +26,7 @@ class RuntimeFileman {
   }
 
   clear() {
-    return pify(rimraf)(this.filename())
+    return rimraf.sync(this.filename())
   }
 
   write(name, content) {

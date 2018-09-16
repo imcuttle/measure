@@ -16,7 +16,12 @@ import { createHashHistory } from 'history'
 require('./_style/index.less')
 
 class Measure extends App {
-  static render({ basename, ...data } = {}, node, callback) {
+  static render({ basename, language, ...data } = {}, node, callback) {
+    const i18n = App.i18n
+    if (typeof language === 'string') {
+      i18n.setLanguage(language)
+    }
+
     const hashHistory = createHashHistory({
       basename,
       hashType: 'slash'
