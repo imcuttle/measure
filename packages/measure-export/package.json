@@ -1,6 +1,6 @@
 {
   "name": "measure-export",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "Make measure UI exported for teamwork",
   "keywords": [
     "measure",
@@ -33,12 +33,6 @@
     "url": "https://github.com/imcuttle/measure/issues"
   },
   "dependencies": {
-    "mobx": "^3.6.2",
-    "mobx-react": "^4.4.3",
-    "prop-types": "^15.6.2",
-    "react": "^16.5.1",
-    "react-dom": "^16.5.1",
-    "react-mobx-vm": "^0.2.0",
     "@moyuyc/psd": "^3.2.2",
     "@moyuyc/psd-html": "^0.2.1",
     "@rcp/util.createlogger": "^1.1.0",
@@ -61,10 +55,16 @@
     "micromatch": "^3.1.10",
     "mini-css-extract-plugin": "^0.4.2",
     "mkdirp": "^0.5.1",
+    "mobx": "^3.6.2",
+    "mobx-react": "^4.4.3",
     "pify": "^4.0.0",
     "progress-bar-webpack-plugin": "^1.11.0",
+    "prop-types": "^15.6.2",
     "quote-it": "^1.0.1",
     "raw-loader": "^0.5.1",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "react-mobx-vm": "^0.2.0",
     "rimraf": "^2.6.2",
     "simple-progress-webpack-plugin": "^1.1.2",
     "style-loader": "^0.23.0",
