@@ -38,7 +38,8 @@
   "dependencies": {
     "caporal": "^0.10.0",
     "measure-export": "^0.2.3",
-    "update-notifier": "^2.5.0"
+    "update-notifier": "^2.5.0",
+    "express": "^4.16.3"
   },
   "gitHead": "819c938626cb3bdcec3d4e124bbfb47f37c5685d"
 }
