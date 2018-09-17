@@ -4,6 +4,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 let analyzerPort = 8888
+const watch = !!process.env.WATCH
+
 function conf({ define, isBuild, watch, externals, mini, suffix = '', format } = {}) {
   const NODE_ENV = isBuild ? 'production' : 'development'
   const filename = `measure-ui${suffix}.${format}${mini ? '.min' : ''}.js`
@@ -60,19 +62,21 @@ function conf({ define, isBuild, watch, externals, mini, suffix = '', format } =
         new BundleAnalyzerPlugin({
           analyzerPort: analyzerPort++
         })
-    ].filter(Boolean)
+    ].filter(Boolean),
+
+    watch
   }
 }
 
 module.exports = [
   conf({
-    watch: false,
+    watch: watch,
     isBuild: false,
     format: 'commonjs2',
     externals: ['psd-to-html']
   }),
 
-  conf({
+  !watch && conf({
     isBuild: true,
     format: 'umd',
     externals: {
@@ -96,4 +100,4 @@ module.exports = [
       // }
     }
   })
-]
+].filter(Boolean)

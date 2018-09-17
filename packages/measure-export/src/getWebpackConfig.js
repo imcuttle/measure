@@ -43,7 +43,11 @@ module.exports = function({
         new FriendlyErrors({
           compilationSuccessInfo
         }),
-      // new webpack.Define
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: mode
+        }
+      }),
       !debug &&
         prod &&
         new SimpleProgressPlugin({
