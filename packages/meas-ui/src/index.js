@@ -68,7 +68,7 @@ class Measure extends App {
               html
             })
             app.inforBar.clear()
-            const title = page.id
+            const title = (page.id || '').replace(/^\/+/, '')
             if (typeof document !== 'undefined') {
               document.title = `${title} - ${app.header.logo || 'Measure UI'}`
             }
