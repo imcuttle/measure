@@ -7,7 +7,7 @@
 const nps = require('path')
 const concat = require('concat-stream')
 const PSD = require('@moyuyc/psd')
-// psd-to-html
+// psd-html
 
 function loader(buffer) {
   const psd = new PSD(buffer)

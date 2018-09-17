@@ -1,5 +1,5 @@
 {
-  "name": "psd-to-html",
+  "name": "psd-html",
   "version": "0.1.0",
   "description": "Make it a fun to create spec by psd for developers and teammates",
   "keywords": [
@@ -9,11 +9,11 @@
   "author": "imcuttle <moyuyc95@gmail.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "dist/psd-to-html.cjs.js",
-  "module": "dist/psd-to-html.es.js",
-  "browser": "dist/psd-to-html.browser.cjs.js",
-  "cdn": "dist/psd-to-html.browser.umd.min.js",
-  "unpkg": "dist/psd-to-html.browser.umd.min.js",
+  "main": "dist/psd-html.cjs.js",
+  "module": "dist/psd-html.es.js",
+  "browser": "dist/psd-html.browser.cjs.js",
+  "cdn": "dist/psd-html.browser.umd.min.js",
+  "unpkg": "dist/psd-html.browser.umd.min.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -41,5 +41,6 @@
   "devDependencies": {
     "rimraf": "^2.6.2",
     "rollup": "^0.65.2"
-  }
+  },
+  "gitHead": "b8317573573e35d5227abc306aa6f1067f4f1aed"
 }

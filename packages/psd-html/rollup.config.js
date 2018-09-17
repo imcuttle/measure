@@ -22,7 +22,7 @@ function config({ format, min = false, env = 'node', suffix = '' } = {}) {
     input: 'lib/index.js',
     output: {
       // exports: 'named',
-      file: `dist/psd-to-html${suffix}.${format}${min ? '.min' : ''}.js`,
+      file: `dist/psd-html${suffix}.${format}${min ? '.min' : ''}.js`,
       format: format, // immediately-invoked function expression — suitable for <script> tags
       sourcemap: true,
       globals: {

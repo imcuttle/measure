@@ -74,14 +74,14 @@ module.exports = [
     watch: watch,
     isBuild: false,
     format: 'commonjs2',
-    externals: ['psd-to-html']
+    externals: ['psd-html']
   }),
 
   // !watch &&
   //   conf({
   //     isBuild: true,
   //     format: 'umd',
-  //     // externals: ['psd-to-html'],
+  //     // externals: ['psd-html'],
   //     suffix: '.web-worker',
   //     define: {
   //       'process.env.WEB_WORKER': '"on"',
@@ -94,10 +94,10 @@ module.exports = [
       isBuild: true,
       format: 'umd',
       externals: {
-        'psd-to-html': {
-          commonjs: 'psd-to-html',
-          commonjs2: 'psd-to-html',
-          amd: 'psd-to-html',
+        'psd-html': {
+          commonjs: 'psd-html',
+          commonjs2: 'psd-html',
+          amd: 'psd-html',
           root: 'PsdToHtml'
         }
       }

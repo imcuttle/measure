@@ -7,11 +7,11 @@
 const nps = require('path')
 const concat = require('concat-stream')
 const PSD = require('@moyuyc/psd')
-const { psdToHASTFromBuffer } = require('psd-to-html')
+const { psdToHASTFromBuffer } = require('psd-html')
 const hastToHtml = require('hast-util-to-html')
 
 const { coverRequire } = require('../generate')
-// psd-to-html
+// psd-html
 
 function loader(buffer) {
   return psdToHASTFromBuffer(buffer, {

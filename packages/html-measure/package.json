@@ -23,5 +23,6 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "less": "^3.8.1"
-  }
+  },
+  "gitHead": "b8317573573e35d5227abc306aa6f1067f4f1aed"
 }
