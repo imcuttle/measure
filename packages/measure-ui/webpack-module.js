@@ -77,6 +77,17 @@ module.exports = {
           postcssLoader
         ]
       })
+    },
+    {
+      test: /\.png$/,
+      // include: ['node_modules/**'],
+      use: {
+        loader: 'url-loader',
+        options: {
+          // url: false,
+          limit: Infinity
+        }
+      }
     }
     // 条件不匹配时匹配
   ]

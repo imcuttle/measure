@@ -39,9 +39,10 @@ module.exports = function({
     plugins: [
       !debug && !prod && new ProgressBar({}),
       !debug &&
-        !prod &&
         new FriendlyErrors({
-          compilationSuccessInfo
+          compilationSuccessInfo,
+          // onErrors: (severity, errors) => {
+          // }
         }),
       new webpack.DefinePlugin({
         'process.env': {

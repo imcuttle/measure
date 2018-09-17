@@ -34,6 +34,9 @@ const getWebpackConfig = require('./getWebpackConfig')
 class MeasureExport {
   constructor(opts = {}) {
     this.opts = Object.assign({}, this.constructor.defaultOptions, opts)
+    this.opts.context = nps.resolve(this.opts.context)
+    this.opts.distDir = nps.resolve(this.opts.distDir)
+    this.opts.htmlTemplatePath = nps.resolve(this.opts.htmlTemplatePath)
     this.opts.debug = this.opts.debug || !!process.env.MEASURE_EXPORT_DEBUG
     const name = require('../package').name
     if (this.opts.debug) {
@@ -59,7 +62,7 @@ class MeasureExport {
     return md5(`${this.opts.context}-${this.actionType}`).slice(0, 10)
   }
 
-  _registerWatch() {
+  registerWatch() {
     if (this.opts.hot) {
       this.logger.debug('registerWatch, with arguments')
       this._watcher = chokidar
@@ -87,7 +90,7 @@ class MeasureExport {
     }
   }
 
-  _unwatch() {
+  unwatch() {
     if (this._watcher) {
       this._watcher.close()
       this._watcher = null
@@ -98,6 +101,7 @@ class MeasureExport {
     const paths = await globby(this.opts.glob, {
       cwd: this.opts.context
     })
+    this.logger.debug('matching paths: %O', paths)
     const content = generatePage(paths, { context: this.opts.context })
     return await this.runtimeFm.write('pages.js', `module.exports = ${content}`)
   }
@@ -133,11 +137,13 @@ class MeasureExport {
     this.actionType = 'build'
     const config = await this.getWebpackConfig({ prod: true })
     const compiler = webpack(config)
-    return await pify(compiler.run.bind(compiler))()
+    const states = await pify(compiler.run.bind(compiler))()
+    this.logger.debug('build output: %s', config.output.path)
+    return states
   }
 
   async quit() {
-    this._unwatch()
+    this.unwatch()
     this.logger.debug('quit: %s', this.runtimeFm.filename())
     this.runtimeFm.clear()
   }
@@ -146,7 +152,7 @@ class MeasureExport {
     this.actionType = 'dev'
     const config = await this.getWebpackConfig({ prod: false })
     const compiler = webpack(config)
-    this._registerWatch()
+    this.registerWatch()
 
     // middleware
     return {

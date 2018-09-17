@@ -5,9 +5,9 @@
 	"main": "index.js",
 	"description": "Make html to be measurable",
 	"author": "imcuttle",
-  "scripts": {
-    "dev": "lerna run dev --parallel"
-  },
+	"scripts": {
+		"dev": "lerna run dev --parallel"
+	},
 	"edam": {
 		"source": "./src/components/__Template__",
 		"output": "./src/components"
@@ -23,7 +23,9 @@
 	"license": "MIT",
 	"repository": "imcuttle/html-measure",
 	"jest": {
-    "testPathIgnorePatterns": ["__Template__"],
+		"testPathIgnorePatterns": [
+			"__Template__"
+		],
 		"testMatch": [
 			"**/__test{s,}__/*.(spec|test).{t,j}s{x,}"
 		],
@@ -60,6 +62,7 @@
 		"cssnano": "^4.1.0",
 		"enzyme": "^3.6.0",
 		"extract-text-webpack-plugin": "^4.0.0-beta.0",
+		"gentle-cli": "^1.0.3",
 		"html-webpack-plugin": "^3.2.0",
 		"husky": "^0.14.3",
 		"jest": "^23.6.0",
@@ -91,6 +94,7 @@
 		"rollup-plugin-uglify": "^5.0.2",
 		"style-loader": "^0.23.0",
 		"tiny-i18n": "^1.1.2",
+		"url-loader": "^1.1.1",
 		"webpack-bundle-analyzer": "^3.0.2",
 		"webpack-cli": "^3.1.0",
 		"zepto": "^1.2.0"
