@@ -5,6 +5,9 @@
 	"main": "index.js",
 	"description": "Make html to be measurable",
 	"author": "imcuttle",
+  "scripts": {
+    "dev": "lerna run dev --parallel"
+  },
 	"edam": {
 		"source": "./src/components/__Template__",
 		"output": "./src/components"
