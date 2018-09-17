@@ -1,11 +1,11 @@
 {
   "name": "measure-ui",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "dependencies": {
     "@rcp/util.createmount": "^1.0.9",
     "color": "^3.0.0",
     "history": "^4.7.2",
-    "html-measure": "^1.0.0",
+    "html-measure": "^0.1.0",
     "lodash.kebabcase": "^4.1.1",
     "lodash.some": "^4.6.0",
     "prefix-classname": "^1.0.1",
@@ -22,7 +22,7 @@
   "cdn": "dist/measure-ui.umd.js",
   "unpkg": "dist/measure-ui.umd.js",
   "optionalDependencies": {
-    "psd-to-html": "^1.0.0"
+    "psd-to-html": "^0.1.0"
   },
   "peerDependencies": {
     "mobx": "^3.6.2",

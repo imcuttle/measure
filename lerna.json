@@ -1,13 +1,21 @@
 {
-  "packages": ["packages/*"],
-  "version": "0.0.0",
+  "packages": [
+    "packages/*"
+  ],
+  "version": "0.1.0",
   "command": {
     "publish": {
-      "ignoreChanges": ["**/__fixtures__/**", "**/__tests__/**", "**/*.md"]
+      "ignoreChanges": [
+        "**/__fixtures__/**",
+        "**/__tests__/**",
+        "**/*.md"
+      ]
     },
     "bootstrap": {
       "hoist": true,
-      "npmClientArgs": ["--no-package-lock"]
+      "npmClientArgs": [
+        "--no-package-lock"
+      ]
     }
   }
 }
