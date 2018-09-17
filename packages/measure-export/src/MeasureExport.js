@@ -26,8 +26,8 @@ const getWebpackConfig = require('./getWebpackConfig')
 //     html
 //     ...
 //   assets/
-//     measure-ui.js
-//     measure-ui.css
+//     meas-ui.js
+//     meas-ui.css
 //     ...
 //
 

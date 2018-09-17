@@ -1,5 +1,5 @@
-const MeasureUI = require('measure-ui')
-require('measure-ui/dist/style.css')
+const MeasureUI = require('meas-ui')
+require('meas-ui/dist/style.css')
 
 // pages.map(x => {})
 

@@ -8,7 +8,7 @@ const watch = !!process.env.WATCH
 
 function conf({ define, isBuild, globalObject, watch, externals, mini, suffix = '', format } = {}) {
   const NODE_ENV = isBuild ? 'production' : 'development'
-  const filename = `measure-ui${suffix}.${format}${mini ? '.min' : ''}.js`
+  const filename = `meas-ui${suffix}.${format}${mini ? '.min' : ''}.js`
   return {
     // context: path.join(__dirname, '../..'),
     name: filename,
@@ -39,8 +39,8 @@ function conf({ define, isBuild, globalObject, watch, externals, mini, suffix = 
       filename,
       library: {
         root: 'MeasureUI',
-        amd: 'measure-ui',
-        commonjs: 'measure-ui'
+        amd: 'meas-ui',
+        commonjs: 'meas-ui'
       },
       // 导出库(exported library)的名称
       libraryTarget: format // 通用模块定义    // 导出库(exported library)的类型

@@ -1,5 +1,5 @@
 {
-  "name": "measure-ui",
+  "name": "meas-ui",
   "version": "0.2.0",
   "dependencies": {
     "@rcp/util.createmount": "^1.0.9",
@@ -18,9 +18,9 @@
     "worker-loader": "^2.0.0",
     "zepto": "^1.2.0"
   },
-  "main": "dist/measure-ui.commonjs2.js",
-  "cdn": "dist/measure-ui.umd.js",
-  "unpkg": "dist/measure-ui.umd.js",
+  "main": "dist/meas-ui.commonjs2.js",
+  "cdn": "dist/meas-ui.umd.js",
+  "unpkg": "dist/meas-ui.umd.js",
   "optionalDependencies": {
     "@moyuyc/psd-html": "^0.2.0"
   },
@@ -50,5 +50,5 @@
     "dist": "rimraf dist && NODE_ENV=production webpack",
     "dist:analy": "rimraf dist && BUNDLE_ANALYZER=1 NODE_ENV=production webpack"
   },
-  "gitHead": "58b5eb03718ab084dc404736156fe025ac54b09f"
+  "gitHead": "819c938626cb3bdcec3d4e124bbfb47f37c5685d"
 }

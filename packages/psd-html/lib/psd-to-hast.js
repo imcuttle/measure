@@ -13,7 +13,7 @@ const psdUtils = require('./psd-utils')
 
 function assert(check, ...argv) {
   if (!check) {
-    console.error(`Error: [psd-measure-ui](psd-to-hast):`, ...argv)
+    console.error(`Error: [psd-html](psd-to-hast):`, ...argv)
   }
 }
 
