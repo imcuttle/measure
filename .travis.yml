@@ -13,7 +13,7 @@ cache:
 
 install:
   - npm install
-  - npm run bootstrap
+  - lerna bootstrap
 
 jobs:
   include:
