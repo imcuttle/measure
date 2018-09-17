@@ -7,14 +7,24 @@
 const Me = require('measure-export')
 const app = require('express')()
 
-function start({ port = 8888, ...opts } = {}) {
-  const me = Me({
-    ...opts,
-    compilationSuccessInfo: {
-      messages: [`Measure UI is running here http://localhost:${port}`]
-      // notes: ['Some additionnal notes to be displayed unpon successful compilation']
-    }
-  })
+function start(opts) {
+  opts = Object.assign(
+    {
+      port: 8888
+    },
+    opts
+  )
+  const me = Me(
+    Object.assign(
+      {
+        compilationSuccessInfo: {
+          messages: [`Measure UI is running here http://localhost:${port}`]
+          // notes: ['Some additionnal notes to be displayed unpon successful compilation']
+        }
+      },
+      opts
+    )
+  )
   process.on('SIGINT', () => {
     me.quit()
     require('./update-notify')()

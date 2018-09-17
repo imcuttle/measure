@@ -6,9 +6,7 @@
 const Me = require('measure-export')
 
 function build(opts = {}) {
-  const me = Me({
-    ...opts,
-  })
+  const me = Me(opts)
 
   process.on('SIGINT', () => {
     me.quit()
