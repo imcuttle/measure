@@ -50,5 +50,5 @@
     "dist": "rimraf dist && NODE_ENV=production webpack",
     "dist:analy": "rimraf dist && BUNDLE_ANALYZER=1 NODE_ENV=production webpack"
   },
-  "gitHead": "819c938626cb3bdcec3d4e124bbfb47f37c5685d"
+  "gitHead": "2d06e9bbeb5e4991130e3d628ee0519df242535a"
 }
