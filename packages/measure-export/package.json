@@ -1,6 +1,6 @@
 {
   "name": "measure-export",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Make measure UI exported for teamwork",
   "keywords": [
     "measure",
@@ -49,13 +49,13 @@
     "html-webpack-plugin": "^3.2.0",
     "inherits": "^2.0.3",
     "md5": "^2.2.1",
-    "measure-ui": "^0.1.0",
+    "measure-ui": "^0.1.1",
     "micromatch": "^3.1.10",
     "mini-css-extract-plugin": "^0.4.2",
     "mkdirp": "^0.5.1",
     "pify": "^4.0.0",
     "progress-bar-webpack-plugin": "^1.11.0",
-    "psd-html": "^0.1.0",
+    "psd-html": "^0.1.1",
     "quote-it": "^1.0.1",
     "rimraf": "^2.6.2",
     "simple-progress-webpack-plugin": "^1.1.2",

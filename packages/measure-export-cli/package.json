@@ -1,6 +1,6 @@
 {
   "name": "measure-export-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "measure export cli",
   "keywords": [
     "cli",
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "caporal": "^0.10.0",
-    "measure-export": "^0.1.0",
+    "measure-export": "^0.1.1",
     "update-notifier": "^2.5.0"
   },
   "gitHead": "b8317573573e35d5227abc306aa6f1067f4f1aed"
