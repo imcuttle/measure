@@ -4,6 +4,7 @@
 @prefix: hm-app__;
 
 @loading-color: #f5faff;
+@header-height: 67px;
 
 // loading
 .coffee_cup {
@@ -107,7 +108,7 @@
   &stage {
     position: relative;
     width: 100vw;
-    height: ~'calc(100vh - 57px)';
+    height: ~'calc(100vh - @{header-height})';
   }
 
   &infor-bar {
@@ -195,7 +196,7 @@
 
   &header {
     position: relative;
-    height: 67px;
+    height: @header-height;
     transition: all 0.15s ease;
   }
 
