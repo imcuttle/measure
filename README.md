@@ -1,29 +1,19 @@
-# html-measure
+# measure
 
-[![Build status](https://img.shields.io/travis/imcuttle/html-measure/master.svg?style=flat-square)](https://travis-ci.org/imcuttle/html-measure)
-[![Test coverage](https://img.shields.io/codecov/c/github/imcuttle/html-measure.svg?style=flat-square)](https://codecov.io/github/imcuttle/html-measure?branch=master)
-[![NPM version](https://img.shields.io/npm/v/html-measure.svg?style=flat-square)](https://www.npmjs.com/package/html-measure)
-[![NPM Downloads](https://img.shields.io/npm/dm/html-measure.svg?style=flat-square&maxAge=43200)](https://www.npmjs.com/package/html-measure)
+[![Build status](https://img.shields.io/travis/imcuttle/measure/master.svg?style=flat-square)](https://travis-ci.org/imcuttle/measure)
+[![Test coverage](https://img.shields.io/codecov/c/github/imcuttle/measure.svg?style=flat-square)](https://codecov.io/github/imcuttle/measure?branch=master)
 [![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
-Make html to be measurable
+## Getting started
 
-## Installation
 
-```bash
-npm install html-measure
-# or use yarn
-yarn add html-measure
-```
 
-## Usage
-
-```javascript
-import htmlMeasure from 'html-measure'
-```
 
 ## Related
+
+- [sketch measure](2) - asd
+- [psd.js](2) - asd
 
 ## Authors
 

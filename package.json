@@ -20,6 +20,7 @@
 	"license": "MIT",
 	"repository": "imcuttle/html-measure",
 	"jest": {
+    "testPathIgnorePatterns": ["__Template__"],
 		"testMatch": [
 			"**/__test{s,}__/*.(spec|test).{t,j}s{x,}"
 		],
