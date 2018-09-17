@@ -30,10 +30,10 @@ class Measure extends App {
     }
 
     function push(k) {
-      hashHistory.push(k.replace(/^\/+/, '/'))
+      hashHistory.push(k.replace(/^\/*/, '/'))
     }
     function replace(k) {
-      hashHistory.push(k.replace(/^\/+/, '/'))
+      hashHistory.push(k.replace(/^\/*/, '/'))
     }
 
     app.history = hashHistory
