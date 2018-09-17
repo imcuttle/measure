@@ -13,15 +13,16 @@ window.app = Measure.render(
     navi: {
       pages: [
         {
-          key: 'home',
+          key: 'source',
+          title: 'From Source',
           cover:
-            'https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2017-09-26/352f1d243122cf52462a2e6cdcb5ed6d.png',
+            'http://img.wxcha.com/file/201603/07/7ec4c7c1f7.jpg',
           html: require('!raw-loader!./psd-test.html')
         },
         {
-          title: 'xxxxxwwxxxxxwwxxxxxwwxxxxxwwxxxxxww',
-          cover:
-            'https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2018-09-13/ecba312a72bf2dd4807bed73240b8596.jpg',
+          key: 'html',
+          title: 'From Html',
+          cover: 'http://t2.hddhhn.com/uploads/tu/201612/98/st94.png',
           html: () =>
             new Promise(rlv => {
               require.ensure([], () => {

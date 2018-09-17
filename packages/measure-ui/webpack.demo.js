@@ -7,7 +7,7 @@ module.exports = {
   mode: 'development',
   entry: './demo/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'demo-dist')
     /* 高级输出配置（点击显示） */
   },
   devtool: 'source-map',
