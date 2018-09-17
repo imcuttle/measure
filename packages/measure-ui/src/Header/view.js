@@ -36,7 +36,9 @@ export default class Header extends React.Component {
       remStandardPx,
       logo,
       color,
-      colorOptions
+      colorOptions,
+      language,
+      langOptions
     } = this.local
 
     return (
@@ -67,7 +69,28 @@ export default class Header extends React.Component {
             }}
             placeholder={i18n('color.placeholder')}
             value={color}
-            options={colorOptions}
+            options={[
+              {
+                label: i18n('color.label.auto'),
+                value: 'auto'
+              },
+              {
+                label: i18n('color.label.hex.argb'),
+                value: 'hex.argb'
+              },
+              {
+                label: i18n('color.label.hex.rgb,a'),
+                value: 'hex.rgb,a'
+              },
+              {
+                label: i18n('color.label.rgb,a'),
+                value: 'rgb,a'
+              },
+              {
+                label: i18n('color.label.argb'),
+                value: 'argb'
+              }
+            ]}
           />
 
           <label className={c('item', 'checkbox-wrapper')}>
@@ -88,28 +111,59 @@ export default class Header extends React.Component {
             }}
             placeholder={i18n('number-fixed.placeholder')}
             value={numberFixed}
-            options={numberFixedOptions}
+            options={[
+              {
+                label: i18n('number-fixed.label.integer'),
+                value: 0
+              },
+              {
+                label: i18n('number-fixed.label.one-pos-decimals'),
+                value: 1
+              },
+              {
+                label: i18n('number-fixed.label.two-pos-decimals'),
+                value: 2
+              },
+              {
+                label: i18n('number-fixed.label.three-pos-decimals'),
+                value: 3
+              }
+            ]}
           />
-        </div>
 
-        <div className={c('right', 'zoom', 'item')}>
-          <span
-            className={c('zoom-out', 'zoom-btn', {
-              'zoom-disabled': zoom <= 0.25
-            })}
-            onClick={zoom <= 0.25 ? null : () => this.local.updateZoom(-0.25)}
-          />
-          <span className={c('zoom-input-wrapper')}>
-            <Input
-              className={c('zoom-input')}
-              value={(zoom * 100).toFixed(0)}
-              onChange={evt => {
-                this.local.setValue('zoom', evt.target.value / 100)
-              }}
+          <div className={c('zoom', 'item')}>
+            <span
+              className={c('zoom-out', 'zoom-btn', {
+                'zoom-disabled': zoom <= 0.25
+              })}
+              onClick={zoom <= 0.25 ? null : () => this.local.updateZoom(-0.25)}
             />
-            <span className={c('zoom-suffix')}>%</span>
-          </span>
-          <span className={c('zoom-in', 'zoom-btn')} onClick={() => this.local.updateZoom(0.25)} />
+            <span className={c('zoom-input-wrapper')}>
+              <Input
+                className={c('zoom-input')}
+                value={(zoom * 100).toFixed(0)}
+                onChange={evt => {
+                  this.local.setValue('zoom', evt.target.value / 100)
+                }}
+              />
+              <span className={c('zoom-suffix')}>%</span>
+            </span>
+            <span className={c('zoom-in', 'zoom-btn')} onClick={() => this.local.updateZoom(0.25)} />
+          </div>
+        </div>
+        <div className={c('right')}>
+          <Select
+            name="language"
+            className={c('language', 'item')}
+            onChange={language => {
+              this.local.setValue('language', language)
+            }}
+            placeholder={'Language/语言'}
+            value={language}
+            options={langOptions}
+          />
+
+          <a href={'https://github.com/imcuttle/measure'} title={"Github"} target={'_blank'} className={c('gh', 'item')} />
         </div>
       </div>
     )

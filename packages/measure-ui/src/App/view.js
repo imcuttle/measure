@@ -58,6 +58,10 @@ export default class App extends React.Component {
     let sizes = []
     let textDecorations = []
     let weights = []
+    let strokeDashOffset = null
+    let strokeColor = null
+    let strokeLineWidth = null
+    let strokeLineAlign = null
 
     let snippetIndex = app.inforBar.snippets.findIndex(x => x.value === 'outerHtml')
     if (node.hasAttribute('data-psd-index')) {
@@ -71,6 +75,10 @@ export default class App extends React.Component {
       sizes = $n.data('fontSizes') || []
       textDecorations = $n.data('textDecoration') || []
       weights = $n.data('fontWeights') || []
+      strokeDashOffset = $n.data('strokeDashOffset')
+      strokeColor = $n.data('strokeColor')
+      strokeLineWidth = $n.data('strokeLineWidth')
+      strokeLineAlign = $n.data('strokeLineAlign')
 
       if (snippetIndex >= 0) {
         app.inforBar.snippets.splice(snippetIndex, 1)
@@ -103,6 +111,12 @@ export default class App extends React.Component {
         sizes = [parseFloat(getSty('font-size'))]
         textDecorations = [getSty('text-decoration')]
         weights = [getSty('font-weight')]
+        if (getSty('border-style') !== 'none') {
+          strokeDashOffset = getSty('border-style') === 'solid' ? 0 : 1
+          strokeColor = getSty('border-color')
+          strokeLineWidth = getSty('border-width')
+          strokeLineAlign = 'strokeStyleAlignInside'
+        }
       }
     }
 
@@ -152,6 +166,12 @@ export default class App extends React.Component {
       },
       opacity: $n.css('opacity'),
       shadow,
+      stroke: {
+        dashOffset: strokeDashOffset,
+        color: strokeColor,
+        lineWidth: strokeLineWidth,
+        lineAlign: strokeLineAlign
+      },
       radius,
       size: {
         width: $n.width(),
@@ -219,7 +239,7 @@ export default class App extends React.Component {
 
   render() {
     const { className } = this.props
-    const { html } = this.local
+    const { html, naviVisible, headerVisible } = this.local
     const { isWaitingForUpload, isImporting } = this.state
 
     const isSupportPsd = getPsdToHtml()
@@ -233,7 +253,7 @@ export default class App extends React.Component {
         onDrag={this.preventAndStop}
         onDragExit={this.preventAndStop}
         onDrop={this.handleDrop}
-        className={cn(c('container', (isWaitingForUpload || isImporting) && 'mask'), className)}
+        className={cn(c('container', (isWaitingForUpload || isImporting) && 'mask', !headerVisible && 'head-hide', !naviVisible && 'navi-hide'), className)}
       >
         {isWaitingForUpload && (
           <div className={c('mask-wrapper')}>
@@ -242,11 +262,23 @@ export default class App extends React.Component {
             </div>
           </div>
         )}
-        {isImporting && <div className={c('mask-wrapper')}>{i18n('app.importing')}</div>}
-
-        {h(this.local.header, { className: c('header') })}
+        {isImporting && (
+          <div className={c('mask-wrapper')}>
+            <div className={c('importing')}>
+              <div className="coffee_cup" />
+              <span className={c('importing-text')}>{i18n('app.importing')}</span>
+            </div>
+          </div>
+        )}
+        <div className={c('header')}>
+          {h(this.local.header)}
+          <span className={c('header-op')} onClick={() => this.local.setValue('headerVisible', !headerVisible)}/>
+        </div>
         <div className={c('stage')}>
-          {h(this.local.navi, c('navi'))}
+          <div className={c('navi')}>
+            {h(this.local.navi)}
+            <span className={c('op')} onClick={() => this.local.setValue('naviVisible', !naviVisible)}/>
+          </div>
           <div className={c('playground')}>
             <HtmlMeasure
               onClickMeasureAbleNode={this.handleClickMeasureAbleNode}

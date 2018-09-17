@@ -7,6 +7,8 @@
   &container {
     background-color: @infor-bg-color;
     padding: 10px;
+    transition: all 0.15s ease;
+    height: 100%;
   }
   &list {
     color: #e5e7e7;
@@ -24,9 +26,11 @@
       border-radius: 5px;
       display: block;
       width: auto;
-      height: 100px;
+      max-height: 100px;
       max-width: 100%;
       object-fit: contain;
+      margin: auto;
+      margin-bottom: 8px;
     }
   }
   &item-title {

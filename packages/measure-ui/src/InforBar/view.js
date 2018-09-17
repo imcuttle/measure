@@ -160,6 +160,13 @@ export function isEmpty(data) {
   return false
 }
 
+function v(val) {
+  if (val == null) {
+    return ''
+  }
+  return String(val)
+}
+
 export default class InforBar extends React.Component {
   static propTypes = {
     className: PropTypes.string
@@ -177,6 +184,7 @@ export default class InforBar extends React.Component {
       radius,
       shadow,
       color,
+      stroke,
       fonts,
       content
     } = this.local
@@ -218,6 +226,34 @@ export default class InforBar extends React.Component {
                   type: 'color',
                   typeStyle: {
                     backgroundColor: Clr(color).string()
+                  }
+                }
+              ]
+            ]}
+          />
+        )}
+
+        {!isEmpty(stroke) && (
+          <Section
+            title={i18n('infor-bar.stroke.title')}
+            className={c('sec-stroke')}
+            table={[
+              [
+                {
+                  colSpan: 2,
+                  label: i18n('infor-bar.stroke.style.label'),
+                  content: `${stroke.lineAlign ? i18n('infor-bar.stroke.style.' + stroke.lineAlign) : ''} ${v(
+                     sz(stroke.lineWidth)
+                  )}`
+                }
+              ],
+              stroke.color && [
+                {
+                  colSpan: 2,
+                  type: 'color',
+                  content: clr(stroke.color),
+                  typeStyle: {
+                    backgroundColor: Clr(stroke.color).string()
                   }
                 }
               ]

@@ -3,25 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-  <script src="../dist/psd-to-html.browser.umd.js"></script>
+  <script src="https://unpkg.com/@moyuyc/psd/dist/psd.browser.js"></script>
 </head>
 <body>
 <script>
+  PSD.fromURL('../__tests__/fixtures/home.psd')
+  .then(psd => {
+    window.psd = psd
+    console.log('psd', psd)
 
-  Promise.all([
-    fetch('../__tests__/fixtures/home.psd', { method: 'GET' })
-      .then(res => res.arrayBuffer())
-      .then(buf => {
-        return PsdToHtml.psdToHtmlFromBuffer(new Uint8Array(buf))
-      }),
-    PsdToHtml
-      .psdToHtmlFromURL('../__tests__/fixtures/home.psd')
-  ]).then(htmlList => {
-    console.log(htmlList[0] === htmlList[1])
+    psd.parse()
+    window.tree = psd.tree()
+    console.log('tree', window.tree)
+
+    window.psdExport = window.tree.export()
+    console.log('psdExport', window.psdExport)
   })
-
-
-
 </script>
 </body>
 </html>

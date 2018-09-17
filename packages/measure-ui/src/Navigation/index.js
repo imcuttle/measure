@@ -21,6 +21,10 @@ export class Page extends Root {
   @observable
   isActive = false
   onClick() {}
+
+  get id() {
+    return this.key || this.title
+  }
 }
 
 class Pages extends List {
@@ -38,7 +42,7 @@ class Pages extends List {
   getKey(i) {
     const d = this[i]
     if (d) {
-      return d.key || d.title || i
+      return d.id || i
     }
     return d
   }
@@ -46,8 +50,7 @@ class Pages extends List {
 
 @bindView(View)
 export default class Navigation extends Root {
-  @observable
-  pages = Pages.create([], Page)
+  @observable pages = Pages.create([], Page)
 
   handlePageClick = (p, i) => null
 }

@@ -6,6 +6,7 @@
  */
 const h = require('hastscript')
 const PSD = require('@moyuyc/psd')
+const get = require('lodash.get')
 
 const visit = require('./tree-visit')
 const psdUtils = require('./psd-utils')
@@ -70,15 +71,17 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, inj
         // https://github.com/meltingice/psd.js/issues/107
         // Spec https://www.tonton-pixel.com/Photoshop%20Additional%20File%20Formats/styles-file-format.html
         const data = {}
+        const overwriteStyle = {}
 
         const vectorOrigination = node.get('vectorOrigination')
+        const vectorStrokeContent = node.get('vectorStrokeContent')
+        const vectorStroke = node.get('vectorStroke')
         const objectEffects = node.get('objectEffects')
         const solidColor = node.get('solidColor')
 
         // Drop Shadow
         if (objectEffects && objectEffects.data && objectEffects.data.DrSh && objectEffects.data.DrSh.enab) {
           const DrSh = objectEffects.data.DrSh
-          // console.log(DrSh)
           const d = psdUtils.dropShadowToStyle({
             dist: DrSh['Dstn'],
             color: DrSh['Clr'],
@@ -96,13 +99,9 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, inj
           })
         }
 
-        if (
-          vectorOrigination &&
-          vectorOrigination.data &&
-          vectorOrigination.data.keyDescriptorList &&
-          vectorOrigination.data.keyDescriptorList[0]
-        ) {
-          const { keyOriginRRectRadii } = vectorOrigination.data.keyDescriptorList[0]
+        const keyDescriptorList = get(vectorOrigination, 'data.keyDescriptorList')
+        if (keyDescriptorList && keyDescriptorList[0]) {
+          const { keyOriginRRectRadii, keyOriginShapeBBox } = keyDescriptorList[0]
           if (keyOriginRRectRadii) {
             Object.assign(data, {
               'data-radius-bottom-left': keyOriginRRectRadii.bottomLeft && keyOriginRRectRadii.bottomLeft.value,
@@ -111,11 +110,48 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, inj
               'data-radius-top-right': keyOriginRRectRadii.topRight && keyOriginRRectRadii.topRight.value
             })
           }
+
+          // Fix size and position
+          if (keyOriginShapeBBox) {
+            Object.assign(overwriteStyle, {
+              left: size(psdUtils.val(keyOriginShapeBBox['Left'])),
+              top: size(psdUtils.val(keyOriginShapeBBox['Top '])),
+              width: size(psdUtils.val(keyOriginShapeBBox['Rght']) - psdUtils.val(keyOriginShapeBBox['Left'])),
+              height: size(psdUtils.val(keyOriginShapeBBox['Btom']) - psdUtils.val(keyOriginShapeBBox['Top ']))
+            })
+          }
         }
 
+        const bgColor = solidColor
+          ? JSON.stringify(solidColor.color())
+          : vectorStrokeContent && psdUtils.clr(vectorStrokeContent.data['Clr '])
         Object.assign(data, {
-          'data-solid-color': solidColor && JSON.stringify(solidColor.color())
+          'data-solid-color': bgColor
         })
+
+        if (vectorStroke && vectorStroke.data && vectorStroke.data.strokeEnabled) {
+          const {
+            strokeStyleContent,
+            strokeStyleLineDashOffset,
+            strokeStyleOpacity,
+            strokeStyleLineWidth,
+            strokeStyleLineAlignment,
+            strokeStyleLineDashSet
+          } = vectorStroke.data
+
+          const borderColor =
+            strokeStyleContent && psdUtils.clr(strokeStyleContent['Clr '], psdUtils.val(strokeStyleOpacity))
+          const dashOffset = psdUtils.val(strokeStyleLineDashOffset)
+          const lineWidth = psdUtils.val(strokeStyleLineWidth)
+          const lineAlign = psdUtils.val(strokeStyleLineAlignment)
+
+          Object.assign(data, {
+            'data-stroke-dash-offset': dashOffset,
+            'data-stroke-color': borderColor,
+            'data-stroke-line-width': lineWidth,
+            'data-stroke-line-align': lineAlign
+          })
+        }
 
         const exported = node.export()
         if (exported.text) {
@@ -124,7 +160,7 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, inj
             'data-content': text.value
           })
           if (text.font) {
-            const {
+            let {
               sizes = [],
               names,
               leading = [],
@@ -135,6 +171,17 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, inj
               weights = [],
               textDecoration = []
             } = text.font
+
+            // TODO: Fix font size by default temporarily
+            if (lengthArray.length > sizes.length && sizes.length === 0) {
+              const StyleSheetData = get(
+                node.get('typeTool'),
+                'obj.engineData.ResourceDict.StyleSheetSet.StyleSheetData'
+              )
+              if (StyleSheetData && StyleSheetData[0]) {
+                sizes = new Array(lengthArray.length).fill(StyleSheetData[0].FontSize)
+              }
+            }
 
             Object.assign(data, {
               'data-font-length-array': names ? JSON.stringify(lengthArray) : null,
@@ -162,7 +209,8 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, inj
               height: size(exported.height),
               left: size(exported.left),
               top: size(exported.top),
-              position: 'absolute'
+              position: 'absolute',
+              ...overwriteStyle
             }
             if (img) {
               style['background-image'] = img

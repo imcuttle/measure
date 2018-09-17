@@ -4,6 +4,7 @@ node_modules/
 dist/
 public/
 **/*debug.log
+**/etc/
 
 .entry
 .dist

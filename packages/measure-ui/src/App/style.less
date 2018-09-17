@@ -3,6 +3,49 @@
 
 @prefix: hm-app__;
 
+@loading-color: #f5faff;
+
+// loading
+.coffee_cup {
+  width: 40px;
+  height: 48px;
+  border: 1px @loading-color solid;
+  border-radius: 0px 0px 10px 10px;
+  position: relative;
+  margin: auto;
+  box-sizing: border-box;
+}
+.coffee_cup:after,
+.coffee_cup:before {
+  position: absolute;
+  content: '';
+}
+.coffee_cup:after {
+  border: 1px solid @loading-color;
+  border-left: none;
+  border-radius: 0 20px 20px 0;
+  height: 23px;
+  left: 40px;
+  width: 8px;
+}
+.coffee_cup:before {
+  width: 1px;
+  height: 18px;
+  background-color: @loading-color;
+  top: -10px;
+  left: 12px;
+  box-shadow: 8px 0px 0px 0px @loading-color, 8px -8px 0px 0px @loading-color, 16px 0px 0px 0px @loading-color;
+  animation: steam 1s linear infinite alternate;
+}
+@keyframes steam {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 6px;
+  }
+}
+
 .@{prefix} {
   &container {
     ::-webkit-scrollbar-thumb {
@@ -28,7 +71,6 @@
       background: @main-bg-color;
     }
 
-    //position: relative;
   }
 
   &mask {
@@ -44,7 +86,7 @@
       display: flex;
       z-index: 100;
 
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(0, 0, 0, 0.65);
     }
 
     .@{prefix}upload-tip {
@@ -53,11 +95,11 @@
       justify-content: center;
       margin: auto;
       font-size: 24px;
-      color: #a03713;
+      color: @loading-color;
       border-radius: 10px;
       width: 500px;
       height: 300px;
-      border: 2px dashed sienna;
+      border: 2px dashed @loading-color;
       pointer-events: none;
     }
   }
@@ -82,6 +124,7 @@
   }
 
   &playground {
+    transition: all 0.15s ease;
     background-color: #212226;
     overflow: auto;
     margin-left: @navi-bar-width;
@@ -96,6 +139,16 @@
     }
   }
 
+  &importing {
+    margin: auto;
+    color: @loading-color;
+  }
+  &importing-text {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 20px;
+  }
+
   &navi {
     position: absolute;
     top: 0;
@@ -103,8 +156,72 @@
     left: 0;
     width: @navi-bar-width;
 
-    overflow: auto;
+    overflow: visible;
+    //overflow-x: visible;
     transition: all 0.15s ease;
     display: block;
+  }
+
+
+  &navi-hide {
+    .@{prefix}playground {
+      margin-left: 0;
+    }
+    .hm-navigation__container {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .@{prefix}navi {
+      width: 0;
+    }
+    .@{prefix}op {
+      transform: translate(100%, -50%);
+      background-image: url('~file-loader!./assets/to-right.png');
+    }
+  }
+
+  &head-hide {
+    .@{prefix}header {
+      height: 0;
+    }
+    .@{prefix}stage {
+      height: 100vh;
+    }
+    .@{prefix}header-op {
+      //transform: translate(100%, -50%);
+      background-image: url('~file-loader!./assets/to-bottom.png');
+    }
+  }
+
+  &header {
+    position: relative;
+    height: 67px;
+    transition: all 0.15s ease;
+  }
+
+  &header-op, &op{
+    z-index: 200;
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+  }
+
+  &header-op {
+    bottom: 0;
+    //left: ~'calc((100% - @{infor-bar-width}) / 2)';
+    left: 50%;
+    transform: translate(-50%, 100%);
+    background-image: url('~file-loader!./assets/to-top.png');
+  }
+
+  &op {
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+
+    background-image: url('~file-loader!./assets/to-left.png');
   }
 }

@@ -7,8 +7,9 @@
 
 import Measure from '../src'
 
-Measure.render(
+window.app = Measure.render(
   {
+    language: 'zh-cn',
     navi: {
       pages: [
         {

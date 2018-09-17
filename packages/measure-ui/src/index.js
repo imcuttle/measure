@@ -9,28 +9,27 @@ export * from './App/index'
 import App from './App/index'
 
 import * as ReactDOM from 'react-dom'
-import { h, action } from 'react-mobx-vm'
+import { h, action, reaction, autorun } from 'react-mobx-vm'
 import * as React from 'react'
 import { createHashHistory } from 'history'
+import { setLanguage } from './i18n'
 
 require('./_style/index.less')
 
 class Measure extends App {
-  static render({ basename, language, ...data } = {}, node, callback) {
-    const i18n = App.i18n
-    if (typeof language === 'string') {
-      i18n.setLanguage(language)
-    }
 
+  static render({ basename, ...data } = {}, node, callback) {
     const hashHistory = createHashHistory({
       basename,
       hashType: 'slash'
     })
+
     let app = data
     if (!(data instanceof Measure)) {
       app = Measure.create(data)
     }
 
+    app.history = hashHistory
     app.navi.handlePageClick = function(p, i) {
       return () => hashHistory.push(app.navi.pages.getKey(i))
     }
@@ -69,7 +68,7 @@ class Measure extends App {
               html
             })
             app.inforBar.clear()
-            const title = page.title || page.key
+            const title = page.id
             if (typeof document !== 'undefined') {
               document.title = `${title} - ${app.header.logo || 'Measure UI'}`
             }
@@ -103,13 +102,15 @@ class Measure extends App {
       const m = app.navi.pages.matched(hashHistory.location.pathname.replace(/^\/+/, ''))
       if (m) {
         loadPage(m)
-      }
-
-      let k = app.navi.pages.getKey(0)
-      if (k) {
-        hashHistory.replace(k)
+      } else {
+        let k = app.navi.pages.getKey(0)
+        if (k) {
+          hashHistory.replace(k)
+        }
       }
     }
+
+    app.node = node
     ReactDOM.render(h(app), node)
     return app
   }

@@ -2,9 +2,6 @@
 'use strict'
 
 const prog = require('caporal')
-const run = require('./run')
-const build = require('./build')
-const createlogger = require('@rcp/util.createlogger').default
 const me = require('measure-export')
 
 const any = a => a
@@ -19,10 +16,9 @@ function common(pro) {
 common(
   prog
     .version(require('../package').version)
-    // .logger(createlogger('measure-export'))
     // the "order" command
     .help(`My Custom help !!`)
-    .command('run', 'Order a pizza')
+    .command('start', 'Start measure UI in development mode')
     .help(`My Custom help about the order command !!`)
     // <kind> will be auto-magicaly autocompleted by providing the user with 3 choices
     .argument('[context]', 'Kind of pizza', any, String(me.defaultOptions.context))
@@ -36,7 +32,7 @@ common(
     logger.debug("Command 'run' called with:")
     logger.debug('arguments: %j', args)
     logger.debug('options: %j', options)
-    return run(Object.assign({ logger }, args, options))
+    return require('./start')(Object.assign({ logger }, args, options))
   })
 
 // the "return" command
@@ -47,7 +43,7 @@ common(prog.command('build', 'Return an order').argument('[dist-dir]', 'dist pat
     logger.debug("Command 'build' called with:")
     logger.debug('arguments: %j', args)
     logger.debug('options: %j', options)
-    return build(Object.assign({ logger }, args, options))
+    return require('./build')(Object.assign({ logger }, args, options))
   })
 
 prog.parse(process.argv)

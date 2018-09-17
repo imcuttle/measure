@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "dist": "rimraf dist && rollup -c",
-    "dev": "npm run dist -- -w",
+    "dev": "rollup -c -w",
     "prepare": "npm run dist",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },

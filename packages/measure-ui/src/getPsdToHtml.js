@@ -5,13 +5,20 @@
  *
  */
 
+function check(toHtml) {
+  return toHtml && typeof toHtml.psdToHtmlFromBuffer === 'function'
+}
+
 module.exports = () => {
   let toHtml = null
   try {
-    toHtml = global.PsdToHtml || require('psd-to-html')
+    let toHtml = require('psd-to-html')
   } catch (e) {}
-  if (toHtml && typeof toHtml.psdToHtml === 'function') {
+  if (check(toHtml)) {
     return toHtml
+  }
+  if (check(global.PsdToHtml)) {
+    return global.PsdToHtml
   }
   return null
 }

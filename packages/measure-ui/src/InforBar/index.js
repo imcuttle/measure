@@ -11,6 +11,13 @@ import View, { isEmpty } from './view'
 import kebabcase from 'lodash.kebabcase'
 import slug from 'slugify'
 
+export class Stroke extends Root {
+  @observable color
+  @observable dashOffset
+  @observable lineWidth
+  @observable lineAlign
+}
+
 export class Font extends Root {
   @observable
   family = ''
@@ -111,6 +118,8 @@ export default class InformationBar extends Root {
   opacity = 1
   @observable
   radius = Radius.create()
+  @observable
+  stroke = Stroke.create()
 
   @observable
   color = ''

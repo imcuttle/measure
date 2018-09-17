@@ -6,7 +6,7 @@
  */
 
 import { Root, bindView, observable, reaction, Symbolic, symbolicLink, storageSync } from 'react-mobx-vm'
-import { i18n } from '../i18n'
+import { i18n, setLanguage } from '../i18n'
 import View from './view'
 import Header from '../Header'
 import InforBar from '../InforBar'
@@ -75,6 +75,7 @@ export default class App extends Root {
   constructor(props) {
     super(props)
     symbolicLink(this, {
+      language: Symbolic(this.header, 'language'),
       unit: Symbolic(this.header, 'unit'),
       remStandardPx: Symbolic(this.header, 'remStandardPx'),
       zoom: Symbolic(this.header, 'zoom'),
@@ -91,8 +92,16 @@ export default class App extends Root {
   @observable
   error = ''
 
+  @storageSync
+  @observable
+  naviVisible = true
+
+  @storageSync
+  @observable
+  headerVisible = true
+
   navi = Navigation.create()
-  header = Header.create()
+  header = Header.create({})
   inforBar = InforBar.create({
     clr: this.clr,
     sz: this.sz
@@ -122,16 +131,20 @@ export default class App extends Root {
 
       const toHtml = getPsdToHtml()
       if (toHtml && ['.psd'].includes(ext)) {
-        const { psdToHtmlFromURL, psdToHtmlFromBuffer } = toHtml
         tasks.push(() => {
           return new Promise((resolve, reject) => {
+            const { psdToHtmlFromBuffer } = toHtml
             let fr = new FileReader()
             fr.readAsArrayBuffer(file)
             fr.onload = evt => {
               psdToHtmlFromBuffer(new Uint8Array(fr.result))
                 .then(html => {
+                  const img = $(html).css('background-image')
+                  const stripedImage = img.replace(/url\((["'])?(.+)\1\)/, '$2')
+
                   this.navi.pages.push({
                     title: file.name,
+                    cover: stripedImage,
                     html
                   })
                 })

@@ -116,5 +116,15 @@ if (production) {
     })
   ]
 } else {
-  module.exports = config({ format: 'cjs' })
+  module.exports = [
+    config({
+      format: 'cjs',
+      env: 'browser',
+      suffix: '.'
+    }),
+    config({
+      format: 'cjs',
+      env: 'node'
+    })
+  ]
 }

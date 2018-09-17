@@ -12,6 +12,6 @@ const psdMeasure = require('psd-measure');
 
 ## TODO
 
-- [ ] default font(size, family...)
+- [x] default font(size, family...) (deal with it temporarily)
 - [ ] inset shadow
-- [ ] border
+- [x] border

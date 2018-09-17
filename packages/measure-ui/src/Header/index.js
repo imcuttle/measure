@@ -5,12 +5,34 @@
  *
  */
 
-import { Root, bindView, action, observable, storageSync, autorun } from 'react-mobx-vm'
+import { Root, bindView, action, observable, storageSync, reaction, autorun } from 'react-mobx-vm'
 import View from './view'
-import { i18n } from '../i18n'
+import { i18n, setLanguage, getCurrentLanguage } from '../i18n'
 
 @bindView(View)
 export default class Header extends Root {
+  @observable
+  langOptions = [
+    {
+      label: 'English',
+      value: 'en-us'
+    },
+    {
+      label: '中文',
+      value: 'zh-cn'
+    }
+  ]
+
+  @storageSync
+  @observable language = getCurrentLanguage()
+
+  @autorun
+  autoLanguage() {
+    if (this.language && typeof location !== 'undefined') {
+      setLanguage(this.language)
+    }
+  }
+
   @observable
   unitOptions = [
     {
@@ -31,30 +53,6 @@ export default class Header extends Root {
   @observable
   remStandardPx = 16
 
-  @observable
-  colorOptions = [
-    {
-      label: i18n('color.label.auto'),
-      value: 'auto'
-    },
-    {
-      label: i18n('color.label.hex.argb'),
-      value: 'hex.argb'
-    },
-    {
-      label: i18n('color.label.hex.rgb,a'),
-      value: 'hex.rgb,a'
-    },
-    {
-      label: i18n('color.label.rgb,a'),
-      value: 'rgb,a'
-    },
-    {
-      label: i18n('color.label.argb'),
-      value: 'argb'
-    }
-  ]
-
   @storageSync
   @observable
   color = 'auto'
@@ -64,26 +62,6 @@ export default class Header extends Root {
   isShowUnit = true
 
   @observable
-  numberFixedOptions = [
-    {
-      label: i18n('number-fixed.label.integer'),
-      value: 0
-    },
-    {
-      label: i18n('number-fixed.label.one-pos-decimals'),
-      value: 1
-    },
-    {
-      label: i18n('number-fixed.label.two-pos-decimals'),
-      value: 2
-    },
-    {
-      label: i18n('number-fixed.label.three-pos-decimals'),
-      value: 3
-    }
-  ]
-
-  @observable
   logo = 'Measure UI'
 
   @storageSync
@@ -91,7 +69,7 @@ export default class Header extends Root {
   numberFixed = 1
 
   // todo fit?
-  // @storageSync
+  @storageSync
   @observable
   zoom = 0.5
 

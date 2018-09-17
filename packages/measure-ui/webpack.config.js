@@ -6,7 +6,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 let analyzerPort = 8888
 const watch = !!process.env.WATCH
 
-function conf({ define, isBuild, watch, externals, mini, suffix = '', format } = {}) {
+function conf({ define, isBuild, globalObject, watch, externals, mini, suffix = '', format } = {}) {
   const NODE_ENV = isBuild ? 'production' : 'development'
   const filename = `measure-ui${suffix}.${format}${mini ? '.min' : ''}.js`
   return {
@@ -34,6 +34,7 @@ function conf({ define, isBuild, watch, externals, mini, suffix = '', format } =
           ].concat(externals)
         : externals,
     output: {
+      globalObject,
       path: path.resolve(__dirname, 'dist'),
       filename,
       library: {
@@ -56,7 +57,7 @@ function conf({ define, isBuild, watch, externals, mini, suffix = '', format } =
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
         ...define
       }),
-      !isBuild && watch && new webpack.HotModuleReplacementPlugin(),
+      // !isBuild && watch && new webpack.HotModuleReplacementPlugin(),
       isBuild &&
         process.env.BUNDLE_ANALYZER &&
         new BundleAnalyzerPlugin({
@@ -76,28 +77,29 @@ module.exports = [
     externals: ['psd-to-html']
   }),
 
-  !watch && conf({
-    isBuild: true,
-    format: 'umd',
-    externals: {
-      'psd-to-html': {
-        commonjs: 'psd-to-html',
-        commonjs2: 'psd-to-html',
-        amd: 'psd-to-html',
-        root: 'PsdToHtml'
+  // !watch &&
+  //   conf({
+  //     isBuild: true,
+  //     format: 'umd',
+  //     // externals: ['psd-to-html'],
+  //     suffix: '.web-worker',
+  //     define: {
+  //       'process.env.WEB_WORKER': '"on"',
+  //     },
+  //     globalObject: 'this'
+  //   }),
+
+  !watch &&
+    conf({
+      isBuild: true,
+      format: 'umd',
+      externals: {
+        'psd-to-html': {
+          commonjs: 'psd-to-html',
+          commonjs2: 'psd-to-html',
+          amd: 'psd-to-html',
+          root: 'PsdToHtml'
+        }
       }
-      // react: {
-      //   commonjs: 'react',
-      //   commonjs2: 'react',
-      //   amd: 'react',
-      //   root: 'React'
-      // },
-      // 'react-dom': {
-      //   commonjs: 'react-dom',
-      //   commonjs2: 'react-dom',
-      //   amd: 'react-dom',
-      //   root: 'ReactDOM'
-      // }
-    }
-  })
+    })
 ].filter(Boolean)

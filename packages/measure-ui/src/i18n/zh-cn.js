@@ -8,6 +8,7 @@
 module.exports = {
   'app.upload.tip.psd': '有一种导入叫做 “手放开” (支持 psd/html)',
   'app.upload.tip.no-psd': '有一种导入叫做 “手放开” (支持 html)',
+  'app.importing': '导入中...',
 
   'color.label.auto': '自动(RGBA || Hex)',
   'color.label.hex.argb': '#Hex(ARGB)',
@@ -15,9 +16,9 @@ module.exports = {
   'color.label.rgb,a': 'RGB,A',
   'color.label.argb': 'ARGB',
 
-  'color.placeholder': 'ARGB',
-  'unit.placeholder': 'ARGB',
-  'number-fixed.placeholder': 'number-fixed.placeholder',
+  'color.placeholder': '输入颜色类型',
+  'unit.placeholder': '输入单位',
+  'number-fixed.placeholder': '小数规则',
 
   'unit.label': '单位',
   'number-fixed.label.integer': '取整',
@@ -40,6 +41,10 @@ module.exports = {
   'infor-bar.color.title': '填充',
   'infor-bar.radius.label': '圆角',
   'infor-bar.copy.btn': '复制',
+
+  'infor-bar.stroke.title': '描边',
+  'infor-bar.stroke.style.label': '描边样式',
+  'infor-bar.stroke.style.strokeStyleAlignInside': '内侧',
 
   'infor-bar.box-shadow.title': '阴影',
   'infor-bar.box-shadow.label': '外投影',

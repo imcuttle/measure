@@ -28,6 +28,7 @@
   }
 
   &rem-standard {
+    max-width: 50px;
     width: auto;
   }
   &color {
@@ -35,6 +36,10 @@
   }
 
   &number-fixed {
+    min-width: 120px;
+  }
+
+  &language {
     min-width: 120px;
   }
 
@@ -47,6 +52,7 @@
 
   &right {
     display: flex;
+    align-items: center;
   }
 
   &zoom-out {
@@ -139,5 +145,12 @@
     &:after {
       background-color: #ddd;
     }
+  }
+  &gh {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: url('~file-loader!./GitHub-Mark-64px.png') center no-repeat;
+    background-size: contain;
   }
 }

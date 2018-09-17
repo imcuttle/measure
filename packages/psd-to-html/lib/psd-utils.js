@@ -5,11 +5,11 @@
  *
  */
 
-import Clr from 'color'
+const Clr = require('color')
 
 // Spec https://www.tonton-pixel.com/Photoshop%20Additional%20File%20Formats/styles-file-format.html
 
-export function clr(color, opacity) {
+function clr(color, opacity) {
   let c
   if (color && color.class && typeof color.class.id === 'string') {
     switch (color.class.id.toLowerCase()) {
@@ -36,7 +36,7 @@ export function clr(color, opacity) {
   return c.string()
 }
 
-export function pxl(data) {
+function val(data) {
   if (data && data.hasOwnProperty('value')) {
     return data.value
   }
@@ -45,12 +45,12 @@ export function pxl(data) {
 
 // http://www.melanieceraso.com/psd-to-css3/
 // https://github.com/finanzcheck/drop-shadow-converter/blob/master/less/drop-shadow-converter.less
-export function dropShadowToStyle({ dist, color, spread /* ckmt */, size /*blur*/, angle, opct } = {}) {
-  angle = pxl(angle)
-  dist = pxl(dist)
-  spread = pxl(spread)
-  size = pxl(size)
-  opct = pxl(opct)
+function dropShadowToStyle({ dist, color, spread /* ckmt */, size /*blur*/, angle, opct } = {}) {
+  angle = val(angle)
+  dist = val(dist)
+  spread = val(spread)
+  size = val(size)
+  opct = val(opct)
 
   angle = ((180 - angle) * Math.PI) / 180
   let offsetY = Math.round(Math.sin(angle) * dist)
@@ -66,4 +66,10 @@ export function dropShadowToStyle({ dist, color, spread /* ckmt */, size /*blur*
     spreadRadius,
     color: clr(color, opct)
   }
+}
+
+module.exports = {
+  clr,
+  val,
+  dropShadowToStyle
 }
