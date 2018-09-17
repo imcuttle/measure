@@ -7,7 +7,13 @@
 
 ## Getting started
 
-
+```
+npm i measure-export-cli -g
+# Run the online server
+measure-export start path/to/psdDir
+# Build assets on dist
+measure-export build
+```
 
 
 ## Related

@@ -8,9 +8,9 @@ const any = a => a
 
 function common(pro) {
   return pro
-    .option('-g, --glob', 'pattern', prog.Array, me.defaultOptions.glob)
-    .option('-l, --language', 'language', any, String(me.defaultOptions.language))
-    .option('-t, --html-template-path', 'Html template path', any, me.defaultOptions.htmlTemplatePath)
+    .option('-g, --glob', "Matching file's pattern [glob]", prog.Array, me.defaultOptions.glob)
+    .option('-l, --language', 'Set default Language', any, String(me.defaultOptions.language))
+    .option('-t, --html-template-path', "Set html template's path", any, me.defaultOptions.htmlTemplatePath)
 }
 
 common(
