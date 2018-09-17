@@ -59,7 +59,7 @@ class MeasureExport {
   }
 
   get hash() {
-    return md5(`${this.opts.context}-${this.actionType}`).slice(0, 10)
+    return this.opts.hash || String(process.pid)
   }
 
   registerWatch() {
@@ -134,7 +134,6 @@ class MeasureExport {
   }
 
   async build() {
-    this.actionType = 'build'
     const config = await this.getWebpackConfig({ prod: true })
     const compiler = webpack(config)
     const states = await pify(compiler.run.bind(compiler))()
@@ -149,7 +148,6 @@ class MeasureExport {
   }
 
   async getMiddlewares() {
-    this.actionType = 'dev'
     const config = await this.getWebpackConfig({ prod: false })
     const compiler = webpack(config)
     this.registerWatch()
