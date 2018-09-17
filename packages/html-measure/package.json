@@ -2,9 +2,9 @@
   "name": "html-measure",
   "version": "1.0.0",
   "scripts": {
-    "dist": "rimraf lib/ && npm run dist:css && babel src/ -Dd lib",
+    "dist": "rimraf lib/ && babel src/ -Dd lib && npm run dist:css",
     "dist:css": "lessc style.less style.css",
-    "dev": "npm run dist -- -w",
+    "dev": "babel src/ -Dd lib -w",
     "prepublishOnly": "npm run dist"
   },
   "main": "lib/index.js",
