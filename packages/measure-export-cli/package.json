@@ -19,7 +19,7 @@
     "measure-export": "bin/index.js"
   },
   "files": [
-    "lib"
+    "bin"
   ],
   "repository": {
     "type": "git",
