@@ -1,6 +1,6 @@
 {
   "name": "measure-export",
-  "version": "0.2.3",
+  "version": "0.2.7",
   "description": "Make measure UI exported for teamwork",
   "keywords": [
     "measure",
@@ -42,9 +42,8 @@
     "babel-runtime": "^6.26.0",
     "chokidar": "^2.0.4",
     "concat-stream": "^1.6.2",
-    "file-loader": "^2.0.0",
-    "style-loader": "^0.23.0",
     "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "globby": "^8.0.1",
     "handlebars": "^4.0.12",
@@ -62,6 +61,7 @@
     "raw-loader": "^0.5.1",
     "rimraf": "^2.6.2",
     "simple-progress-webpack-plugin": "^1.1.2",
+    "style-loader": "^0.23.0",
     "webpack": "^4.19.0",
     "webpack-dev-middleware": "^3.3.0",
     "webpack-hot-middleware": "^2.24.0"
