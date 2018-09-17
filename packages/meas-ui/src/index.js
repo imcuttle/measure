@@ -29,9 +29,21 @@ class Measure extends App {
       app = Measure.create(data)
     }
 
+    function push(k) {
+      hashHistory.push(k.replace(/^\/+/, '/'))
+    }
+    function replace(k) {
+      hashHistory.push(k.replace(/^\/+/, '/'))
+    }
+
     app.history = hashHistory
     app.navi.handlePageClick = function(p, i) {
-      return () => hashHistory.push(app.navi.pages.getKey(i))
+      return () => {
+        const k = app.navi.pages.getKey(i)
+        if (typeof k === 'string') {
+          push(k)
+        }
+      }
     }
     const getHtml = action(html => {
       if (typeof html === 'function') {
@@ -105,7 +117,7 @@ class Measure extends App {
       } else {
         let k = app.navi.pages.getKey(0)
         if (k) {
-          hashHistory.replace(k)
+          replace(k)
         }
       }
     }
