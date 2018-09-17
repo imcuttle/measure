@@ -114,7 +114,7 @@ export default class App extends React.Component {
         if (getSty('border-style') !== 'none') {
           strokeDashOffset = getSty('border-style') === 'solid' ? 0 : 1
           strokeColor = getSty('border-color')
-          strokeLineWidth = getSty('border-width')
+          strokeLineWidth = parseFloat(getSty('border-width'))
           strokeLineAlign = 'strokeStyleAlignInside'
         }
       }

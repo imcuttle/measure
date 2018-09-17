@@ -32,11 +32,12 @@
     "url": "https://github.com/imcuttle/measure/issues"
   },
   "devDependencies": {
-    "rimraf": "^2.6.2",
-    "globby": "^8.0.1"
+    "globby": "^8.0.1",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {
     "caporal": "^0.10.0",
-    "measure-export": "^1.0.0"
+    "measure-export": "^1.0.0",
+    "update-notifier": "^2.5.0"
   }
 }

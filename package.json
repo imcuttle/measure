@@ -6,7 +6,8 @@
 	"description": "Make html to be measurable",
 	"author": "imcuttle",
 	"scripts": {
-		"dev": "lerna run dev --parallel"
+		"dev": "lerna run dev --parallel",
+    "test": "jest"
 	},
 	"edam": {
 		"source": "./src/components/__Template__",

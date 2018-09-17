@@ -9,15 +9,13 @@ const rimraf = require('rimraf')
 const cmd = require.resolve('..')
 const fixturePath = nps.join(__dirname, 'fixtures')
 
-const c = cli({ cwd: fixturePath, redirect: true })
+const c = cli({ cwd: fixturePath, redirect: false })
 
 describe('measure-export-cli', () => {
   it('build', function(done) {
     const tmp = nps.join(os.tmpdir(), String(Date.now()))
     jest.setTimeout(60000)
     c.use(`node ${cmd} build -d ${tmp}`).end(function(err, stdout, stderr) {
-      console.log(stdout, stderr)
-
       expect(
         globby.sync(['**/*'], {
           cwd: tmp

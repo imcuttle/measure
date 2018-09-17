@@ -28,6 +28,7 @@ common(
     logger.debug("Command 'run' called with:")
     logger.debug('arguments: %j', args)
     logger.debug('options: %j', options)
+
     return require('./start')(Object.assign({ logger }, args, options))
   })
 
@@ -44,7 +45,9 @@ common(prog.command('build', 'Build the assets with measure ui in dist'))
     options.hot = !options.noHot
     delete options.noHot
 
-    return require('./build')(Object.assign({ logger }, args, options))
+    return require('./build')(Object.assign({ logger }, args, options)).then(() => {
+      require('./update-notify')()
+    })
   })
 
 prog.parse(process.argv)

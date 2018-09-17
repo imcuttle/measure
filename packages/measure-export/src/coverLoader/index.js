@@ -10,7 +10,6 @@ const PSD = require('@moyuyc/psd')
 // psd-to-html
 
 function loader(buffer) {
-  console.log('process.pid', process.pid)
   const psd = new PSD(buffer)
   psd.parse()
   return new Promise((resolve, reject) => {

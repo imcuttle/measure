@@ -17,6 +17,7 @@ function start({ port = 8888, ...opts } = {}) {
   })
   process.on('SIGINT', () => {
     me.quit()
+    require('./update-notify')()
     process.exit()
   })
   return me.getMiddlewares().then(({ dev, hot }) => {

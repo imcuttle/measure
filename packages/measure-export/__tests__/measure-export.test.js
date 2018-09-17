@@ -30,8 +30,9 @@ describe('measure-export', () => {
     const ms = measureExport({ context: fixturePath })
     const oldHash = ms.hash
     expect(oldHash).toEqual(ms.runtimeFm.hash)
-    ms.actionType = 'abc'
+    ms.opts.hash = 'abc'
     expect(ms.hash).not.toEqual(oldHash)
+    expect(ms.hash).toEqual('abc')
     expect(ms.hash).toEqual(ms.runtimeFm.hash)
   })
 
