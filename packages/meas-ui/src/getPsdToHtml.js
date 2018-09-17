@@ -12,7 +12,7 @@ function check(toHtml) {
 module.exports = () => {
   let toHtml = null
   try {
-    let toHtml = require('@moyuyc/psd-html')
+    toHtml = require('@moyuyc/psd-html')
   } catch (e) {}
   if (check(toHtml)) {
     return toHtml
