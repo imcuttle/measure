@@ -55,7 +55,7 @@
     "mkdirp": "^0.5.1",
     "pify": "^4.0.0",
     "progress-bar-webpack-plugin": "^1.11.0",
-    "psd-html": "^0.1.1",
+    "@moyuyc/psd-html": "^0.1.1",
     "quote-it": "^1.0.1",
     "rimraf": "^2.6.2",
     "simple-progress-webpack-plugin": "^1.1.2",
@@ -66,5 +66,5 @@
   "devDependencies": {
     "babel-cli": "^6.26.0"
   },
-  "gitHead": "b8317573573e35d5227abc306aa6f1067f4f1aed"
+  "gitHead": "58b5eb03718ab084dc404736156fe025ac54b09f"
 }

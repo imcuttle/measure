@@ -74,7 +74,7 @@ module.exports = [
     watch: watch,
     isBuild: false,
     format: 'commonjs2',
-    externals: ['psd-html']
+    externals: ['@moyuyc/psd-html']
   }),
 
   // !watch &&
@@ -94,10 +94,10 @@ module.exports = [
       isBuild: true,
       format: 'umd',
       externals: {
-        'psd-html': {
-          commonjs: 'psd-html',
-          commonjs2: 'psd-html',
-          amd: 'psd-html',
+        '@moyuyc/psd-html': {
+          commonjs: '@moyuyc/psd-html',
+          commonjs2: '@moyuyc/psd-html',
+          amd: '@moyuyc/psd-html',
           root: 'PsdToHtml'
         }
       }
