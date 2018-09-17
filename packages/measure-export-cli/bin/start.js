@@ -18,7 +18,7 @@ function start(opts) {
     Object.assign(
       {
         compilationSuccessInfo: {
-          messages: [`Measure UI is running here http://localhost:${port}`]
+          messages: [`Measure UI is running here http://localhost:${opts.port}`]
           // notes: ['Some additionnal notes to be displayed unpon successful compilation']
         }
       },
@@ -33,7 +33,7 @@ function start(opts) {
   return me.getMiddlewares().then(({ dev, hot }) => {
     dev && app.use(dev)
     hot && app.use(hot)
-    app.listen(port)
+    app.listen(opts.port)
     return app
   })
 }
