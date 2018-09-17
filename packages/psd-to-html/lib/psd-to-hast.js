@@ -7,8 +7,8 @@
 const h = require('hastscript')
 const PSD = require('@moyuyc/psd')
 const get = require('lodash.get')
-
 const visit = require('@moyuyc/walk-tree')
+
 const psdUtils = require('./psd-utils')
 
 function assert(check, ...argv) {

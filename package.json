@@ -7,7 +7,9 @@
 	"author": "imcuttle",
 	"scripts": {
 		"dev": "lerna run dev --parallel",
-    "test": "jest"
+    "test": "jest",
+    "release": "lerna publish",
+    "prerelease": "npm test"
 	},
 	"edam": {
 		"source": "./src/components/__Template__",
