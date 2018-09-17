@@ -46,7 +46,7 @@ module.exports = function({
         }),
       new webpack.DefinePlugin({
         'process.env': {
-          NODE_ENV: mode
+          NODE_ENV: JSON.stringify(mode)
         }
       }),
       !debug &&
