@@ -6,16 +6,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 <a name="0.3.3"></a>
 ## [0.3.3](https://github.com/imcuttle/measure/compare/v0.3.2...v0.3.3) (2018-09-18)
 
-**Note:** Version bump only for package html-measure
-
-
-
-
-
-<a name="0.3.2"></a>
-## [0.3.2](https://github.com/imcuttle/measure/compare/v0.3.1...v0.3.2) (2018-09-18)
-
-
-### Bug Fixes
-
-* some style ([08ed337](https://github.com/imcuttle/measure/commit/08ed337))
+**Note:** Version bump only for package @moyuyc/psd-html

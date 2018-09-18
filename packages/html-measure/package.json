@@ -1,6 +1,6 @@
 {
   "name": "html-measure",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "scripts": {
     "dist": "rimraf lib/ && babel src/ -Dd lib && npm run dist:css",
     "dist:css": "lessc style.less style.css",

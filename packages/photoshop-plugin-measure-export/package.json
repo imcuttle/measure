@@ -1,6 +1,6 @@
 {
   "name": "photoshop-plugin-measure-export",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": true,
   "description": "Measure export plugin for photoshop",
   "author": "imcuttle <moyuyc95@gmail.com>",
