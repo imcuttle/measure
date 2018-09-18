@@ -3,5 +3,7 @@
 const photoshopPluginMeasureExport = require('..');
 
 describe('photoshop-plugin-measure-export', () => {
-    it('needs tests');
+    it.skip('needs tests', function () {
+      
+    });
 });
