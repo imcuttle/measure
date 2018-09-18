@@ -14,8 +14,8 @@ cache:
     - node_modules/
     - ${HOME}/.npm
 
-before_install:
-  - npm install --global npm@latest
+#before_install:
+#  - npm install --global npm@latest
 
 install:
   - npm install
