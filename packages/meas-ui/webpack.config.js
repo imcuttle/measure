@@ -53,10 +53,14 @@ function conf({ define, isBuild, globalObject, watch, externals, mini, suffix = 
         filename: 'style.css',
         allChunks: true
       }),
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-        ...define
-      }),
+      new webpack.DefinePlugin(
+        Object.assign(
+          {
+            'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+          },
+          define
+        )
+      ),
       // !isBuild && watch && new webpack.HotModuleReplacementPlugin(),
       isBuild &&
         process.env.BUNDLE_ANALYZER &&

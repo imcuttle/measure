@@ -74,8 +74,9 @@ module.exports = function({
             {
               loader: require.resolve('babel-loader'),
               options: {
-                presets: [['env', { targets: { browsers: ['ie 11'] } }]],
-                plugins: ['syntax-dynamic-import']
+                babelrc: false,
+                presets: [[require.resolve('babel-preset-env'), { targets: { browsers: ['ie 11'] } }]],
+                plugins: [require.resolve('babel-plugin-syntax-dynamic-import')]
               }
             }
           ]
