@@ -54,7 +54,7 @@ function config({ format, min = false, env = 'node', suffix = '' } = {}) {
         namedExports: {}
       }),
       babel({
-        exclude: '**/node_modules/**',
+        // exclude: 'node_modules/**',
         presets: [
           [
             'env',
