@@ -18,10 +18,10 @@ function loader(buffer) {
     injectImage: false
   }).then(hast => {
     const style = hast.properties.style = hast.properties.style || ''
-    hast.properties.style = `background-image: url(\${imgPath.trim()});${style}`
+    hast.properties.style = `background-image: url(\${imgPath.trim()}); ${style}`
 
     return `
-var imgPath = ${coverRequire(this.resourcePath)};
+var imgPath = ${coverRequire(this.resourcePath)}.replace(/([\\(\\)])/g, '\\\\$1');
 module.exports=\`${hastToHtml(hast)}\`
 `
   })
