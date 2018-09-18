@@ -8,7 +8,7 @@
 	"scripts": {
 		"dev": "lerna run dev --parallel",
 		"test": "jest",
-    "postinstall": "lerna bootstrap",
+		"postinstall": "lerna bootstrap",
 		"release": "lerna publish --conventional-commits -m 'chore(release): publish'",
 		"prerelease": "npm test"
 	},
