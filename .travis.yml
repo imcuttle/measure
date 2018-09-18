@@ -1,13 +1,21 @@
 sudo: false
 language: node_js
 node_js:
+  - 6
   - 8
   - stable
 
+matrix:
+  fast_finish: true
+
+
 cache:
-  bundle: true
   directories:
-    - node_modules
+    - node_modules/
+    - ${HOME}/.npm
+
+before_install:
+  - npm install --global npm@latest
 
 install:
   - npm install
