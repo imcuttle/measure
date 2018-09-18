@@ -134,6 +134,15 @@
     height: 100%;
   }
 
+  &canvas {
+    width: max-content;
+    padding: 0 20%;
+    margin: auto;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
   &hm-core {
     margin: 20% auto;
     .html-measure__layer {
@@ -163,7 +172,6 @@
     transition: all 0.15s ease;
     display: block;
   }
-
 
   &navi-hide {
     .@{prefix}playground {
@@ -201,7 +209,8 @@
     transition: all 0.15s ease;
   }
 
-  &header-op, &op{
+  &header-op,
+  &op {
     z-index: 200;
     cursor: pointer;
     position: absolute;

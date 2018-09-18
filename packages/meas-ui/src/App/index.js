@@ -59,6 +59,8 @@ export default class App extends Root {
   }
 
   hmRef = null
+  playgroundRef = null
+  naviRef = null
 
   init() {
     this.scrollIntoView()
@@ -67,8 +69,12 @@ export default class App extends Root {
   @reaction('html')
   scrollIntoView() {
     setTimeout(() => {
+      // Scroll to center
       const node = ReactDOM.findDOMNode(this.hmRef)
       node && node.scrollIntoView()
+      if (this.playgroundRef) {
+        this.playgroundRef.scrollLeft = (this.canvasRef.scrollWidth - this.playgroundRef.clientWidth) >> 1
+      }
     })
   }
 

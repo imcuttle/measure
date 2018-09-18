@@ -43,7 +43,7 @@ export default class App extends React.Component {
   }
   static defaultProps = {}
 
-  handleClickMeasureAbleNode = node => {
+  handleClickMeasureAbleNode = action(node => {
     const app = this.local
     const pos = app.hmRef.pos(node)
     const $n = $(node)
@@ -84,15 +84,18 @@ export default class App extends React.Component {
         app.inforBar.snippets.splice(snippetIndex, 1)
       }
     } else {
-      if (snippetIndex < 0) {
-        app.inforBar.snippets.push({
-          value: 'outerHtml',
-          label: 'Outer HTML',
-          lang: 'html',
-          process: () => {
-            return node.outerHTML
-          }
-        })
+      const obj = {
+        value: 'outerHtml',
+        label: 'Outer HTML',
+        lang: 'html',
+        process: () => {
+          return node.outerHTML
+        }
+      }
+      if (snippetIndex >= 0) {
+        app.inforBar.snippets[snippetIndex] = obj
+      } else {
+        app.inforBar.snippets.push(obj)
       }
 
       if (typeof getComputedStyle === 'function') {
@@ -187,7 +190,7 @@ export default class App extends React.Component {
     if (typeof this.props.onClickMeasureAbleNode === 'function') {
       this.props.onClickMeasureAbleNode(node)
     }
-  }
+  })
 
   state = {
     isWaitingForUpload: false
@@ -274,22 +277,30 @@ export default class App extends React.Component {
         </div>
         <div className={c('stage')}>
           <div className={c('navi')}>
-            {h(this.local.navi, { ref: r => this.local.naviRef = r })}
+            {h(this.local.navi, { ref: r => (this.local.naviRef = r) })}
             <span className={c('op')} onClick={() => this.local.setValue('naviVisible', !naviVisible)} />
           </div>
-          <div className={c('playground')}>
-            <HtmlMeasure
-              onClickMeasureAbleNode={this.handleClickMeasureAbleNode}
-              style={{ zoom: this.local.zoom }}
-              className={c('hm-core')}
-              ref={r => r && (this.local.hmRef = r)}
-              html={html}
-              scaleGapPx={10}
-              remStandardPx={Number(this.local.remStandardPx)}
-              unit={this.local.unit}
-              isShowUnit={this.local.isShowUnit}
-              numberFixed={Number(this.local.numberFixed)}
-            />
+          <div className={c('playground')} ref={r => (this.local.playgroundRef = r)}>
+            <div className={c('canvas')} ref={r => (this.local.canvasRef = r)}>
+              <HtmlMeasure
+                onClickMeasureAbleNode={this.handleClickMeasureAbleNode}
+                style={{
+                  zoom: this.local.zoom,
+                  MsZoom: this.local.zoom,
+                  WebkitZoom: this.local.zoom,
+                  MozTransform: `scale(${this.local.zoom}, ${this.local.zoom})`,
+                  MozTransformOrigin: 'left center'
+                }}
+                className={c('hm-core')}
+                ref={r => r && (this.local.hmRef = r)}
+                html={html}
+                scaleGapPx={10}
+                remStandardPx={Number(this.local.remStandardPx)}
+                unit={this.local.unit}
+                isShowUnit={this.local.isShowUnit}
+                numberFixed={Number(this.local.numberFixed)}
+              />
+            </div>
           </div>
           {h(this.local.inforBar, c('infor-bar'))}
         </div>

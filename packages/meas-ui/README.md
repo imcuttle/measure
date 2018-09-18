@@ -25,7 +25,8 @@ import htmlMeasure from 'html-measure'
 
 ## Todo
 
-- [ ] - i18n ui
+- [x] - i18n ui
+- [ ] - zoom style has bug on firefox.
 
 ## Related
 
