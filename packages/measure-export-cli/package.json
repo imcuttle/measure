@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "globby": "^8.0.1",
+    "gentle-cli": "^1.0.3",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
