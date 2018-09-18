@@ -9,7 +9,7 @@ const rimraf = require('rimraf')
 const cmd = require.resolve('..')
 const fixturePath = nps.join(__dirname, 'fixtures')
 
-const c = cli({ cwd: fixturePath, redirect: false })
+const c = cli({ cwd: fixturePath, redirect: true })
 
 describe('measure-export-cli', () => {
   it('build', function(done) {
