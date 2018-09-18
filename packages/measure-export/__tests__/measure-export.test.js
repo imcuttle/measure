@@ -1,6 +1,6 @@
 'use strict'
 
-const measureExport = require('..')
+const measureExport = require('../src/MeasureExport')
 const nps = require('path')
 const fs = require('fs')
 

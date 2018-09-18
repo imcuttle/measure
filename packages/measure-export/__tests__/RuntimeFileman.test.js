@@ -1,6 +1,6 @@
 'use strict'
 
-const RuntimeFileman = require('../lib/RuntimeFileman')
+const RuntimeFileman = require('../src/RuntimeFileman')
 const nps = require('path')
 const fs = require('fs')
 

@@ -5,6 +5,7 @@ dist/
 public/
 **/*debug.log
 **/etc/
+coverage/
 
 .entry
 .dist

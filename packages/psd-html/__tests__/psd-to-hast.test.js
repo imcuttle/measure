@@ -6,7 +6,7 @@
  */
 const nps = require('path')
 
-const { psdToHASTFromPath } = require('../')
+const { psdToHASTFromPath } = require('../lib/index')
 
 describe('psd-to-hast', function() {
   it('should psd-to-hast', function(done) {

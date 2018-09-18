@@ -15,6 +15,9 @@ measure-export start path/to/psdDir
 measure-export build
 ```
 
+## TODO
+
+- [ ] - integration tests
 
 ## Related
 
