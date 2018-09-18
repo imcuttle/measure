@@ -1,6 +1,8 @@
 sudo: false
 language: node_js
 node_js:
+  - 6
+  - 7
   - 8
   - stable
 
@@ -17,14 +19,14 @@ jobs:
   include:
     - stage: Document deploy
       allow_failure: true
-      script: lerna run dist:demo --scope=measure-ui -- -- --output-public-path=measure
+      script: lerna run dist:demo --scope=meas-ui -- -- --output-public-path=measure
       deploy:
         edge:
           branch: v1.8.47
         provider: pages
         skip_cleanup: true
         github_token: ${GH_TOKEN} # Set in travis-ci.org dashboard
-        local_dir: packages/measure-ui/demo-dist
+        local_dir: packages/meas-ui/demo-dist
 
     - stage: Test
       before_script: npm install codecov

@@ -5,7 +5,7 @@
     "dist": "rimraf lib/ && babel src/ -Dd lib && npm run dist:css",
     "dist:css": "lessc style.less style.css",
     "dev": "babel src/ -Dd lib -w",
-    "prepublishOnly": "npm run dist"
+    "prepare": "npm run dist"
   },
   "main": "lib/index.js",
   "files": [
