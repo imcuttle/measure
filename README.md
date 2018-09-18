@@ -7,12 +7,16 @@
 
 ## Getting started
 
-```
+```bash
 npm i measure-export-cli -g
 # Run the online server
 measure-export start path/to/psdDir
-# Build assets on dist
-measure-export build
+# Build assets in $PWD/dist
+measure-export build path/to/psdDir
+
+measure-export --help
+measure-export start --help
+measure-export build --help
 ```
 
 ## Processor about the monorepo
@@ -21,7 +25,12 @@ measure-export build
 
 ## TODO
 
-- [ ] - integration tests
+- [ ] integration tests should be applied on ui and cli
+
+## Packages
+
+- [sketch measure](2) - asd
+- [psd.js](2) - asd
 
 ## Related
 

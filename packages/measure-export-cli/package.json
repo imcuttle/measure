@@ -32,9 +32,10 @@
     "url": "https://github.com/imcuttle/measure/issues"
   },
   "devDependencies": {
-    "globby": "^8.0.1",
     "gentle-cli": "^1.0.3",
-    "rimraf": "^2.6.2"
+    "globby": "^8.0.1",
+    "rimraf": "^2.6.2",
+    "temp-dir": "^1.0.0"
   },
   "dependencies": {
     "caporal": "^0.10.0",

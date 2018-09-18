@@ -35,6 +35,6 @@ jobs:
         local_dir: packages/meas-ui/demo-dist
 
     - stage: Test
-      before_script: npm install codecov
-      script: npm test -- --coverage
+      before_script: npm install codecov --no-save
+      script: npm test -- --coverage --ci
       after_script: codecov --token=$CODECOV_TOKEN

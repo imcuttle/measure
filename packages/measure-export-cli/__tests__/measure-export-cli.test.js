@@ -3,8 +3,10 @@ const cli = require('gentle-cli')
 const nps = require('path')
 const fs = require('fs')
 const globby = require('globby')
-const os = require('os')
+const tempDir = require('temp-dir')
 const rimraf = require('rimraf')
+const skipIf = require('skip-if')
+const isCI = require('is-ci')
 
 const cmd = require.resolve('..')
 const fixturePath = nps.join(__dirname, 'fixtures')
@@ -12,8 +14,10 @@ const fixturePath = nps.join(__dirname, 'fixtures')
 const c = cli({ cwd: fixturePath, redirect: true })
 
 describe('measure-export-cli', () => {
+  // skipIf(isCI,
   it('build', function(done) {
-    const tmp = nps.join(os.tmpdir(), String(Date.now()))
+    const tmp = tempDir
+    // const tmp = nps.join(os.tmpdir(), String(Date.now()))
     jest.setTimeout(60000)
     console.log('cmd', cmd)
     console.log('tmp', tmp)
