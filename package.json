@@ -8,7 +8,7 @@
 	"scripts": {
 		"dev": "lerna run dev --parallel",
     "test": "jest",
-    "release": "lerna publish",
+    "release": "lerna publish --conventional-commits -m 'chore(release): publish'",
     "prerelease": "npm test"
 	},
 	"edam": {
@@ -22,7 +22,6 @@
 		"imcuttle",
 		"html-measure"
 	],
-	"typings": "index.d.ts",
 	"license": "MIT",
 	"repository": "imcuttle/html-measure",
 	"jest": {
