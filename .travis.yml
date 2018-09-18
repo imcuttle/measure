@@ -3,6 +3,8 @@ language: node_js
 node_js:
   - 6
   - 7
+  env:
+    - NODE_LOW_V=1
   - 8
   - stable
 
@@ -10,6 +12,9 @@ cache:
   bundle: true
   directories:
     - node_modules
+
+before_install:
+  - npm install -g npm@latest
 
 install:
   - npm ci
