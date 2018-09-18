@@ -11,7 +11,7 @@ cache:
 
 install:
   - npm install
-  - lerna bootstrap
+  - lerna bootstrap --nohoist=*
 
 jobs:
   include:
