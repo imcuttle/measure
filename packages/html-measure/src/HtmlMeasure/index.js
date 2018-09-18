@@ -193,10 +193,10 @@ export default class Scene extends PureComponent {
       const selPos = this.pos($selectedNode)
       const rulePos = this.pos($ruleNode)
 
-      const leftDist = paddingLeft > 0 ? paddingLeft - 1 : selPos.left - rulePos.left - $ruleNode.width() + 1
-      const rightDist = paddingRight > 0 ? paddingRight - 1 : rulePos.left - selPos.left - $selectedNode.width()
-      const topDist = paddingTop > 0 ? paddingTop : selPos.top - rulePos.top - $ruleNode.height() + 1
-      const bottomDist = paddingBottom > 0 ? paddingBottom - 1 : rulePos.top - selPos.top - $selectedNode.height()
+      const leftDist = paddingLeft > 0 ? paddingLeft : selPos.left - rulePos.left - $ruleNode.width()
+      const rightDist = paddingRight > 0 ? paddingRight : rulePos.left - selPos.left - $selectedNode.width()
+      const topDist = paddingTop > 0 ? paddingTop : selPos.top - rulePos.top - $ruleNode.height()
+      const bottomDist = paddingBottom > 0 ? paddingBottom : rulePos.top - selPos.top - $selectedNode.height()
 
       let dom
       if (leftDist > 0) {
@@ -210,7 +210,7 @@ export default class Scene extends PureComponent {
               }}
               className={c('scale-label')}
             >
-              {this.sz(leftDist - 1)}
+              {this.sz(leftDist)}
             </div>
           ),
           attributes: {
@@ -253,7 +253,7 @@ export default class Scene extends PureComponent {
         $(dom)
           .css({
             top: selPos.top + $selectedNode.height() / 2,
-            left: selPos.left + $selectedNode.width() + 1,
+            left: selPos.left + $selectedNode.width(),
             width: rightDist
           })
           .show()
@@ -271,7 +271,7 @@ export default class Scene extends PureComponent {
               }}
               className={c('scale-label')}
             >
-              {this.sz(topDist - 1)}
+              {this.sz(topDist)}
             </div>
           ),
           attributes: {
@@ -314,7 +314,7 @@ export default class Scene extends PureComponent {
 
         $(dom)
           .css({
-            top: selPos.top + $selectedNode.height() + 1,
+            top: selPos.top + $selectedNode.height(),
             height: bottomDist,
             left: selPos.left + $selectedNode.width() / 2
           })
