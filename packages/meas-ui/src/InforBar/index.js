@@ -154,13 +154,13 @@ export default class InformationBar extends Root {
         let fontObjs = []
         if (fonts && fonts.length) {
           fontObjs = fonts.map(f => ({
-            color: _cr(f.color),
             'font-family': f.family,
             'font-size': _sz(f.size),
             'font-weight': f.weight,
             'line-height': _sz(f.lineHeight),
             'text-decoration': f.textDecoration,
-            'text-align': f.align
+            'text-align': f.align,
+            color: _cr(f.color)
           }))
         }
 

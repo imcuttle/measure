@@ -112,7 +112,7 @@ export default class App extends React.Component {
         colors = [getSty('color')]
         aligns = [getSty('text-align')]
         sizes = [parseFloat(getSty('font-size'))]
-        textDecorations = [getSty('text-decoration')]
+        textDecorations = [getSty('text-decoration-line') !== 'none' ? getSty('text-decoration') : null].filter(Boolean)
         weights = [getSty('font-weight')]
         if (getSty('border-style') !== 'none') {
           strokeDashOffset = getSty('border-style') === 'solid' ? 0 : 1

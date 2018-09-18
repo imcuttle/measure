@@ -15,6 +15,10 @@ measure-export start path/to/psdDir
 measure-export build
 ```
 
+## Processor about the monorepo
+
+![](./psd-measure.zh.svg)
+
 ## TODO
 
 - [ ] - integration tests

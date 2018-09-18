@@ -29,6 +29,16 @@ window.app = Measure.render(
                 rlv(require('!raw-loader!./doc-test.html'))
               })
             })
+        },
+        {
+          key: 'svg',
+          title: 'From Svg',
+          html: () =>
+            new Promise(rlv => {
+              require.ensure([], () => {
+                rlv(require('!raw-loader!../../../psd-measure.zh.svg'))
+              })
+            })
         }
       ]
     }
