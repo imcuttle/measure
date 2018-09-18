@@ -3,7 +3,7 @@ const cli = require('gentle-cli')
 const nps = require('path')
 const fs = require('fs')
 const globby = require('globby')
-const tempDir = require('temp-dir')
+const tempy = require('tempy')
 const rimraf = require('rimraf')
 const skipIf = require('skip-if')
 const isCI = require('is-ci')
@@ -16,7 +16,7 @@ const c = cli({ cwd: fixturePath, redirect: true })
 describe('measure-export-cli', () => {
   // skipIf(isCI,
   it('build', function(done) {
-    const tmp = tempDir
+    const tmp = tempy.directory()
     // const tmp = nps.join(os.tmpdir(), String(Date.now()))
     jest.setTimeout(60000)
     console.log('cmd', cmd)
