@@ -12,10 +12,14 @@ import kebabcase from 'lodash.kebabcase'
 import slug from 'slugify'
 
 export class Stroke extends Root {
-  @observable color
-  @observable dashOffset
-  @observable lineWidth
-  @observable lineAlign
+  @observable
+  color
+  @observable
+  dashOffset
+  @observable
+  lineWidth
+  @observable
+  lineAlign
 }
 
 export class Font extends Root {
@@ -142,7 +146,7 @@ export default class InformationBar extends Root {
       label: 'CSS',
       lang: 'css',
       value: 'css',
-      process: ({ title, opacity, size, shadow, fonts, radius, color, clr, sz }) => {
+      process: ({ title, opacity, size, shadow, stroke, fonts, radius, color, clr, sz }) => {
         let id = 1
         let _cr = c => clr(toJS(c), 'auto')
         let _sz = c => sz(c, { isShowUnit: true })
@@ -186,6 +190,9 @@ export default class InformationBar extends Root {
         const obj = {
           width: size && size.width && _sz(size.width),
           height: size && size.height && _sz(size.height),
+          border:
+            !isEmpty(stroke) &&
+            `${_sz(stroke.lineWidth)} ${stroke.dashOffset == 0 ? 'solid' : 'dashed'} ${_cr(stroke.color)}`,
           'border-radius': radiusCss(radius),
           'box-shadow':
             shadow &&
