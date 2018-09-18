@@ -28,13 +28,6 @@ export default class Header extends Root {
   @storageSync
   @observable language = getCurrentLanguage()
 
-  @autorun
-  autoLanguage() {
-    if (this.language && typeof location !== 'undefined') {
-      setLanguage(this.language)
-    }
-  }
-
   @observable
   unitOptions = [
     {

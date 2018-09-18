@@ -18,6 +18,15 @@ require('./_style/index.less')
 
 class Measure extends App {
 
+  @autorun
+  autoLanguage() {
+    // console.log('autoLanguage', this.header.language)
+    if (this.header.language) {
+      App.i18n.setLanguage(this.header.language)
+      ReactDOM.render(h(this), this._node)
+    }
+  }
+
   static render({ basename, ...data } = {}, node, callback) {
     const hashHistory = createHashHistory({
       basename,
@@ -29,6 +38,7 @@ class Measure extends App {
       app = Measure.create(data)
     }
 
+    app._node = node
     function push(k) {
       hashHistory.push(k.replace(/^\/*/, '/'))
     }

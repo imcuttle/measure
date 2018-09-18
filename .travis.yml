@@ -24,6 +24,7 @@ install:
 jobs:
   include:
     - stage: Document deploy
+      env: ACTION=doc
       allow_failure: true
       script: lerna run dist:demo --scope=meas-ui # -- -- --output-public-path=measure
       deploy:
