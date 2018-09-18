@@ -14,7 +14,7 @@ cache:
     - node_modules
 
 before_install:
-  - npm install -g npm@latest
+  - "npm install -g npm@latest"
 
 install:
   - npm ci
