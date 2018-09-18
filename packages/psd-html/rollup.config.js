@@ -44,10 +44,9 @@ function config({ format, min = false, env = 'node', suffix = '' } = {}) {
 
     plugins: [
       json(),
-      replace({
+      replace(Object.assign({
         'process.env.STREAM_PKG_NAME': '"stream"',
-        ...replacer
-      }),
+      }, replacer)),
       commonjs({
         exclude: ['node_modules/core-js/**'],
         ignore: env === 'node' ? [] : ['fs', 'path', 'stream'],
