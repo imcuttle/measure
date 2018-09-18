@@ -11,6 +11,8 @@ import { i18n, setLanguage, getCurrentLanguage } from '../i18n'
 
 @bindView(View)
 export default class Header extends Root {
+  import(files) {}
+
   @observable
   langOptions = [
     {

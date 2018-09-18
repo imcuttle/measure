@@ -7,7 +7,7 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import p from 'prefix-classname'
-import { h } from 'react-mobx-vm'
+import { h, action } from 'react-mobx-vm'
 
 import './style.less'
 import { i18n } from '../i18n'
@@ -190,33 +190,23 @@ export default class App extends React.Component {
   }
 
   state = {
-    isWaitingForUpload: false,
-    isImporting: false
+    isWaitingForUpload: false
   }
 
-  handleDrop = evt => {
+  handleDrop = action(evt => {
     const files = evt.dataTransfer.files
     this.preventAndStop(evt)
 
     this.setState({
-      isImporting: true,
       isWaitingForUpload: false
     })
-    this.local
-      .import(files)
-      .then(() => {
-        this.setState({
-          isImporting: false
-        })
+    this.local.import(files).catch(err => {
+      console.error(err)
+      this.setState({
+        error: err.message
       })
-      .catch(err => {
-        console.error(err)
-        this.setState({
-          error: err.message,
-          isImporting: false
-        })
-      })
-  }
+    })
+  })
 
   preventAndStop = evt => {
     evt.stopPropagation()
@@ -239,8 +229,8 @@ export default class App extends React.Component {
 
   render() {
     const { className } = this.props
-    const { html, naviVisible, headerVisible } = this.local
-    const { isWaitingForUpload, isImporting } = this.state
+    const { html, naviVisible, headerVisible, isImporting } = this.local
+    const { isWaitingForUpload } = this.state
 
     const isSupportPsd = getPsdToHtml()
 
@@ -253,7 +243,15 @@ export default class App extends React.Component {
         onDrag={this.preventAndStop}
         onDragExit={this.preventAndStop}
         onDrop={this.handleDrop}
-        className={cn(c('container', (isWaitingForUpload || isImporting) && 'mask', !headerVisible && 'head-hide', !naviVisible && 'navi-hide'), className)}
+        className={cn(
+          c(
+            'container',
+            (isWaitingForUpload || isImporting) && 'mask',
+            !headerVisible && 'head-hide',
+            !naviVisible && 'navi-hide'
+          ),
+          className
+        )}
       >
         {isWaitingForUpload && (
           <div className={c('mask-wrapper')}>
@@ -272,12 +270,12 @@ export default class App extends React.Component {
         )}
         <div className={c('header')}>
           {h(this.local.header)}
-          <span className={c('header-op')} onClick={() => this.local.setValue('headerVisible', !headerVisible)}/>
+          <span className={c('header-op')} onClick={() => this.local.setValue('headerVisible', !headerVisible)} />
         </div>
         <div className={c('stage')}>
           <div className={c('navi')}>
-            {h(this.local.navi)}
-            <span className={c('op')} onClick={() => this.local.setValue('naviVisible', !naviVisible)}/>
+            {h(this.local.navi, { ref: r => this.local.naviRef = r })}
+            <span className={c('op')} onClick={() => this.local.setValue('naviVisible', !naviVisible)} />
           </div>
           <div className={c('playground')}>
             <HtmlMeasure

@@ -10,7 +10,11 @@ import p from 'prefix-classname'
 
 import Select, { createFilter } from '../components/Select'
 import Input from '../components/Input'
+import Button from '../components/Button'
 import Checkbox from '../components/Checkbox'
+
+import getPsdToHtml from '../getPsdToHtml'
+import { upload } from '../utils'
 
 import { i18n } from '../i18n'
 
@@ -152,6 +156,26 @@ export default class Header extends React.Component {
           </div>
         </div>
         <div className={c('right')}>
+          <Button
+            title={
+              !!getPsdToHtml()
+                ? i18n('header.btn.import.placeholder.psd')
+                : i18n('header.btn.import.placeholder.no-psd')
+            }
+            onClick={() => {
+              upload({
+                onChange: evt => {
+                  this.local.import(evt.target.files)
+                },
+                multiple: true,
+                accept: '.psd,.PSD,.htm,.HTM,.html,.HTML,.svg,.SVG'
+              })
+            }}
+            className={c('item')}
+          >
+            <input type="file" style={{ display: 'none' }} />
+            {i18n('header.btn.import')}
+          </Button>
           <Select
             name="language"
             className={c('language', 'item')}
@@ -163,7 +187,12 @@ export default class Header extends React.Component {
             options={langOptions}
           />
 
-          <a href={'https://github.com/imcuttle/measure'} title={"Github"} target={'_blank'} className={c('gh', 'item')} />
+          <a
+            href={'https://github.com/imcuttle/measure'}
+            title={'Github'}
+            target={'_blank'}
+            className={c('gh', 'item')}
+          />
         </div>
       </div>
     )

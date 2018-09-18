@@ -6,8 +6,8 @@
  */
 
 module.exports = {
-  'app.upload.tip.psd': '有一种导入叫做 “手放开” (支持 psd/html)',
-  'app.upload.tip.no-psd': '有一种导入叫做 “手放开” (支持 html)',
+  'app.upload.tip.psd': '有一种导入叫做 “手放开” (支持 psd、html、svg)',
+  'app.upload.tip.no-psd': '有一种导入叫做 “手放开” (支持 html、svg)',
   'app.importing': '导入中...',
 
   'color.label.auto': '自动(RGBA || Hex)',
@@ -19,12 +19,14 @@ module.exports = {
   'color.placeholder': '输入颜色类型',
   'unit.placeholder': '输入单位',
   'number-fixed.placeholder': '小数规则',
-
   'unit.label': '单位',
   'number-fixed.label.integer': '取整',
   'number-fixed.label.one-pos-decimals': '一位小数',
   'number-fixed.label.two-pos-decimals': '两位小数',
   'number-fixed.label.three-pos-decimals': '三位小数',
+  'header.btn.import': '导入',
+  'header.btn.import.placeholder.no-psd': '导入支持 html、svg',
+  'header.btn.import.placeholder.psd': '导入支持 psd、html、svg',
 
   'infor-bar.width.label': '宽',
   'infor-bar.height.label': '高',

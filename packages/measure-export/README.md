@@ -13,4 +13,4 @@ const measureExport = require('measure-export');
 
 ## TODO
 
-- [ ] IPC
+- [ ] IPC (multi-worker)

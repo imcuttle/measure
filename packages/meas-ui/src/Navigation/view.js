@@ -40,10 +40,14 @@ export default class Navigation extends React.Component {
                     cursor: onClick ? 'pointer' : null
                   }}
                   onClick={onClick}
-                  className={c('item')}
+                  className={c('item', p.isActive && 'active')}
                 >
                   {p.cover && <img src={p.cover} />}
-                  {p.title && <span className={c('item-title')}>{p.title}</span>}
+                  {p.title && (
+                    <span className={c('item-title')} title={p.title}>
+                      {p.title}
+                    </span>
+                  )}
                 </div>
               </li>
             )

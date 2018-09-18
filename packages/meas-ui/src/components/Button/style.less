@@ -1,0 +1,34 @@
+@import (reference) '../../_style/_mixin';
+@import (reference) '../../_style/_variables';
+
+@import '~rc-checkbox/assets/index.css';
+
+@prefix: hm-button__;
+
+.@{prefix} {
+  &container {
+    &,
+    &:focus {
+      outline: none;
+    }
+
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    &:active {
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  &size-normal {
+    font-size: 14px;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 30px;
+    min-width: 80px;
+  }
+
+  &type-primary {
+    background-color: #fff;
+    color: #000;
+  }
+}

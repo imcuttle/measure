@@ -6,8 +6,8 @@
  */
 
 module.exports = {
-  'app.upload.tip.psd': 'Let it go! (support psd/html)',
-  'app.upload.tip.no-psd': 'Let it go! (support html)',
+  'app.upload.tip.psd': 'Let it go! (support psd/html/svg)',
+  'app.upload.tip.no-psd': 'Let it go! (support html/svg)',
   'app.importing': 'Importing...',
 
   'color.label.auto': 'Auto(RGBA || Hex)',
@@ -25,6 +25,9 @@ module.exports = {
   'number-fixed.label.one-pos-decimals': 'Reserve one decimal',
   'number-fixed.label.two-pos-decimals': 'Reserve tow decimal',
   'number-fixed.label.three-pos-decimals': 'Reserve three decimal',
+  'header.btn.import': 'Import',
+  'header.btn.import.placeholder.no-psd': 'Allow html and svg files',
+  'header.btn.import.placeholder.psd': 'Allow psd, html and svg files',
 
   'infor-bar.width.label': 'Width',
   'infor-bar.height.label': 'Height',

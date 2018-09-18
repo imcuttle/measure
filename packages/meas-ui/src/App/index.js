@@ -72,42 +72,10 @@ export default class App extends Root {
     })
   }
 
-  constructor(props) {
-    super(props)
-    symbolicLink(this, {
-      language: Symbolic(this.header, 'language'),
-      unit: Symbolic(this.header, 'unit'),
-      remStandardPx: Symbolic(this.header, 'remStandardPx'),
-      zoom: Symbolic(this.header, 'zoom'),
-      numberFixed: Symbolic(this.header, 'numberFixed'),
-      isShowUnit: Symbolic(this.header, 'isShowUnit'),
-      color: Symbolic(this.header, 'color')
-    })
-  }
-
   @observable
-  html = ''
-  @observable
-  isLoading = false
-  @observable
-  error = ''
+  isImporting = false
 
-  @storageSync
-  @observable
-  naviVisible = true
-
-  @storageSync
-  @observable
-  headerVisible = true
-
-  navi = Navigation.create()
-  header = Header.create({})
-  inforBar = InforBar.create({
-    clr: this.clr,
-    sz: this.sz
-  })
-
-  import(files) {
+  import = files => {
     let tasks = []
     for (let i = 0; i < files.length; i++) {
       const file = files[i]
@@ -157,6 +125,57 @@ export default class App extends Root {
       }
     }
 
+    if (!tasks.length) {
+      return Promise.resolve()
+    }
+
+    this.setValue('isImporting', true)
     return Promise.all(tasks.map(execable => execable()))
+      .then((list) => {
+        this.setValue('isImporting', false)
+        $(ReactDOM.findDOMNode(this.naviRef)).scrollTop(9999999999)
+      })
+      .catch(err => {
+        this.setValue('isImporting', false)
+        $(ReactDOM.findDOMNode(this.naviRef)).scrollTop(9999999999)
+        throw err
+      })
   }
+
+  constructor(props) {
+    super(props)
+    symbolicLink(this, {
+      language: Symbolic(this.header, 'language'),
+      unit: Symbolic(this.header, 'unit'),
+      remStandardPx: Symbolic(this.header, 'remStandardPx'),
+      zoom: Symbolic(this.header, 'zoom'),
+      numberFixed: Symbolic(this.header, 'numberFixed'),
+      isShowUnit: Symbolic(this.header, 'isShowUnit'),
+      color: Symbolic(this.header, 'color')
+    })
+  }
+
+  @observable
+  html = ''
+  @observable
+  isLoading = false
+  @observable
+  error = ''
+
+  @storageSync
+  @observable
+  naviVisible = true
+
+  @storageSync
+  @observable
+  headerVisible = true
+
+  navi = Navigation.create()
+  header = Header.create({
+    import: this.import
+  })
+  inforBar = InforBar.create({
+    clr: this.clr,
+    sz: this.sz
+  })
 }

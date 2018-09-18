@@ -16,10 +16,12 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    li + li {
+      margin-top: 10px;
+    }
   }
   &item {
     display: block;
-
     color: inherit;
     .ellipsis();
     padding: 10px 0;
@@ -33,11 +35,27 @@
       margin: auto;
       margin-bottom: 8px;
     }
+
+    opacity: .67;
+    transition: all 0.15s ease;
+
+    border-radius: 5px;
+    &:not(.@{prefix}active):hover {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  &active {
+    opacity: 1;
+    background-color: #000;
   }
   &item-title {
     display: inline-block;
     padding-top: 6px;
     .ellipsis();
     font-size: 15px;
+
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
