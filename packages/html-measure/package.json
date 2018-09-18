@@ -10,7 +10,9 @@
   "main": "lib/index.js",
   "files": [
     "src/",
-    "lib/"
+    "lib/",
+    "style.less",
+    "style.css"
   ],
   "dependencies": {
     "@rcp/util.createmount": "^1.0.9",

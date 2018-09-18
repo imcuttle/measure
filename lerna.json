@@ -5,15 +5,17 @@
   "version": "0.3.3",
   "command": {
     "publish": {
-      "ignoreChanges": [
-        "**/__fixtures__/**",
-        "**/__tests__/**",
-        "**/*.md"
-      ]
+      "conventionalCommits": true,
+      "message": "chore(release): publish %s",
     },
     "bootstrap": {
       "hoist": false,
       "npmClientArgs": []
     }
-  }
+  },
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/*.md"
+  ]
 }
