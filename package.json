@@ -7,9 +7,9 @@
 	"author": "imcuttle",
 	"scripts": {
 		"dev": "lerna run dev --parallel",
-    "test": "jest",
-    "release": "lerna publish --conventional-commits -m 'chore(release): publish'",
-    "prerelease": "npm test"
+		"test": "jest",
+		"release": "lerna publish --conventional-commits -m 'chore(release): publish'",
+		"prerelease": "npm test"
 	},
 	"edam": {
 		"source": "./src/components/__Template__",
