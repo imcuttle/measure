@@ -15,6 +15,8 @@ describe('measure-export-cli', () => {
   it('build', function(done) {
     const tmp = nps.join(os.tmpdir(), String(Date.now()))
     jest.setTimeout(600000)
+    console.log('cmd', cmd)
+    console.log('tmp', tmp)
     c.use(`node ${cmd} build -d ${tmp}`).end(function(err, stdout, stderr) {
       expect(
         globby.sync(['**/*'], {
