@@ -1,8 +1,6 @@
 sudo: false
 language: node_js
 node_js:
-  - 6
-  - 7
   - 8
   - stable
 
@@ -12,7 +10,7 @@ cache:
     - node_modules
 
 install:
-  - npm install
+  - npm ci
   - lerna bootstrap
 
 jobs:
