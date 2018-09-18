@@ -1,6 +1,6 @@
 {
   "name": "measure-export",
-  "version": "0.2.15",
+  "version": "0.2.16",
   "description": "Make measure UI exported for teamwork",
   "keywords": [
     "measure",
@@ -51,7 +51,7 @@
     "html-webpack-plugin": "^3.2.0",
     "inherits": "^2.0.3",
     "md5": "^2.2.1",
-    "meas-ui": "^0.2.15",
+    "meas-ui": "^0.2.16",
     "micromatch": "^3.1.10",
     "mini-css-extract-plugin": "^0.4.2",
     "mkdirp": "^0.5.1",
