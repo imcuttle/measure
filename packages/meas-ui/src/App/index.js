@@ -70,10 +70,23 @@ export default class App extends Root {
   scrollIntoView() {
     setTimeout(() => {
       // Scroll to center
-      const node = ReactDOM.findDOMNode(this.hmRef)
-      node && node.scrollIntoView()
       if (this.playgroundRef) {
+        // vertical
         this.playgroundRef.scrollLeft = (this.canvasRef.scrollWidth - this.playgroundRef.clientWidth) >> 1
+
+        // horizontal
+        if (
+          this.hmRef &&
+          this.hmRef.layerRef &&
+          this.hmRef.layerRef.clientHeight &&
+          this.playgroundRef.clientHeight > this.hmRef.layerRef.clientHeight
+        ) {
+          this.playgroundRef.scrollTop = (this.canvasRef.scrollHeight - this.playgroundRef.clientHeight) >> 1
+        } else {
+          // Real layer is overflow
+          const node = ReactDOM.findDOMNode(this.hmRef)
+          node && node.scrollIntoView()
+        }
       }
     })
   }
@@ -137,7 +150,7 @@ export default class App extends Root {
 
     this.setValue('isImporting', true)
     return Promise.all(tasks.map(execable => execable()))
-      .then((list) => {
+      .then(list => {
         this.setValue('isImporting', false)
         $(ReactDOM.findDOMNode(this.naviRef)).scrollTop(9999999999)
       })
