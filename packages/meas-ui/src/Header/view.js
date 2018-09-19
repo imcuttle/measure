@@ -28,6 +28,30 @@ export default class Header extends React.Component {
     className: PropTypes.string
   }
   static defaultProps = {}
+
+  handleKeyDown = evt => {
+    if (evt.metaKey || evt.ctrlKey) {
+      switch (evt.keyCode) {
+        // +
+        case 187:
+          this.local.updateZoom(+0.1)
+          evt.preventDefault()
+          break
+        // -
+        case 189:
+          this.local.updateZoom(-0.1)
+          evt.preventDefault()
+          break
+      }
+    }
+  }
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyDown)
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown)
+  }
+
   render() {
     const { className, ...props } = this.props
     const {
@@ -137,6 +161,7 @@ export default class Header extends React.Component {
 
           <div className={c('zoom', 'item')}>
             <span
+              title={'Ctrl - / Cmd -'}
               className={c('zoom-out', 'zoom-btn', {
                 'zoom-disabled': zoom <= 0.25
               })}
@@ -152,7 +177,7 @@ export default class Header extends React.Component {
               />
               <span className={c('zoom-suffix')}>%</span>
             </span>
-            <span className={c('zoom-in', 'zoom-btn')} onClick={() => this.local.updateZoom(0.25)} />
+            <span title={'Ctrl + / Cmd +'} className={c('zoom-in', 'zoom-btn')} onClick={() => this.local.updateZoom(0.25)} />
           </div>
         </div>
         <div className={c('right')}>
