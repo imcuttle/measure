@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-const chromeExtensionPsdMeasure = require('..');
+const chromeExtensionPsdMeasure = require('..')
 
 describe('chrome-extension-psd-measure', () => {
-    it('needs tests');
-});
+  it.skip('needs tests')
+})
