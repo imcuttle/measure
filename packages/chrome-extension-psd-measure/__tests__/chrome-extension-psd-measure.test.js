@@ -3,5 +3,7 @@
 const chromeExtensionPsdMeasure = require('..')
 
 describe('chrome-extension-psd-measure', () => {
-  it.skip('needs tests')
+  it.skip('needs tests', function () {
+    
+  })
 })
