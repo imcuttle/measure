@@ -1,6 +1,6 @@
 {
   "name": "measure-export",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Make measure UI exported for teamwork",
   "keywords": [
     "measure",
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@moyuyc/psd": "^3.2.2",
-    "@moyuyc/psd-html": "^0.4.0",
+    "@moyuyc/psd-html": "^0.4.1",
     "@rcp/util.createlogger": "^1.1.0",
     "babel-loader": "^7.1.5",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
@@ -51,7 +51,7 @@
     "html-webpack-plugin": "^3.2.0",
     "inherits": "^2.0.3",
     "md5": "^2.2.1",
-    "meas-ui": "^0.4.0",
+    "meas-ui": "^0.4.1",
     "micromatch": "^3.1.10",
     "mini-css-extract-plugin": "^0.4.2",
     "mkdirp": "^0.5.1",
