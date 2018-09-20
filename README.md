@@ -1,9 +1,7 @@
 <p align="center">
   <img src="./packages/chrome-extension-psd-measure/img/rule.svg" />
 </p>
-<p align="center">
-  <h3>measure</h3>
-</p>
+<h3 align="center">measure</h3>
 <p align="center">
   <a href="https://travis-ci.org/imcuttle/measure"><img src="https://img.shields.io/travis/imcuttle/measure/master.svg?style=flat-square" /></a>
   <a href="https://codecov.io/github/imcuttle/measure?branch=master"><img src="https://img.shields.io/codecov/c/github/imcuttle/measure.svg?style=flat-square" /></a>
