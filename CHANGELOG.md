@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/imcuttle/html-measure/compare/v0.3.4...v0.4.0) (2018-09-20)
+
+
+### Features
+
+* zoom in and zoom out support shortcut ([5df4653](https://github.com/imcuttle/html-measure/commit/5df4653))
+
+
+### Performance Improvements
+
+* scroll to horizontal center ([cdb7ff4](https://github.com/imcuttle/html-measure/commit/cdb7ff4))
+
+
+
+
+
 <a name="0.3.4"></a>
 ## [0.3.4](https://github.com/imcuttle/html-measure/compare/v0.3.3...v0.3.4) (2018-09-18)
 

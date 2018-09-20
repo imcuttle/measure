@@ -1,11 +1,11 @@
 {
   "name": "meas-ui",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "dependencies": {
     "@rcp/util.createmount": "^1.0.9",
     "color": "^3.0.0",
     "history": "^4.7.2",
-    "html-measure": "^0.3.4",
+    "html-measure": "^0.4.0",
     "lodash.kebabcase": "^4.1.1",
     "lodash.some": "^4.6.0",
     "prefix-classname": "^1.0.1",
@@ -22,7 +22,7 @@
   "cdn": "dist/meas-ui.umd.js",
   "unpkg": "dist/meas-ui.umd.js",
   "optionalDependencies": {
-    "@moyuyc/psd-html": "^0.3.3"
+    "@moyuyc/psd-html": "^0.4.0"
   },
   "peerDependencies": {
     "mobx": "^3.6.2",
