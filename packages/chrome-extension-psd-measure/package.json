@@ -2,6 +2,7 @@
   "name": "chrome-extension-psd-measure",
   "version": "0.4.0",
   "description": "PSD measure viewer",
+  "private": true,
   "keywords": [
     "chrome-ext"
   ],
@@ -25,5 +26,6 @@
   },
   "bugs": {
     "url": "https://github.com/imcuttle/measure/issues"
-  }
+  },
+  "gitHead": "32b13af2ab50d7b2aab17a25ae742a8edbbd1a4d"
 }

@@ -81,5 +81,5 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-react": "^6.24.1"
   },
-  "gitHead": "819c938626cb3bdcec3d4e124bbfb47f37c5685d"
+  "gitHead": "32b13af2ab50d7b2aab17a25ae742a8edbbd1a4d"
 }
