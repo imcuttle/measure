@@ -1,4 +1,4 @@
-<div style="text-align: center;">
+<p align="center">
 <div><img src="./packages/chrome-extension-psd-measure/img/rule.svg" /></div>
 <h3>measure</h3>
 
@@ -8,7 +8,7 @@
 <a href="https://prettier.io/"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" /></a>
 <a href="https://conventionalcommits.org"><img src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square" /></a>
 </div>
-</div>
+</p>
 
 
 ## Getting started
