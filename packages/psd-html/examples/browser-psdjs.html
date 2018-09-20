@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="https://unpkg.com/@moyuyc/psd"></script>
+</head>
+<body>
+<script>
+  PSD.fromURL('../__tests__/fixtures/example.psd')
+  .then(psd => {
+    window.psd = psd
+    console.log('psd', psd)
+
+    psd.parse()
+    window.tree = psd.tree()
+    console.log('tree', window.tree)
+
+    window.psdExport = window.tree.export()
+    console.log('psdExport', window.psdExport)
+  })
+</script>
+</body>
+</html>

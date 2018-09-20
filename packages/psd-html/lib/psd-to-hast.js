@@ -198,7 +198,7 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, inj
 
         tasks.push(function() {
           if (exported.name === '矩形 28 副本 13 拷贝 2') {
-            node;
+            node
           }
           const p = injectImage
             ? imageSplit
@@ -280,11 +280,16 @@ function psdToHASTFromPath(psdPath, opts) {
   return psdToHASTFromBuffer(require('fs').readFileSync(require('path').resolve(psdPath)), opts)
 }
 
+function psdToHASTFromURL(url, opts) {
+  return PSD.fromURL(url).then(psd => psdToHAST(psd, opts))
+}
+
 module.exports =
   process.env.RUN_ENV === 'browser'
     ? {
         psdToHAST,
-        psdToHASTFromBuffer
+        psdToHASTFromBuffer,
+        psdToHASTFromURL
       }
     : {
         psdToHAST,

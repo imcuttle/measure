@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-  <script src="https://unpkg.com/@moyuyc/psd/dist/psd.browser.js"></script>
+  <!--<script src="https://unpkg.com/@moyuyc/psd-html"></script>-->
+  <script src="../dist/psd-html.browser.umd.min.js"></script>
 </head>
 <body>
 <script>
-  PSD.fromURL('../__tests__/fixtures/home.psd')
-  .then(psd => {
-    window.psd = psd
-    console.log('psd', psd)
+  PsdToHtml.psdToHASTFromURL('../__tests__/fixtures/example.psd').then(console.log)
 
-    psd.parse()
-    window.tree = psd.tree()
-    console.log('tree', window.tree)
-
-    window.psdExport = window.tree.export()
-    console.log('psdExport', window.psdExport)
+  PsdToHtml.psdToHtmlFromURL('../__tests__/fixtures/example.psd')
+  .then(html => {
+    document.write(html)
   })
 </script>
 </body>

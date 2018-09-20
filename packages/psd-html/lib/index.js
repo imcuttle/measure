@@ -6,22 +6,22 @@
  */
 const toHtml = require('hast-util-to-html')
 const PSD = require('@moyuyc/psd')
-const { psdToHAST, psdToHASTFromBuffer, psdToHASTFromPath } = require('./psd-to-hast')
+const { psdToHAST, psdToHASTFromBuffer, psdToHASTFromPath, psdToHASTFromURL } = require('./psd-to-hast')
 
 function psdToHtmlFromBuffer(buffer, { toHtmlOpts, ...opts } = {}) {
-  return psdToHASTFromBuffer(buffer, opts).then(html => toHtml(html, toHtmlOpts))
+  return psdToHASTFromBuffer(buffer, opts).then(hast => toHtml(hast, toHtmlOpts))
 }
 
 function psdToHtml(psd, { toHtmlOpts, ...opts } = {}) {
-  return psdToHAST(psd, opts).then(html => toHtml(html, toHtmlOpts))
+  return psdToHAST(psd, opts).then(hast => toHtml(hast, toHtmlOpts))
 }
 
 function psdToHtmlFromPath(path, { toHtmlOpts, ...opts } = {}) {
-  return psdToHASTFromPath(path, opts).then(html => toHtml(html, toHtmlOpts))
+  return psdToHASTFromPath(path, opts).then(hast => toHtml(hast, toHtmlOpts))
 }
 
-function psdToHtmlFromURL(url, opts) {
-  return PSD.fromURL(url).then(psd => psdToHtml(psd, opts))
+function psdToHtmlFromURL(url, { toHtmlOpts, ...opts } = {}) {
+  return psdToHASTFromURL(url, opts).then(hast => toHtml(hast, toHtmlOpts))
 }
 
 module.exports =
@@ -30,6 +30,7 @@ module.exports =
         psdToHtml,
         psdToHtmlFromBuffer,
         psdToHtmlFromURL,
+        psdToHASTFromURL,
         psdToHAST,
         psdToHASTFromBuffer
       }
