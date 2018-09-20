@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "measure-viewer",
+  "version": "0.3.4",
+  "description": "Measure Viewer for PSD or HTML, SVG",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_title": "browser_action",
+    "default_popup": "page/browser-popup.html"
+  }
+}

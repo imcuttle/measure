@@ -26,14 +26,14 @@ export function isNodeContains(node) {
 function padding(node, parent) {
   const rect1 = node.getBoundingClientRect()
   const rect2 = parent.getBoundingClientRect()
-  const overlap = !(
+  const overlap = (
     rect1.right < rect2.left ||
     rect1.left > rect2.right ||
     rect1.bottom < rect2.top ||
     rect1.top > rect2.bottom
   )
 
-  if (overlap) {
+  if (!overlap) {
     return {
       paddingTop: rect2.top - rect1.top,
       paddingBottom: rect1.bottom - rect2.bottom,

@@ -59,4 +59,11 @@ describe('psd-utils', function() {
       color: 'rgba(100, 0, 0, 0.25)'
     })
   })
+
+  it('should innerShadowMulti', function () {
+    console.log(psdUtils.dropShadowToStyle({
+      dist: 3, color: 'rgb(0,0,0)', spread: 0,
+      size: 7, angle: 90, opct: 35
+    }))
+  })
 })

@@ -1,12 +1,14 @@
 {
-  "name": "photoshop-plugin-measure-export",
-  "version": "0.3.3",
-  "private": true,
-  "description": "Measure export plugin for photoshop",
+  "name": "chrome-extension-psd-measure",
+  "version": "0.3.4",
+  "description": "PSD measure viewer",
+  "keywords": [
+    "chrome-ext"
+  ],
   "author": "imcuttle <moyuyc95@gmail.com>",
   "homepage": "https://github.com/imcuttle/measure#readme",
   "license": "MIT",
-  "main": "lib/photoshop-plugin-measure-export.js",
+  "main": "lib/chrome-extension-psd-measure.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"

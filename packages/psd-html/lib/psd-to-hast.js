@@ -197,6 +197,9 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, inj
         }
 
         tasks.push(function() {
+          if (exported.name === '矩形 28 副本 13 拷贝 2') {
+            node;
+          }
           const p = injectImage
             ? imageSplit
               ? toBase64P(node.layer).then(b64encoded => `url(${b64encoded})`)

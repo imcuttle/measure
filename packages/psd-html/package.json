@@ -12,8 +12,8 @@
   "author": "imcuttle <moyuyc95@gmail.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "dist/psd-html.cjs.js",
   "module": "dist/psd-html.es.js",
+  "main": "dist/psd-html.cjs.js",
   "browser": "dist/psd-html.browser.cjs.js",
   "cdn": "dist/psd-html.browser.umd.min.js",
   "unpkg": "dist/psd-html.browser.umd.min.js",
@@ -22,7 +22,8 @@
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "lib",
+    "dist"
   ],
   "scripts": {
     "dist": "rimraf dist && rollup -c",
