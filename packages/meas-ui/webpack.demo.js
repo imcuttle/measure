@@ -15,7 +15,7 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin({
       filename: 'style.min.css',
-      allChunks: false
+      allChunks: true
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
