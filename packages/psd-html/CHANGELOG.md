@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.2"></a>
+## [0.4.2](https://github.com/imcuttle/measure/compare/v0.4.1...v0.4.2) (2018-09-20)
+
+
+### Performance Improvements
+
+* expose psdToHASTFromURL ([28c48aa](https://github.com/imcuttle/measure/commit/28c48aa))
+
+
+
+
+
 <a name="0.4.1"></a>
 ## [0.4.1](https://github.com/imcuttle/measure/compare/v0.4.0...v0.4.1) (2018-09-20)
 
