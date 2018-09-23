@@ -1,19 +1,19 @@
 {
   "manifest_version": 2,
-  "name": "Measure viewer",
+  "name": "Measure Viewer",
   "version": "0.3.4",
   "description": "Measure Viewer for PSD or HTML, SVG",
   "background": {
     "scripts": ["vendor/psd-html.browser.umd.min.js", "dist/background.js"]
   },
   "icons": {
-    "16": "img/rule.png",
-    "48": "img/rule.png",
-    "128": "img/rule.png"
+    "16": "img/rule.jpg",
+    "48": "img/rule.jpg",
+    "128": "img/rule.jpg"
   },
   "browser_action": {
-    "default_icon": "img/rule.png",
-    "default_title": "browser_action",
+    "default_icon": "img/rule.jpg",
+    "default_title": "Measure Viewer",
     "default_popup": "page/options.html"
   },
   "options_ui": {

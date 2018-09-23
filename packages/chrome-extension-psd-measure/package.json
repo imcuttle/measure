@@ -1,5 +1,5 @@
 {
-  "name": "chrome-extension-psd-measure",
+  "name": "chrome-extension-measure-viewer",
   "version": "0.4.1",
   "description": "PSD measure viewer",
   "private": true,
@@ -22,12 +22,13 @@
     "url": "git+https://github.com/imcuttle/measure.git"
   },
   "scripts": {
-    "live": "livereload . -w 1000",
-    "dist": "NODE_ENV=production webpack",
+    "live": "livereload ./src -w 1000",
+    "dist": "rimraf src/dist && NODE_ENV=production webpack",
     "watch": "NODE_ENV=development webpack",
+    "postversion": "node post-version.js",
     "prepare": "run-p dist sync",
     "dev": "run-p live watch",
-    "sync": "cp node_modules/meas-ui/dist/style.css vendor/ && cp node_modules/meas-ui/dist/meas-ui.umd.js vendor/ && cp node_modules/@moyuyc/psd-html/dist/psd-html.browser.umd.min.js vendor/"
+    "sync": "cp node_modules/meas-ui/dist/style.css src/vendor/ && cp node_modules/meas-ui/dist/meas-ui.umd.js src/vendor/ && cp node_modules/@moyuyc/psd-html/dist/psd-html.browser.umd.min.js src/vendor/"
   },
   "bugs": {
     "url": "https://github.com/imcuttle/measure/issues"
@@ -58,6 +59,7 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-mobx-vm": "^0.2.0",
+    "rimraf": "^2.6.2",
     "style-loader": "^0.23.0",
     "webpack": "^4.19.1"
   }

@@ -29,7 +29,7 @@ function get({ entry, format, filename } = {}) {
       }
     },
     output: {
-      path: nps.resolve(__dirname, 'dist'),
+      path: __dirname,
       filename
     },
     module: require('./webpack-module'),
@@ -50,8 +50,8 @@ function get({ entry, format, filename } = {}) {
 }
 
 module.exports = [
-  get({ entry: './lib/localize.js', filename: 'localize.js' }),
-  get({ entry: './lib/options.js', filename: 'options.js' }),
-  get({ entry: './lib/background-script/index.js', filename: 'background.js' }),
-  get({ entry: './lib/view.js', filename: 'view.js' }),
+  get({ entry: './src/localize.js', filename: './src/dist/localize.js' }),
+  get({ entry: './src/options.js', filename: './src/dist/options.js' }),
+  get({ entry: './src/background-script/index.js', filename: './src/dist/background.js' }),
+  get({ entry: './src/view.js', filename: './src/dist/view.js' }),
 ]

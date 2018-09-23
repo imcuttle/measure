@@ -61,7 +61,7 @@ if (query.downloadUrl) {
         if (loadTextNode) {
           loadTextNode.innerHTML =
             '<div style="margin-bottom: 6px;">' + chrome.i18n.getMessage('view_fetcing') + '</div>' +
-            (!total ? prettyBytes(received) : (received / total) * 100 + '%')
+            (!total ? prettyBytes(received) : parseInt((received / total) * 100) + '%')
         }
 
         if (received === total) {
@@ -93,7 +93,7 @@ if (query.downloadUrl) {
             navi: {
               pages: [
                 {
-                  key: query.title || query.downloadUrl,
+                  key: query.title || 'main',
                   title: query.title || query.downloadUrl,
                   cover: stripedImage,
                   html

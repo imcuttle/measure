@@ -10,5 +10,5 @@ module.exports = {
   enable: true,
   excludes: [],
   includes: []
-  // includes: ['*://bos.nj.bpc-internal.baidu.com/ibox-docpreview100/**/**.psd']
+  // includes: ['**://bos.nj.bpc-internal.baidu.com/ibox-docpreview100/**/**.psd']
 }
