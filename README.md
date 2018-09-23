@@ -25,20 +25,16 @@ measure-export build --help
 ```
 
 ## Processor about the monorepo
-
 ![](./psd-measure.zh.svg)
 
 ## TODO
-
 - [ ] integration tests should be applied on ui and cli
 
 ## Packages
-
 - [sketch measure](2) - asd
 - [psd.js](2) - asd
 
 ## Related
-
 - [sketch measure](2) - asd
 - [psd.js](2) - asd
 

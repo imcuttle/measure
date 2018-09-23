@@ -1,0 +1,10 @@
+{
+  "option_includes": { "message": "Including URLs<small>(one record one line. e.g. **://baidu.com)</small>" },
+  "option_enable": { "message": "Whether enable the extension" },
+  "option_excludes": { "message": "Excluding URLs" },
+  "option_save": { "message": "Save" },
+  "option_smart_include": { "message": "Enable Smart Including（analyse from mime-type）" },
+  "view_download": { "message": "Download" },
+  "view_fetching": { "message": "Fetching" },
+  "view_converting": { "message": "Converting" }
+}

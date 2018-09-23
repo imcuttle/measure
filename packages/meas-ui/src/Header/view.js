@@ -57,13 +57,14 @@ export default class Header extends React.Component {
     const {
       zoom,
       numberFixedOptions,
+      buttons,
       numberFixed,
       unitOptions,
       isShowUnit,
       unit,
       remStandardPx,
-      logo,
       color,
+      logo,
       colorOptions,
       language,
       langOptions
@@ -72,7 +73,9 @@ export default class Header extends React.Component {
     return (
       <div className={cn(c('container'), className)}>
         <div className={c('left')}>
-          {logo && <div className={c('logo')}>{logo}</div>}
+          {<div className={c('logo')}>
+            <span className={c('logo-img')}/>
+          </div>}
           <Select
             className={c('unit', 'item')}
             isSearchAble={false}
@@ -177,10 +180,21 @@ export default class Header extends React.Component {
               />
               <span className={c('zoom-suffix')}>%</span>
             </span>
-            <span title={'Ctrl + / Cmd +'} className={c('zoom-in', 'zoom-btn')} onClick={() => this.local.updateZoom(0.25)} />
+            <span
+              title={'Ctrl + / Cmd +'}
+              className={c('zoom-in', 'zoom-btn')}
+              onClick={() => this.local.updateZoom(0.25)}
+            />
           </div>
         </div>
         <div className={c('right')}>
+          {buttons &&
+            !!buttons.length &&
+            buttons.map((btn, i) => (
+              <Button key={i} {...btn}>
+                {btn.content}
+              </Button>
+            ))}
           <Button
             title={
               !!getPsdToHtml()

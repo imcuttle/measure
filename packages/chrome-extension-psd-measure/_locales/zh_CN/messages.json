@@ -1,0 +1,10 @@
+{
+  "option_includes": { "message": "包括的下载链接<small> (一条记录一行，如 **://baidu.com)</small>" },
+  "option_enable": { "message": "是否开启本插件" },
+  "option_excludes": { "message": "忽略的下载链接" },
+  "option_save": { "message": "保存" },
+  "option_smart_include": { "message": "是否开启智能包括（分析 mime-type）" },
+  "view_download": { "message": "下载" },
+  "view_fetching": { "message": "拉取中" },
+  "view_converting": { "message": "转换中" }
+}

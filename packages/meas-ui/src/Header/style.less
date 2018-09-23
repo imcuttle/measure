@@ -9,7 +9,8 @@
     justify-content: space-between;
     align-items: center;
 
-    padding: 13px 20px;
+    padding: 20px;
+    width: 100%;
 
     background-color: #eee;
     border-bottom: 1px solid slategrey;
@@ -22,6 +23,14 @@
     font-size: 24px;
     font-weight: bold;
     color: #dd2f3d;
+  }
+  &logo-img {
+    height: 46px;
+    width: 46px;
+    display: inline-block;
+    margin-right: 10px;
+    background: url("./logo.png") no-repeat center center;
+    background-size: contain;
   }
   &unit {
     min-width: 90px;
@@ -48,6 +57,7 @@
 
   &left {
     display: flex;
+    align-items: center;
   }
 
   &right {

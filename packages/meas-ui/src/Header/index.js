@@ -68,6 +68,9 @@ export default class Header extends Root {
   @observable
   zoom = 0.5
 
+  @observable
+  buttons = []
+
   @action
   updateZoom(delta = 0) {
     this.zoom += delta

@@ -232,10 +232,11 @@ export default class App extends React.Component {
 
   render() {
     const { className } = this.props
-    const { html, naviVisible, headerVisible, isImporting } = this.local
+    let { html, naviVisible, headerVisible, isImporting } = this.local
     const { isWaitingForUpload } = this.state
 
     const isSupportPsd = getPsdToHtml()
+    naviVisible = this.local.navi.pages && !!this.local.navi.pages.length && naviVisible
 
     return (
       <div
@@ -276,10 +277,13 @@ export default class App extends React.Component {
           <span className={c('header-op')} onClick={() => this.local.setValue('headerVisible', !headerVisible)} />
         </div>
         <div className={c('stage')}>
-          <div className={c('navi')}>
-            {h(this.local.navi, { ref: r => (this.local.naviRef = r) })}
-            <span className={c('op')} onClick={() => this.local.setValue('naviVisible', !naviVisible)} />
-          </div>
+          {this.local.navi.pages &&
+            !!this.local.navi.pages.length && (
+              <div className={c('navi')}>
+                {h(this.local.navi, { ref: r => (this.local.naviRef = r) })}
+                <span className={c('op')} onClick={() => this.local.setValue('naviVisible', !naviVisible)} />
+              </div>
+            )}
           <div className={c('playground')} ref={r => (this.local.playgroundRef = r)}>
             <div className={c('canvas')} ref={r => (this.local.canvasRef = r)}>
               <HtmlMeasure

@@ -38,6 +38,9 @@ class Measure extends App {
       app = Measure.create(data)
     }
 
+    if (typeof data.language === 'string') {
+      App.i18n.setLanguage(data.language)
+    }
     app._node = node
     function push(k) {
       hashHistory.push(k.replace(/^\/*/, '/'))

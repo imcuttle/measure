@@ -20,11 +20,14 @@
   },
   "peerDependencies": {
     "prop-types": "*",
-    "react": "*"
+    "react": "*",
+    "react-dom": "*"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "less": "^3.8.1",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
     "rimraf": "^2.6.2"
   },
   "gitHead": "32b13af2ab50d7b2aab17a25ae742a8edbbd1a4d"

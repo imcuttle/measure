@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>options.html</title>
+  <link rel="stylesheet" href="../vendor/bootstrap.min.css">
+  <style>
+    textarea {
+      white-space: pre;
+    }
+    body {
+      min-width: 350px;
+      min-height: 150px;
+      margin: 0;
+      padding: 0;
+      /*background-color: rgba(44, 45, 46, 0.01);*/
+    }
+    .loader-container {
+      position: absolute;
+      margin: auto;
+      top: 0; bottom: 0; left: 0; right: 0;
+      width: 6.250em; height: 6.250em;
+      animation: rotate 2.4s linear infinite;
+    }
+
+    .white {
+      top: 0; bottom: 0; left: 0; right: 0;
+      background: white;
+      animation: flash 2.4s linear infinite;
+      opacity: 0;
+    }
+    .dot {
+      position: absolute;
+      margin: auto;
+      width: 2.4em; height: 2.4em;
+      border-radius: 100%;
+      transition: all 1s ease;
+    }
+    .dot:nth-child(2) { top: 0; bottom: 0; left: 0; background: #FF4444; animation: dotsY 2.4s linear infinite; }
+    .dot:nth-child(3) { left: 0; right: 0; top: 0; background: #FFBB33; animation: dotsX 2.4s linear infinite; }
+    .dot:nth-child(4) { top: 0; bottom: 0; right: 0; background: #99CC00; animation: dotsY 2.4s linear infinite; }
+    .dot:nth-child(5) { left: 0; right: 0; bottom: 0; background: #33B5E5; animation: dotsX 2.4s linear infinite; }
+
+    @keyframes rotate {
+      0% { transform: rotate( 0 ); }
+      10% { width: 6.250em; height: 6.250em; }
+      66% { width: 2.4em; height: 2.4em; }
+      100%{ transform: rotate(360deg); width: 6.250em; height: 6.250em; }
+    }
+
+    @keyframes dotsY {
+      66% { opacity: .1; width: 2.4em; }
+      77%{ opacity: 1; width: 0; }
+    }
+    @keyframes dotsX {
+      66% { opacity: .1; height: 2.4em;}
+      77%{ opacity: 1; height: 0; }
+    }
+
+    @keyframes flash {
+      33% { opacity: 0; border-radius: 0%; }
+      55%{ opacity: .6; border-radius: 100%; }
+      66%{ opacity: 0; }
+    }
+
+    .control-group + .control-group {
+      margin-top: 12px;
+    }
+
+  </style>
+</head>
+<body>
+<div>
+  <div class="loader-container">
+    <div class="dot white"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</div>
+<div id="container" class="container" style="margin-bottom: 20px; display: none; padding: 15px 15px 0;">
+  <div class="form-horizontal" id="form">
+    <!--<div class="form-group has-success has-feedback">-->
+      <!--<label class="control-label col-sm-3" for="inputSuccess3">Input with success</label>-->
+      <!--<div class="col-sm-9">-->
+        <!--<input type="text" class="form-control" id="inputSuccess3" aria-describedby="inputSuccess3Status">-->
+        <!--<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>-->
+        <!--<span id="inputSuccess3Status" class="sr-only">(success)</span>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="control-group">
+      <label class="control-label" for="includes">__MSG_option_includes__</label>
+      <div class="">
+        <textarea name="includes" class="form-control" id="includes" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="excludes">__MSG_option_excludes__</label>
+      <div class="">
+        <textarea name="excludes" class="form-control" id="excludes" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="control-group text-left" style="padding-top: 0">
+      <div class="checkbox">
+        <label>
+          <input name="smartInclude" type="checkbox">__MSG_option_smart_include__
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input name="enable" type="checkbox">__MSG_option_enable__
+        </label>
+      </div>
+    </div>
+  </div>
+  <script src="../dist/localize.js"></script>
+  <script src="../dist/options.js"></script>
+</div>
+</body>
+</html>

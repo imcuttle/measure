@@ -1,13 +1,34 @@
 {
   "manifest_version": 2,
-  "name": "measure-viewer",
+  "name": "Measure viewer",
   "version": "0.3.4",
   "description": "Measure Viewer for PSD or HTML, SVG",
   "background": {
-    "page": "background.html"
+    "scripts": ["vendor/psd-html.browser.umd.min.js", "dist/background.js"]
+  },
+  "icons": {
+    "16": "img/rule.png",
+    "48": "img/rule.png",
+    "128": "img/rule.png"
   },
   "browser_action": {
+    "default_icon": "img/rule.png",
     "default_title": "browser_action",
-    "default_popup": "page/browser-popup.html"
-  }
+    "default_popup": "page/options.html"
+  },
+  "options_ui": {
+    "page": "page/options.html",
+    "open_in_tab": false,
+    "chrome_style": false
+  },
+  "default_locale": "zh_CN",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": ["<all_urls>"],
+      "js": ["dist/view.js"]
+    }
+  ],
+  "permissions": ["downloads", "declarativeContent", "storage"],
+  "homepage_url": "https://github.com/imcuttle/measure/blob/master/packages/chrome-extension-psd-measure"
 }

@@ -164,7 +164,7 @@ export default class App extends Root {
   constructor(props) {
     super(props)
     symbolicLink(this, {
-      // language: Symbolic(this.header, 'language'),
+      language: Symbolic(this.header, 'language'),
       unit: Symbolic(this.header, 'unit'),
       remStandardPx: Symbolic(this.header, 'remStandardPx'),
       zoom: Symbolic(this.header, 'zoom'),
