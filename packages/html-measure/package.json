@@ -1,6 +1,6 @@
 {
   "name": "html-measure",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Make html to be measurable written by React",
   "scripts": {
     "dist": "rimraf lib/ && babel src/ -Dd lib && npm run dist:css",

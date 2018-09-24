@@ -1,12 +1,12 @@
 {
   "name": "meas-ui",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Measure UI for making PSD/SVG/HTML to be measurable",
   "dependencies": {
     "@rcp/util.createmount": "^1.0.9",
     "color": "^3.0.0",
     "history": "^4.7.2",
-    "html-measure": "^0.5.0",
+    "html-measure": "^0.5.1",
     "lodash.kebabcase": "^4.1.1",
     "lodash.some": "^4.6.0",
     "prefix-classname": "^1.0.1",
