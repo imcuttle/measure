@@ -30,5 +30,5 @@
     }
   ],
   "permissions": ["downloads", "declarativeContent", "storage"],
-  "homepage_url": "https://github.com/imcuttle/measure/blob/master/packages/chrome-extension-psd-measure"
+  "homepage_url": "https://github.com/imcuttle/measure/blob/master/packages/chrome-extension-measure-viewer"
 }
