@@ -51,7 +51,7 @@ function conf({ define, isBuild, globalObject, watch, externals, mini, suffix = 
     plugins: [
       new ExtractTextPlugin({
         filename: 'style.css',
-        allChunks: true
+        allChunks: false
       }),
       new webpack.DefinePlugin(
         Object.assign(

@@ -101,7 +101,7 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, inj
 
         const keyDescriptorList = get(vectorOrigination, 'data.keyDescriptorList')
         if (keyDescriptorList && keyDescriptorList[0]) {
-          const { keyOriginRRectRadii, keyOriginShapeBBox } = keyDescriptorList[0]
+          const { keyOriginRRectRadii, keyOriginShapeBBox, keyShapeInvalidated } = keyDescriptorList[0]
           if (keyOriginRRectRadii) {
             Object.assign(data, {
               'data-radius-bottom-left': keyOriginRRectRadii.bottomLeft && keyOriginRRectRadii.bottomLeft.value,
@@ -112,7 +112,7 @@ function psdToHAST(psd, { unit = 'px', remStandard = 16, imageSplit = false, inj
           }
 
           // Fix size and position
-          if (keyOriginShapeBBox) {
+          if (keyOriginShapeBBox && !keyShapeInvalidated) {
             Object.assign(overwriteStyle, {
               left: size(psdUtils.val(keyOriginShapeBBox['Left'])),
               top: size(psdUtils.val(keyOriginShapeBBox['Top '])),

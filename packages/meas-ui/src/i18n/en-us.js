@@ -6,8 +6,8 @@
  */
 
 module.exports = {
-  'app.upload.tip.psd': 'Let it go! (support psd/html/svg)',
-  'app.upload.tip.no-psd': 'Let it go! (support html/svg)',
+  'app.upload.tip.psd': 'Let me go! (support psd/html/svg)',
+  'app.upload.tip.no-psd': 'Let me go! (support html/svg)',
   'app.importing': 'Importing...',
 
   'color.label.auto': 'Auto(RGBA || Hex)',

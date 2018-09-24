@@ -6,8 +6,8 @@
  */
 
 module.exports = {
-  'app.upload.tip.psd': '有一种导入叫做 “手放开” (支持 psd、html、svg)',
-  'app.upload.tip.no-psd': '有一种导入叫做 “手放开” (支持 html、svg)',
+  'app.upload.tip.psd': '“手放开” (支持 psd、html、svg)',
+  'app.upload.tip.no-psd': '“手放开” (支持 html、svg)',
   'app.importing': '导入中...',
 
   'color.label.auto': '自动(RGBA || Hex)',
