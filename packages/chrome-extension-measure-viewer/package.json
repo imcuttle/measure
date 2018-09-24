@@ -1,6 +1,6 @@
 {
   "name": "chrome-extension-measure-viewer",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "PSD measure viewer",
   "private": true,
   "keywords": [
@@ -36,7 +36,7 @@
   },
   "gitHead": "32b13af2ab50d7b2aab17a25ae742a8edbbd1a4d",
   "devDependencies": {
-    "@moyuyc/psd-html": "^0.4.2",
+    "@moyuyc/psd-html": "^0.5.0",
     "autoprefixer": "^9.1.5",
     "babel-loader": "^7.1.5",
     "babel-plugin-add-module-exports": "^1.0.0",
@@ -50,7 +50,7 @@
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "livereload": "^0.7.0",
-    "meas-ui": "^0.4.2",
+    "meas-ui": "^0.5.0",
     "micromatch": "^3.1.10",
     "mobx": "^3.6.2",
     "mobx-react": "^4.4.3",
