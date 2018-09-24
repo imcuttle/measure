@@ -7,11 +7,11 @@
 
 import { Root, bindView, observable, reaction, Symbolic, symbolicLink, storageSync } from 'react-mobx-vm'
 import { i18n, setLanguage } from '../i18n'
-import View from './view'
 import Header from '../Header'
 import InforBar from '../InforBar'
 import Navigation from '../Navigation'
 import getPsdToHtml from '../getPsdToHtml'
+import View from './view'
 
 import * as nps from 'path'
 import HM from 'html-measure'
