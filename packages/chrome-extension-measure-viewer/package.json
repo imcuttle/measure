@@ -27,7 +27,7 @@
     "watch": "NODE_ENV=development webpack",
     "postversion": "node post-version.js",
     "prepare": "run-p dist",
-    "postpublish": "cd src && zip -r ../measure-viewer.zip . && npm run sync",
+    "postpublish": "npm run sync && cd src && zip -r ../measure-viewer.zip .",
     "dev": "run-p live watch",
     "sync": "cp node_modules/meas-ui/dist/style.css src/vendor/ && cp node_modules/meas-ui/dist/meas-ui.umd.js src/vendor/ && cp node_modules/@moyuyc/psd-html/dist/psd-html.browser.umd.min.js src/vendor/"
   },
