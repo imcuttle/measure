@@ -9,7 +9,10 @@
   <a href="https://conventionalcommits.org"><img src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square" /></a>
 </p>
 
-[Live Demo](https://imcuttle.github.io/measure)
+![](https://i.loli.net/2018/09/24/5ba8ae0a7e1e7.png)
+
+- [Live Demo](https://imcuttle.github.io/measure)
+- [中文文章](https://imcuttle.github.io/make-psd-measurable)
 
 ## Getting started
 
