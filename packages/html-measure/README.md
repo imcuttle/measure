@@ -1,13 +1,11 @@
 # html-measure
 
-[![Build status](https://img.shields.io/travis/imcuttle/html-measure/master.svg?style=flat-square)](https://travis-ci.org/imcuttle/html-measure)
-[![Test coverage](https://img.shields.io/codecov/c/github/imcuttle/html-measure.svg?style=flat-square)](https://codecov.io/github/imcuttle/html-measure?branch=master)
 [![NPM version](https://img.shields.io/npm/v/html-measure.svg?style=flat-square)](https://www.npmjs.com/package/html-measure)
 [![NPM Downloads](https://img.shields.io/npm/dm/html-measure.svg?style=flat-square&maxAge=43200)](https://www.npmjs.com/package/html-measure)
-[![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
-Make html to be measurable
+> Make html to be measurable written by React
+
+![](https://i.loli.net/2018/09/24/5ba8b09633089.png)
 
 ## Installation
 
@@ -20,10 +18,61 @@ yarn add html-measure
 ## Usage
 
 ```javascript
-import htmlMeasure from 'html-measure'
+import HtmlMeasure from 'html-measure'
+import 'html-measure/style.css'
+// or
+import 'html-measure/style.less'
+
+ReactDOM.render(<HtmlMeasure html="<div>foo</div>" />, window.root)
 ```
 
-## Related
+## Props
+
+#### `className`
+
+- Type: `string`
+
+#### `style`
+
+- Type: `object`
+
+#### `html`
+
+- Type: `string`
+
+#### `unit`
+
+- Type: one of `'px' | 'rem'`
+- Default: `'px'`
+
+#### `remStandardPx`
+
+- Type: `number`
+- Default: `16`
+
+#### `scaleGapPx`
+
+![](https://i.loli.net/2018/09/24/5ba8b1b604097.png)
+
+The size of the read rect in the above picture.
+
+- Type: `number`
+- Default: `10`
+
+#### `isShowUnit`
+
+- Type: `boolean`
+- Default: `true`
+
+#### `isCalcContainerWidth`
+
+- Type: `boolean`
+- Default: `true`
+
+#### `numberFixed`
+
+- Type: `number`
+- Default: `0`
 
 ## Authors
 

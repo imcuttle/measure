@@ -1,6 +1,7 @@
 {
   "name": "meas-ui",
   "version": "0.5.0",
+  "description": "Measure UI for making PSD/SVG/HTML to be measurable",
   "dependencies": {
     "@rcp/util.createmount": "^1.0.9",
     "color": "^3.0.0",
