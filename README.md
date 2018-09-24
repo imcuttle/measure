@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./packages/chrome-extension-psd-measure/img/rule.svg" />
+  <img src="./packages/chrome-extension-measure-viewer/src/img/rule.svg" />
 </p>
 <h3 align="center">measure</h3>
 <p align="center">
