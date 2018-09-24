@@ -9,6 +9,7 @@
   <a href="https://conventionalcommits.org"><img src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square" /></a>
 </p>
 
+[Live Demo](https://imcuttle.github.io/measure)
 
 ## Getting started
 
