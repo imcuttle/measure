@@ -32,7 +32,7 @@ measure-export build --help
 ![](./psd-measure.zh.svg)
 
 ## TODO
-- [x] integration tests should be applied on ui and cli
+- [ ] integration tests should be applied on ui and cli
 
 ## Packages
 
