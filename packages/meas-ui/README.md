@@ -66,7 +66,9 @@ MeasureUI.render(
       <script src="//unpkg.com/meas-ui"></script>
     </head>
     <body>
-      MeasureUI.render(/* ... */)
+      <script>
+        MeasureUI.render(/* ... */)
+      </script>
     </body>
   </html>
   ```
