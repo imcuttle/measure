@@ -52,9 +52,7 @@ MeasureUI.render(
 ![](https://i.loli.net/2018/09/24/5ba8aff4ab284.png)
 
 - commonjs (webpack)
-  bash
-
-  ```
+  ```bash
   npm install @moyuyc/psd-html
   ```
 
