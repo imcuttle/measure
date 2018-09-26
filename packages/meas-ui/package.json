@@ -1,6 +1,6 @@
 {
   "name": "meas-ui",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Measure UI for making PSD/SVG/HTML to be measurable",
   "dependencies": {
     "@rcp/util.createmount": "^1.0.9",
@@ -23,7 +23,7 @@
   "cdn": "dist/meas-ui.umd.js",
   "unpkg": "dist/meas-ui.umd.js",
   "optionalDependencies": {
-    "@moyuyc/psd-html": "^0.5.0"
+    "@moyuyc/psd-html": "^0.5.2"
   },
   "peerDependencies": {
     "mobx": "^3.6.2",
