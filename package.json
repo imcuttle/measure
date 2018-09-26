@@ -9,7 +9,7 @@
 		"dev": "lerna run dev --parallel",
 		"test": "jest",
 		"postinstall": "lerna bootstrap",
-		"release": "lerna publish --conventional-commits -m 'chore(release): publish'",
+		"release": "lerna publish --conventional-commits -m 'chore(release): publish %s'",
 		"prerelease": "npm test",
     "precommit": "node scripts/gen-readme.js && git add README.md"
 	},
