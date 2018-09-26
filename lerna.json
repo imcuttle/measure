@@ -15,7 +15,6 @@
   },
   "ignoreChanges": [
     "**/__fixtures__/**",
-    "**/__tests__/**",
-    "**/*.md"
+    "**/__tests__/**"
   ]
 }
