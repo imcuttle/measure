@@ -1,11 +1,17 @@
 # `measure-export-cli`
 
-> TODO: description
+> Command line for measure export
 
 ## Usage
 
-```
-const measureExportCli = require('measure-export-cli');
+```bash
+npm i measure-export-cli -g
+# Run the online server
+measure-export start path/to/psdDir
+# Build assets in $PWD/dist
+measure-export build path/to/psdDir
 
-// TODO: DEMONSTRATE API
+measure-export --help
+measure-export start --help
+measure-export build --help
 ```

@@ -1,7 +1,7 @@
 {
   "name": "measure-export-cli",
   "version": "0.5.1",
-  "description": "measure export cli",
+  "description": "Command line for measure export",
   "keywords": [
     "cli",
     "measure",

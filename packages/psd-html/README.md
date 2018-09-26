@@ -7,7 +7,7 @@
 
 It works on node and browser.
 
-Returned html is looks like the follow
+Returned html is looks like the follow.
 
 ```html
 <div id="psd-root" data-hm-exclude style="width: 1100px; height: 1200px; background-image: base64...">

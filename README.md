@@ -40,7 +40,7 @@ measure-export build --help
 - [html-measure](packages/html-measure) - Make html to be measurable written by React  
 - [meas-ui](packages/meas-ui) - Measure UI for making PSD/SVG/HTML to be measurable  
 - [measure-export](packages/measure-export) - Make measure UI exported for teamwork  
-- [measure-export-cli](packages/measure-export-cli) - measure export cli  
+- [measure-export-cli](packages/measure-export-cli) - Command line for measure export  
 - [@moyuyc/psd-html](packages/psd-html) - Make it a fun to create spec by psd for developers and teammates  
 
 
