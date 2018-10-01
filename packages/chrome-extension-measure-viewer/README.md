@@ -1,11 +1,5 @@
-# `chrome-extension-psd-measure`
+# `chrome-extension-measure-viewer`
 
-> TODO: description
+> Measure viewer of chrome extension
 
-## Usage
-
-```
-const chromeExtensionPsdMeasure = require('chrome-extension-psd-measure');
-
-// TODO: DEMONSTRATE API
-```
+## Installation
