@@ -35,7 +35,7 @@ MeasureUI.render(
         html: '<div>My PSD</div>' // or an async or a sync function that resolved html string
       }
     ],
-    language: 'zh' // 'zh' or 'en'
+    language: 'zh-cn' // 'zh-cn' or 'en-us'
   },
   window.root,
   () => {
