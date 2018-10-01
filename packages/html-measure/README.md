@@ -54,7 +54,7 @@ ReactDOM.render(<HtmlMeasure html="<div>foo</div>" />, window.root)
 
 ![](https://i.loli.net/2018/09/24/5ba8b1b604097.png)
 
-The size of the read rect in the above picture.
+The size of the red rect in the above picture.
 
 - Type: `number`
 - Default: `10`
