@@ -11,7 +11,7 @@
 		"postinstall": "lerna bootstrap",
 		"release": "lerna publish --conventional-commits -m 'chore(release): publish %s'",
 		"prerelease": "npm test",
-    "precommit": "node scripts/gen-readme.js && git add README.md"
+    "precommit": "node scripts/gen-readme.js && git add README.md && pretty-quick --staged"
 	},
 	"edam": {
 		"source": "./src/components/__Template__",
