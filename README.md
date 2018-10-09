@@ -83,7 +83,7 @@ measure-export build --help
 - Create your new branch:  
   `git checkout -b feature-new` or `git checkout -b fix-which-bug`
 - Start your magic work now
-- Make sure npm test passes
+- Make sure testing passes
 - Commit your changes:  
   `git commit -am 'feat: some description (close #123)'` or `git commit -am 'fix: some description (fix #123)'`
 - Push to the branch: `git push`
