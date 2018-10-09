@@ -30,31 +30,50 @@ measure-export build --help
 ```
 
 ## Processor about the monorepo
+
 ![](./psd-measure.zh.svg)
 
 ## TODO
+
 - [ ] integration tests should be applied on ui and cli
 
 ## Packages
 
-- [chrome-extension-measure-viewer](packages/chrome-extension-measure-viewer) - PSD measure viewer  
-- [html-measure](packages/html-measure) - Make html to be measurable written by React  
-- [meas-ui](packages/meas-ui) - Measure UI for making PSD/SVG/HTML to be measurable  
-- [measure-export](packages/measure-export) - Make measure UI exported for teamwork  
-- [measure-export-cli](packages/measure-export-cli) - Command line for measure export  
-- [@moyuyc/psd-html](packages/psd-html) - Make it a fun to create spec by psd for developers and teammates  
-
+- [chrome-extension-measure-viewer](packages/chrome-extension-measure-viewer) - PSD measure viewer
+- [html-measure](packages/html-measure) - Make html to be measurable written by React
+- [meas-ui](packages/meas-ui) - Measure UI for making PSD/SVG/HTML to be measurable
+- [measure-export](packages/measure-export) - Make measure UI exported for teamwork
+- [measure-export-cli](packages/measure-export-cli) - Command line for measure export
+- [@moyuyc/psd-html](packages/psd-html) - Make it a fun to create spec by psd for developers and teammates
 
 ## Related
+
 - [sketch measure](https://github.com/utom/sketch-measure) - Make it a fun to create spec for developers and teammates
 - [psd.js](https://github.com/meltingice/psd.js) - A Photoshop PSD file parser for NodeJS and browsers
 
+## Developing
+
+- Install dependencies
+
+  ```bash
+  npm install
+  ```
+
+- This repo use lerna for managing multiply packages, so need to bootstrap dependencies of each package.
+
+  ```bash
+  npx lerna bootstrap
+  ```
+
 ## Contributing
+
 - Fork it!
-- Create your new branch: `git checkout -b feature-new` or `git checkout -b fix-which-bug`
+- Create your new branch:  
+  `git checkout -b feature-new` or `git checkout -b fix-which-bug`
 - Start your magic work now
 - Make sure npm test passes
-- Commit your changes: `git commit -am 'feat: some description (close #123)'` or `git commit -am 'fix: some description (fix #123)'`
+- Commit your changes:  
+  `git commit -am 'feat: some description (close #123)'` or `git commit -am 'fix: some description (fix #123)'`
 - Push to the branch: `git push`
 - Submit a pull request :)
 
