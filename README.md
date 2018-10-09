@@ -49,6 +49,15 @@ measure-export build --help
 - [sketch measure](https://github.com/utom/sketch-measure) - Make it a fun to create spec for developers and teammates
 - [psd.js](https://github.com/meltingice/psd.js) - A Photoshop PSD file parser for NodeJS and browsers
 
+## Contributing
+- Fork it!
+- Create your new branch: `git checkout -b feature-new` or `git checkout -b fix-which-bug`
+- Start your magic work now
+- Make sure npm test passes
+- Commit your changes: `git commit -am 'feat: some description (close #123)'` or `git commit -am 'fix: some description (fix #123)'`
+- Push to the branch: `git push`
+- Submit a pull request :)
+
 ## Authors
 
 This library is written and maintained by imcuttle, [moyuyc95@gmail.com](mailto:moyuyc95@gmail.com).
