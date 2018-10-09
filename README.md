@@ -59,10 +59,22 @@ measure-export build --help
   npm install
   ```
 
-- This repo use lerna for managing multiply packages, so need to bootstrap dependencies of each package.
+- This repo use [lerna](https://github.com/lerna/lerna) for managing multiply packages, so need to bootstrap dependencies of each package.
 
   ```bash
   npx lerna bootstrap
+  ```
+
+  **Note: It will run `prepare` script of each packages in this step**
+
+- Dev & Build for each available packages
+
+  ```bash
+  # Watch mode
+  npm run dev
+
+  # Build
+  npm run dist
   ```
 
 ## Contributing
